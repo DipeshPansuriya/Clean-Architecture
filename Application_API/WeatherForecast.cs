@@ -4,6 +4,7 @@ namespace Application_API
 {
     public class WeatherForecast
     {
+        //this changes done in Windos vs
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }
