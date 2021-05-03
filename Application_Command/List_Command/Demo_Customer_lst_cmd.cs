@@ -28,18 +28,18 @@ namespace Application_Command.List_Command
         public async Task<Response> Handle(Demo_Customer_lst_cmd request, CancellationToken cancellationToken)
         {
             Response response = new Response();
-            bool catchexists = false;
+            bool cachexists = false;
             var data = _cache.GetCachedObject<Demo_Customer>("democust");
             if (data != null)
             {
                 if (data.Result != null)
                 {
                     response.ResponseObject = data.Result;
-                    catchexists = true;
+                    cachexists = true;
                 }
             }
 
-            if (catchexists == false)
+            if (cachexists == false)
             {
                 string Query = _getQuery.GetDBQuery("Demo_Cust", "1");
                 var dbdata = await this._demoCustomer.GetAll<Demo_Customer>(Query, null, System.Data.CommandType.Text);

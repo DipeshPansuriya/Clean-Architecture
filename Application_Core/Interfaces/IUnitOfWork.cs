@@ -8,7 +8,5 @@ namespace Application_Core.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         Task<Response> Commit(CancellationToken cancellationToken);
-
-        Task Rollback();
     }
 }

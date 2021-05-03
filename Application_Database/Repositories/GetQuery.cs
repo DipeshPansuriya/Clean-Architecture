@@ -2,11 +2,9 @@
 using Application_Domain;
 using Dapper;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Application_Database.Repositories
@@ -28,6 +26,7 @@ namespace Application_Database.Repositories
             }
             catch (Exception ex)
             {
+                throw new ArgumentException($"Error in GetQuery.CS :- " + ex.Message, ex.InnerException);
             }
             return Query;
         }
@@ -77,6 +76,7 @@ namespace Application_Database.Repositories
             }
             catch (Exception ex)
             {
+                throw new ArgumentException($"Error in GetQuery.CS :- " + ex.Message, ex.InnerException);
             }
             return DBQuery;
         }
