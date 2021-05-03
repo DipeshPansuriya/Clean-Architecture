@@ -1,8 +1,6 @@
-﻿using Application_Core.Exceptions;
-using Application_Core.Interfaces;
+﻿using Application_Core.Interfaces;
 using Application_Domain;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,12 +12,10 @@ namespace Application_Infrastructure.Caching
     public class CacheService : ICacheService
     {
         private readonly IDistributedCache _cache;
-        private ILogger<CacheService> _logger;
 
-        public CacheService(IDistributedCache cache, ILogger<CacheService> logger)
+        public CacheService(IDistributedCache cache)
         {
             _cache = cache;
-            _logger = logger;
         }
 
         public async Task<List<T>> GetCachedObject<T>(string cacheKeyPrefix)
@@ -41,15 +37,7 @@ namespace Application_Infrastructure.Caching
             }
             catch (Exception ex)
             {
-                string msg;
-                msg = "Application Error :- ";
-                msg = msg + ex.Message.ToString();
-                if (ex.InnerException != null)
-                {
-                    msg = msg + " ~ InnerException ~ " + ex.InnerException.Message.ToString();
-                }
-                _logger.LogError(ex, msg);
-                throw new AppException(msg);
+                throw new ArgumentException($"Error in CacheService.CS :- " + ex.Message, ex.InnerException);
             }
 
             return default(List<T>);
@@ -78,15 +66,7 @@ namespace Application_Infrastructure.Caching
             }
             catch (Exception ex)
             {
-                string msg;
-                msg = "Application Error :- ";
-                msg = msg + ex.Message.ToString();
-                if (ex.InnerException != null)
-                {
-                    msg = msg + " ~ InnerException ~ " + ex.InnerException.Message.ToString();
-                }
-                _logger.LogError(ex, msg);
-                throw new AppException(msg);
+                throw new ArgumentException($"Error in CacheService.CS :- " + ex.Message, ex.InnerException);
             }
         }
 
