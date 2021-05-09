@@ -3,14 +3,16 @@ using Application_Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    partial class APP_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20210508092151_NotificationTable_Update")]
+    partial class NotificationTable_Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,6 +54,7 @@ namespace Application_Database.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FailDetails")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("FailDetails");
 
@@ -61,10 +64,12 @@ namespace Application_Database.Migrations
                         .HasColumnName("MsgBody");
 
                     b.Property<string>("MsgCC")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("MsgCC");
 
                     b.Property<string>("MsgFrom")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("MsgFrom");
@@ -80,6 +85,7 @@ namespace Application_Database.Migrations
                         .HasColumnName("MsgSubject");
 
                     b.Property<string>("MsgTo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("MsgTo");
 

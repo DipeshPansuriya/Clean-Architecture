@@ -3,14 +3,16 @@ using Application_Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    partial class APP_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20210508113334_NotificationTable_UpdateNull")]
+    partial class NotificationTable_UpdateNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

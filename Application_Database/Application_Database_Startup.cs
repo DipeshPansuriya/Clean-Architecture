@@ -1,4 +1,4 @@
-﻿using Application_Core.Interfaces;
+﻿using Application_Core.Repositories;
 using Application_Database.Repositories;
 using Application_Domain;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +24,7 @@ namespace Application_Database
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
 
             //services.AddTransient<ILogRepository, LogRepository>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            //services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IDapper, Dapperr>();
             services.AddTransient<IGetQuery, GetQuery>();
 

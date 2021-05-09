@@ -1,10 +1,10 @@
-﻿using Application_Core.Interfaces;
+﻿using Application_Core.Background;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application_Infrastructure.BackgroundTask
+namespace Application_Infrastructure.Background
 {
     public class BackgroundTask : BackgroundService
     {

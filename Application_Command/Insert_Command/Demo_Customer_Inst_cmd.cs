@@ -1,4 +1,6 @@
-﻿using Application_Core.Interfaces;
+﻿using Application_Core.Background;
+using Application_Core.Cache;
+using Application_Core.Repositories;
 using Application_Domain;
 using AutoMapper;
 using MediatR;
@@ -13,21 +15,21 @@ namespace Application_Command.Insert_Command
         public string Code { get; set; }
     }
 
-    public class Demo_Custome_Handeler : IRequestHandler<Demo_Customer_Inst_cmd, Response>
+    public class Demo_Custome_Insert_Handeler : IRequestHandler<Demo_Customer_Inst_cmd, Response>
     {
         private readonly IRepositoryAsync<Demo_Customer> _demoCustomer;
         private readonly IMapper _mapper;
-        private IUnitOfWork _unitOfWork { get; set; }
         private readonly ICacheService _cache;
         private readonly IBackgroundJob _backgroundJob;
+        private readonly IRepositoryAsync<NotficationCls> _notfication;
 
-        public Demo_Custome_Handeler(IMapper mapper, IRepositoryAsync<Demo_Customer> demoCustomer, IUnitOfWork unitOfWork, ICacheService cache, IBackgroundJob backgroundClient)
+        public Demo_Custome_Insert_Handeler(IMapper mapper, IRepositoryAsync<Demo_Customer> demoCustomer, ICacheService cache, IBackgroundJob backgroundClient, IRepositoryAsync<NotficationCls> notfication)
         {
             _mapper = mapper;
             _demoCustomer = demoCustomer;
-            _unitOfWork = unitOfWork;
             _cache = cache;
             _backgroundJob = backgroundClient;
+            _notfication = notfication;
         }
 
         public async Task<Response> Handle(Demo_Customer_Inst_cmd request, CancellationToken cancellationToken)
@@ -37,8 +39,21 @@ namespace Application_Command.Insert_Command
             _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache("democust"));
             //_backgroundJob.AddSchedule<ICacheService>(x => x.RemoveCache("democust"), RecuringTime.Seconds, 2);
 
-            await _demoCustomer.AddAsync(obj);
-            var response = await _unitOfWork.Commit(cancellationToken);
+            var response = await _demoCustomer.AddAsync(obj);
+            if (response != null && response.ResponseStatus.ToLower() == "success")
+            {
+                NotficationCls notfication = new NotficationCls()
+                {
+                    MsgFrom = "dipeshpansuriya@ymail.com",
+                    MsgTo = "pansuriya.dipesh@gmai.com",
+                    MsgSubject = "Test",
+                    MsgBody = "Test Body",
+                    MsgSatus = NotificationStatus.Pending,
+                    MsgType = NotificationType.Mail,
+                };
+                //await _notfication.AddAsync(notfication);
+                _backgroundJob.AddEnque<IRepositoryAsync<NotficationCls>>(x => x.AddAsync(notfication));
+            }
 
             return response;
         }

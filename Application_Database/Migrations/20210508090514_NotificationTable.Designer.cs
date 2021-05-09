@@ -3,14 +3,16 @@ using Application_Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    partial class APP_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20210508090514_NotificationTable")]
+    partial class NotificationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +53,21 @@ namespace Application_Database.Migrations
                         .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FailDetails")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("FailDetails");
-
                     b.Property<string>("MsgBody")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("MsgBody");
 
                     b.Property<string>("MsgCC")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("MsgCC");
 
                     b.Property<string>("MsgFrom")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("MsgFrom");
-
-                    b.Property<int>("MsgSatus")
-                        .HasMaxLength(50)
-                        .HasColumnType("int")
-                        .HasColumnName("MsgSatus");
 
                     b.Property<string>("MsgSubject")
                         .IsRequired()
@@ -80,6 +75,7 @@ namespace Application_Database.Migrations
                         .HasColumnName("MsgSubject");
 
                     b.Property<string>("MsgTo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("MsgTo");
 
