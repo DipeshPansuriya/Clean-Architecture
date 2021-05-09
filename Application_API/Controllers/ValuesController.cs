@@ -22,5 +22,12 @@ namespace Application_API.Controllers
             var res = await this.Mediator.Send(customer_Cmd);
             return this.Ok(res);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Response>> UpdateValue([FromBody] Demo_Customer_Upd_cmd customer_Cmd)
+        {
+            var res = await this.Mediator.Send(customer_Cmd);
+            return this.Ok(res);
+        }
     }
 }

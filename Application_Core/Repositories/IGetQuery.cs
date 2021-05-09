@@ -1,6 +1,6 @@
 ﻿using Dapper;
 
-namespace Application_Core.Interfaces
+namespace Application_Core.Repositories
 {
     public interface IGetQuery
     {

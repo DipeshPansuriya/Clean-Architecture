@@ -1,4 +1,6 @@
-﻿using Application_Core.Interfaces;
+﻿using Application_Core.Repositories;
+using Application_Domain;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace Application_Database.Repositories
@@ -14,22 +16,64 @@ namespace Application_Database.Repositories
 
         //public IQueryable<T> Entities => _dbContext.Set<T>();
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<Response> AddAsync(T entity)
         {
+            if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+                this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             await _dbContext.Set<T>().AddAsync(entity);
-            return entity;
+            var resulst = await _dbContext.SaveChangesAsync();
+            Response response = new Response()
+            {
+                ResponseId = resulst,
+                ResponseMessage = "Success",
+                ResponseStatus = "Success",
+                ResponseObject = entity
+            };
+            return response;
+            //return entity;
         }
 
-        public Task DeleteAsync(T entity)
+        public async Task<Response> DeleteAsync(T entity)
         {
+            if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+                this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             _dbContext.Set<T>().Remove(entity);
-            return Task.CompletedTask;
+            Response response = new Response()
+            {
+                ResponseMessage = "Success",
+                ResponseStatus = "Success",
+                ResponseObject = entity
+            };
+            return response;
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task<Response> UpdateAsync(T entity)
         {
-            _dbContext.Entry(entity).CurrentValues.SetValues(entity);
-            return Task.CompletedTask;
+            if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+                this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            _dbContext.Entry(entity).State = EntityState.Modified;
+
+            //_dbContext.Set<T>().Update(entity);
+            var resulst = await _dbContext.SaveChangesAsync();
+            Response response = new Response()
+            {
+                ResponseId = resulst,
+                ResponseMessage = "Success",
+                ResponseStatus = "Success",
+                ResponseObject = entity
+            };
+            return response;
+        }
+
+        public async Task<T> GetDetails(int id)
+        {
+            if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+                this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            return await _dbContext.Set<T>().FindAsync(id);
         }
     }
 }

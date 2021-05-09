@@ -1,8 +1,10 @@
+using Application_API.JobScheduler;
 using Application_Command;
 using Application_Database;
 using Application_Domain;
 using Application_Infrastructure;
 using Hangfire;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +27,8 @@ namespace Application_API
     {
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Environment { get; }
+        private static IMediator _mediator;
+        private EmailScheduler jobscheduler = new EmailScheduler(_mediator);
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -146,7 +150,7 @@ namespace Application_API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobClient, IRecurringJobManager recurringJobManager)
         {
             app.UseExceptionHandler(new ExceptionHandlerOptions
             {
@@ -191,6 +195,11 @@ namespace Application_API
 
             // Hangfire
             app.UseHangfireDashboard();
+
+            // Recurring Job for every 5 min
+            recurringJobManager.AddOrUpdate("Send Pending Mail : Runs Every 15 Min",
+                () => jobscheduler.SendPendingMail(), Cron.MinuteInterval(15)
+                );
 
             app.UseEndpoints(endpoints =>
             {

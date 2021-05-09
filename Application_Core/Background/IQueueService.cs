@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application_Core.Interfaces
+namespace Application_Core.Background
 {
     public interface IQueueService
     {

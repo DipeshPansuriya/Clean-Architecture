@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Application_Core.Interfaces
+namespace Application_Core.Repositories
 {
     public interface IDapper : IDisposable
     {

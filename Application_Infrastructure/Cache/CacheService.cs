@@ -1,4 +1,4 @@
-﻿using Application_Core.Interfaces;
+﻿using Application_Core.Cache;
 using Application_Domain;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application_Infrastructure.Caching
+namespace Application_Infrastructure.Cache
 {
     public class CacheService : ICacheService
     {
@@ -58,8 +58,8 @@ namespace Application_Infrastructure.Caching
                 string cacheKey = $"{cacheKeyPrefix}";
 
                 var options = new DistributedCacheEntryOptions()
-                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(APISetting.cacheConfiguration.AbsoluteExpirationInHours))
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(APISetting.cacheConfiguration.SlidingExpirationInMinutes));
+                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(APISetting.CacheConfiguration.AbsoluteExpirationInHours))
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(APISetting.CacheConfiguration.SlidingExpirationInMinutes));
                 await _cache.SetAsync(cacheKey, redisCustomerList, options);
 
                 return true;

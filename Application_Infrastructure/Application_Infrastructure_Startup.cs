@@ -1,6 +1,9 @@
-﻿using Application_Core.Interfaces;
-using Application_Infrastructure.BackgroundTask;
-using Application_Infrastructure.Caching;
+﻿using Application_Core.Background;
+using Application_Core.Cache;
+using Application_Core.Notification;
+using Application_Infrastructure.Background;
+using Application_Infrastructure.Cache;
+using Application_Infrastructure.Notificaion;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application_Infrastructure
@@ -14,6 +17,10 @@ namespace Application_Infrastructure
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IQueueService, QueueService>();
             services.AddSingleton<IBackgroundJob, BackgroundJob>();
+
+            services.AddTransient<INotificationMsg, NotificationMsg>();
+            services.AddScoped<NotificationMsg>();
+
             return services;
         }
     }

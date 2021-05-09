@@ -9,6 +9,7 @@ namespace Application_Command.Profile_Mapping
         public Demo_Customer_Pro_Map()
         {
             CreateMap<Demo_Customer_Inst_cmd, Demo_Customer>().ReverseMap();
+            CreateMap<Demo_Customer_Upd_cmd, Demo_Customer>().ReverseMap();
         }
     }
 }

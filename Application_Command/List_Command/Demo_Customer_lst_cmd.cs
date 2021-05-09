@@ -1,4 +1,6 @@
-﻿using Application_Core.Interfaces;
+﻿using Application_Core.Background;
+using Application_Core.Cache;
+using Application_Core.Repositories;
 using Application_Domain;
 using MediatR;
 using System.Threading;
@@ -15,7 +17,7 @@ namespace Application_Command.List_Command
         private readonly IDapper _demoCustomer;
         private readonly ICacheService _cache;
         private readonly IBackgroundJob _backgroundJob;
-        private IGetQuery _getQuery;
+        private readonly IGetQuery _getQuery;
 
         public Demo_Customer_lst_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob, IGetQuery getQuery)
         {
