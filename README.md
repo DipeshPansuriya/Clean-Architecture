@@ -1,5 +1,5 @@
 # ASP.NET Core WebApi - Clean Architecture
-An Implementation of Clean Architecture with ASP.NET 5 WebApi. With this Open-Source BoilerPlate Template
+An Implementation of Clean Architecture with ASP.NET 5 WebApi.
 
 ## Technologies
 - ASP.NET 5 WebApi
