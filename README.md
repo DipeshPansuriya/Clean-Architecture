@@ -10,6 +10,7 @@ An Implementation of Clean Architecture with ASP.NET 5 WebApi. With this Open-So
 - [X] Onion Architecture
 - [X] CQRS with MediatR Library
 - [X] Entity Framework Core 
+- [X] Dapper
 - [X] Repository Pattern 
 - [X] MediatR Pipeline Logging 
 - [X] Serilog (File, SQL)
