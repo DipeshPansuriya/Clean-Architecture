@@ -5,14 +5,17 @@ using Application_Core.Repositories;
 using Application_Database;
 using Application_Domain;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Test_Application.Common;
 using Test_Application.InitializeDbData;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Test_Application
 {
@@ -26,7 +29,7 @@ namespace Test_Application
         }
 
         [Fact]
-        public async Task Create()
+        public async Task CreateCustomer()
         {
             var client = await _factory.GetAuthenticatedClientAsync();
             var command = new Demo_Customer_Inst_cmd
@@ -37,9 +40,76 @@ namespace Test_Application
 
             var content = Utilities.GetRequestContent(command);
 
-            var response = await client.PostAsync($"/api/Demo_Customer/PostValue", content);
+            var response = await client.PostAsync($"/api/Demo_Customer/CreateCustomer", content);
+            var vm = await Utilities.GetResponseContent<Response>(response);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Assert.IsType<Response>(vm);
 
-            response.EnsureSuccessStatusCode();
+                Assert.Equal("success", vm.ResponseStatus.ToLower());
+            }
+            else
+            {
+                //Assert.False(response.StatusCode != HttpStatusCode.OK);
+                Assert.True(response.StatusCode == HttpStatusCode.OK);
+                throw new XunitException(vm.ResponseMessage);
+            }
+        }
+
+        [Fact]
+        public async Task GetAllCustomer()
+        {
+            var client = await _factory.GetAuthenticatedClientAsync();
+
+            var response = await client.GetAsync($"/api/Demo_Customer/GetAllCustomer");
+            var vm = await Utilities.GetResponseContent<Response>(response);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Assert.IsType<Response>(vm);
+                if (vm.ResponseObject != null)
+                {
+                    var data = JsonConvert.DeserializeObject<List<Demo_Customer>>(vm.ResponseObject.ToString());
+                    Assert.NotEmpty(data);
+                }
+                else
+                {
+                    Assert.Empty(null);
+                }
+            }
+            else
+            {
+                //Assert.False(response.StatusCode != HttpStatusCode.OK);
+                Assert.True(response.StatusCode == HttpStatusCode.OK);
+                throw new XunitException(vm.ResponseMessage);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateCustomer()
+        {
+            var client = await _factory.GetAuthenticatedClientAsync();
+            var command = new Demo_Customer_Upd_cmd
+            {
+                Id = 1,
+                Code = "MM",
+                Name = "This is Test"
+            };
+
+            var content = Utilities.GetRequestContent(command);
+
+            var response = await client.PutAsync($"/api/Demo_Customer/UpdateCustomer", content);
+            var vm = await Utilities.GetResponseContent<Response>(response);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Assert.IsType<Response>(vm);
+
+                Assert.Equal("success", vm.ResponseStatus.ToLower());
+            }
+            else
+            {
+                Assert.True(response.StatusCode == HttpStatusCode.OK);
+                //throw new XunitException(vm.ResponseMessage);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Application_API.Controllers
     public class Demo_CustomerController : BaseController<Demo_CustomerController>
     {
         [HttpGet]
-        public async Task<ActionResult> GetValue()
+        public async Task<ActionResult> GetAllCustomer()
         {
             var res = await this.Mediator.Send(new Demo_Customer_lst_cmd());
 
@@ -17,14 +17,14 @@ namespace Application_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Response>> PostValue([FromBody] Demo_Customer_Inst_cmd customer_Cmd)
+        public async Task<ActionResult<Response>> CreateCustomer([FromBody] Demo_Customer_Inst_cmd customer_Cmd)
         {
             var res = await this.Mediator.Send(customer_Cmd);
             return this.Ok(res);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Response>> UpdateValue([FromBody] Demo_Customer_Upd_cmd customer_Cmd)
+        [HttpPut]
+        public async Task<ActionResult<Response>> UpdateCustomer([FromBody] Demo_Customer_Upd_cmd customer_Cmd)
         {
             var res = await this.Mediator.Send(customer_Cmd);
             return this.Ok(res);
