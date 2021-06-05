@@ -15,7 +15,6 @@ namespace Application_Infrastructure
             services.AddTransient<ICacheService, CacheService>();
             services.AddScoped<CacheService>();
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IQueueService, QueueService>();
             services.AddSingleton<IBackgroundJob, BackgroundJob>();
 
             services.AddTransient<INotificationMsg, NotificationMsg>();

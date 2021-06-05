@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application_API.Controllers
 {
-    public class ValuesController : BaseController<ValuesController>
+    public class Demo_CustomerController : BaseController<Demo_CustomerController>
     {
         [HttpGet]
         public async Task<ActionResult> GetValue()

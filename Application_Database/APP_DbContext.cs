@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application_Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,22 +13,31 @@ namespace Application_Database
         {
         }
 
+        public virtual DbSet<Demo_Customer> Demo_Customers { get; set; }
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            bool contextIsInMemory = base.Database.IsInMemory();
             //var result = base.SaveChangesAsync(cancellationToken);
             //return result;
-
-            var transaction = base.Database.BeginTransaction();
-            try
+            if (contextIsInMemory)
             {
-                var result = await base.SaveChangesAsync(cancellationToken);
-                transaction.Commit();
-                return result;
+                return await base.SaveChangesAsync(cancellationToken);
             }
-            catch (Exception ex)
+            else
             {
-                transaction.Rollback();
-                throw new ArgumentException($"Error in APP_DbContext.CS :- " + ex.Message, ex.InnerException);
+                var transaction = base.Database.BeginTransaction();
+                try
+                {
+                    var result = await base.SaveChangesAsync(cancellationToken);
+                    transaction.Commit();
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new ArgumentException($"Error in APP_DbContext.CS :- " + ex.Message, ex.InnerException);
+                }
             }
         }
 

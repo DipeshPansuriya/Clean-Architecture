@@ -86,7 +86,6 @@ namespace Application_API
                    .UseSqlServerStorage(APISetting.DBConnection));
 
             services.AddHangfireServer();
-            services.AddHangfireServer();
 
             // In-Memory Caching
             services.AddMemoryCache();

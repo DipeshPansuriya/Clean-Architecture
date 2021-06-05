@@ -48,7 +48,7 @@ namespace Application_Command.Insert_Command
                     NotficationCls notfication = new NotficationCls()
                     {
                         MsgFrom = "dipeshpansuriya@ymail.com",
-                        MsgTo = "pansuriya.dipesh@gmai.com",
+                        MsgTo = "pansuriya.dipesh@gmail.com",
                         MsgSubject = "Test",
                         MsgBody = "Test Body",
                         MsgSatus = NotificationStatus.Pending,
