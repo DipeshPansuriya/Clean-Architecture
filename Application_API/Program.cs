@@ -11,7 +11,7 @@ namespace Application_API
 {
     public class Program
     {
-        private static IConfiguration Configuration { get; set; }
+        //private static IConfiguration Configuration { get; set; }
 
         public static void Main(string[] args)
         {
