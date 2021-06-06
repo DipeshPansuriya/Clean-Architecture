@@ -5,6 +5,12 @@ An Implementation of Clean Architecture with ASP.NET 5 WebApi.
 - ASP.NET 5 WebApi
 - REST Standards
 - MS SQL 
+
+## Dashboard
+- http://localhost:50911/swagger/index.html
+- http://localhost:50911/hangfire
+- http://localhost:50911/health
+- http://localhost:50911/healthchecks-ui
  
 ## Features
 - [X] Onion Architecture
