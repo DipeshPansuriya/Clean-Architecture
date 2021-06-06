@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.6" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application_API\Application_API.csproj" />
+    <ProjectReference Include="..\Application_Command\Application_Command.csproj" />
+    <ProjectReference Include="..\Application_Core\Application_Core.csproj" />
+    <ProjectReference Include="..\Application_Database\Application_Database.csproj" />
+    <ProjectReference Include="..\Application_Domain\Application_Domain.csproj" />
+    <ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
