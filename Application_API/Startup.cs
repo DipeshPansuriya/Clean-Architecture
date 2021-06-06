@@ -4,9 +4,11 @@ using Application_Database;
 using Application_Domain;
 using Application_Infrastructure;
 using Hangfire;
+using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +16,10 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
@@ -48,7 +52,24 @@ namespace Application_API
             services.AddRepositories();
             services.AddInfrastructure();
 
-            //Add Cookie Policy
+            // Add Health Check
+            services.AddHealthChecks()
+                 //.AddUrlGroup(new Uri("https://localhost:5001/weatherforecast"), name: "base URL", failureStatus: HealthStatus.Degraded)
+                 .AddSqlServer(APISetting.DBConnection,
+                 healthQuery: "select 1",
+                 failureStatus: HealthStatus.Degraded,
+                 name: "SQL Server");
+
+            services.AddHealthChecksUI(opt =>
+            {
+                opt.SetEvaluationTimeInSeconds(10); //time in seconds between check
+                opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks
+                opt.SetApiMaxActiveRequests(1); //api requests concurrency
+                opt.AddHealthCheckEndpoint("default api", "/health"); //map health check api
+            })
+            .AddInMemoryStorage();
+
+            // Add Cookie Policy
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -177,6 +198,9 @@ namespace Application_API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Application_API v1"));
             }
 
+            // HealthCheck UI /healthchecks-ui
+            app.UseHealthChecksUI();
+
             app.UseResponseCompression();
 
             app.UseHttpsRedirection();
@@ -203,7 +227,13 @@ namespace Application_API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHangfireDashboard();
+                endpoints.MapHangfireDashboard("/hangfire");
+                endpoints.MapHealthChecks("/health",
+                   new HealthCheckOptions()
+                   {
+                       Predicate = _ => true,
+                       ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                   });
             });
         }
     }

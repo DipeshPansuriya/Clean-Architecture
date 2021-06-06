@@ -8,6 +8,10 @@ namespace Application_Database
 {
     public class APP_DbContext : DbContext
     {
+        public APP_DbContext()
+        {
+        }
+
         public APP_DbContext(DbContextOptions<APP_DbContext> options)
            : base(options)
         {
@@ -17,14 +21,7 @@ namespace Application_Database
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            bool contextIsInMemory = base.Database.IsInMemory();
-            //var result = base.SaveChangesAsync(cancellationToken);
-            //return result;
-            if (contextIsInMemory)
-            {
-                return await base.SaveChangesAsync(cancellationToken);
-            }
-            else
+            if (base.Database.IsSqlServer())
             {
                 var transaction = base.Database.BeginTransaction();
                 try
@@ -38,6 +35,10 @@ namespace Application_Database
                     transaction.Rollback();
                     throw new ArgumentException($"Error in APP_DbContext.CS :- " + ex.Message, ex.InnerException);
                 }
+            }
+            else
+            {
+                return await base.SaveChangesAsync(cancellationToken);
             }
         }
 
