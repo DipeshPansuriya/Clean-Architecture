@@ -1,19 +1,11 @@
 ﻿using Application_API;
-using Application_API.Controllers;
 using Application_Command.Insert_Command;
-using Application_Core.Repositories;
-using Application_Database;
 using Application_Domain;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using Test_Application.Common;
-using Test_Application.InitializeDbData;
 using Xunit;
 using Xunit.Sdk;
 

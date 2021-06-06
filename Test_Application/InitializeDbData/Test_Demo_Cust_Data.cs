@@ -1,12 +1,5 @@
 ﻿using Application_Database;
 using Application_Domain;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test_Application.InitializeDbData
 {
