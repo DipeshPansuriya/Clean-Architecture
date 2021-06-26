@@ -16,7 +16,7 @@ namespace Application_Database.Repositories
             string Query = string.Empty;
             try
             {
-                var text = File.ReadAllText(APISetting.XMLFilePath + FolderName + @"\XMLQuery.xml");
+                string text = File.ReadAllText(APISetting.XMLFilePath + FolderName + @"\XMLQuery.xml");
                 XDocument xDoc = XDocument.Parse(text);
 
                 if (xDoc != null)
@@ -38,7 +38,7 @@ namespace Application_Database.Repositories
             string QueryParameters = string.Empty;
             try
             {
-                var text = File.ReadAllText(APISetting.XMLFilePath + FolderName);
+                string text = File.ReadAllText(APISetting.XMLFilePath + FolderName);
                 XDocument xDoc = XDocument.Parse(text);
 
                 if (xDoc != null)
@@ -46,12 +46,12 @@ namespace Application_Database.Repositories
                     Query = xDoc.Elements("Queries").Elements("QUERY").Where(t => t.Attribute("NAME").Value == queryID).FirstOrDefault().Value;
                 }
 
-                var sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
                 if (param != null)
                 {
-                    foreach (var name in param.ParameterNames)
+                    foreach (string name in param.ParameterNames)
                     {
-                        var pValue = param.Get<dynamic>(name);
+                        dynamic pValue = param.Get<dynamic>(name);
                         sb.AppendFormat("{0}={1},", "@" + name, "''" + pValue.ToString() + "''");
                         Query = Query.Replace("@" + name, "'" + pValue.ToString() + "'");
                     }

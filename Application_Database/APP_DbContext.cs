@@ -23,10 +23,10 @@ namespace Application_Database
         {
             if (base.Database.IsSqlServer())
             {
-                var transaction = base.Database.BeginTransaction();
+                Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction transaction = base.Database.BeginTransaction();
                 try
                 {
-                    var result = await base.SaveChangesAsync(cancellationToken);
+                    int result = await base.SaveChangesAsync(cancellationToken);
                     transaction.Commit();
                     return result;
                 }

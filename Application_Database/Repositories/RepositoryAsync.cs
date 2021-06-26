@@ -11,7 +11,7 @@ namespace Application_Database.Repositories
 
         public RepositoryAsync(APP_DbContext dbContext)
         {
-            _dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         //public IQueryable<T> Entities => _dbContext.Set<T>();
@@ -19,10 +19,12 @@ namespace Application_Database.Repositories
         public async Task<Response> AddAsync(T entity)
         {
             if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+            {
                 this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            }
 
-            await _dbContext.Set<T>().AddAsync(entity);
-            var resulst = await _dbContext.SaveChangesAsync();
+            await this._dbContext.Set<T>().AddAsync(entity);
+            int resulst = await this._dbContext.SaveChangesAsync();
             Response response = new Response()
             {
                 ResponseId = resulst,
@@ -37,9 +39,11 @@ namespace Application_Database.Repositories
         public async Task<Response> DeleteAsync(T entity)
         {
             if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+            {
                 this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            }
 
-            _dbContext.Set<T>().Remove(entity);
+            this._dbContext.Set<T>().Remove(entity);
             Response response = new Response()
             {
                 ResponseMessage = "Success",
@@ -52,12 +56,14 @@ namespace Application_Database.Repositories
         public async Task<Response> UpdateAsync(T entity)
         {
             if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+            {
                 this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            }
 
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            this._dbContext.Entry(entity).State = EntityState.Modified;
 
             //_dbContext.Set<T>().Update(entity);
-            var resulst = await _dbContext.SaveChangesAsync();
+            int resulst = await this._dbContext.SaveChangesAsync();
             Response response = new Response()
             {
                 ResponseId = resulst,
@@ -71,9 +77,11 @@ namespace Application_Database.Repositories
         public async Task<T> GetDetails(int id)
         {
             if (this._dbContext.ChangeTracker.QueryTrackingBehavior != QueryTrackingBehavior.NoTracking)
+            {
                 this._dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            }
 
-            return await _dbContext.Set<T>().FindAsync(id);
+            return await this._dbContext.Set<T>().FindAsync(id);
         }
     }
 }

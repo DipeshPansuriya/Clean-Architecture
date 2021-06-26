@@ -19,7 +19,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
@@ -31,8 +30,8 @@ namespace Application_API
     {
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Environment { get; }
-        private static IMediator _mediator;
-        private EmailScheduler jobscheduler = new EmailScheduler(_mediator);
+        private static readonly IMediator _mediator;
+        private readonly EmailScheduler jobscheduler = new EmailScheduler(_mediator);
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -124,6 +123,7 @@ namespace Application_API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Application_API", Version = "v1" });
+                c.CustomSchemaIds(x => x.FullName);
             });
 
             // Customize default API behavior Start
@@ -176,15 +176,15 @@ namespace Application_API
             {
                 ExceptionHandler = (c) =>
                 {
-                    var exception = c.Features.Get<IExceptionHandlerFeature>();
-                    var statusCode = exception.Error.GetType().Name switch
+                    IExceptionHandlerFeature exception = c.Features.Get<IExceptionHandlerFeature>();
+                    HttpStatusCode statusCode = exception.Error.GetType().Name switch
                     {
                         "ArgumentException" => HttpStatusCode.BadRequest,
                         _ => HttpStatusCode.ServiceUnavailable
                     };
 
                     c.Response.StatusCode = (int)statusCode;
-                    var content = Encoding.UTF8.GetBytes($"Error [{exception.Error.Message}]");
+                    byte[] content = Encoding.UTF8.GetBytes($"Error [{exception.Error.Message}]");
                     c.Response.Body.WriteAsync(content, 0, content.Length);
 
                     return Task.CompletedTask;

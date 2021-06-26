@@ -14,13 +14,13 @@ namespace Application_Database.Repositories
     public class Dapperr : IDapper
     {
         private readonly IConfiguration _config;
-        private string msg = string.Empty;
-        private ILogger<Dapperr> _logger;
+        private readonly string msg = string.Empty;
+        private readonly ILogger<Dapperr> _logger;
 
         public Dapperr(IConfiguration config, ILogger<Dapperr> logger)
         {
-            _config = config;
-            _logger = logger;
+            this._config = config;
+            this._logger = logger;
         }
 
         public void Dispose()
@@ -30,7 +30,7 @@ namespace Application_Database.Repositories
         public async Task<T> Get<T>(string sp, DynamicParameters parms, CommandType commandType)
         {
             using IDbConnection db = new SqlConnection(APISetting.DBConnection);
-            var data = await db.QueryAsync<T>(sp, parms, commandType: commandType);
+            IEnumerable<T> data = await db.QueryAsync<T>(sp, parms, commandType: commandType);
             return data.FirstOrDefault();
         }
 
@@ -38,7 +38,7 @@ namespace Application_Database.Repositories
         {
             using IDbConnection db = new SqlConnection(APISetting.DBConnection);
 
-            var data = await db.QueryAsync<T>(sp, parms, commandType: commandType);
+            IEnumerable<T> data = await db.QueryAsync<T>(sp, parms, commandType: commandType);
             return data.ToList();
         }
     }

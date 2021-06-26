@@ -19,7 +19,7 @@ namespace Test_Application.Common
                 .ConfigureServices(services =>
                 {
                     // Create a new service provider.
-                    var serviceProvider = new ServiceCollection()
+                    ServiceProvider serviceProvider = new ServiceCollection()
                         .AddEntityFrameworkInMemoryDatabase()
                         .BuildServiceProvider();
 
@@ -33,13 +33,13 @@ namespace Test_Application.Common
 
                     //services.AddScoped<INorthwindDbContext>(provider => provider.GetService<NorthwindDbContext>());
 
-                    var sp = services.BuildServiceProvider();
+                    ServiceProvider sp = services.BuildServiceProvider();
 
                     // Create a scope to obtain a reference to the database
-                    using var scope = sp.CreateScope();
-                    var scopedServices = scope.ServiceProvider;
-                    var context = scopedServices.GetRequiredService<APP_DbContext>();
-                    var logger = scopedServices.GetRequiredService<ILogger<ApplicationFactory<TStartup>>>();
+                    using IServiceScope scope = sp.CreateScope();
+                    IServiceProvider scopedServices = scope.ServiceProvider;
+                    APP_DbContext context = scopedServices.GetRequiredService<APP_DbContext>();
+                    ILogger<ApplicationFactory<TStartup>> logger = scopedServices.GetRequiredService<ILogger<ApplicationFactory<TStartup>>>();
 
                     // Ensure the database is created.
                     context.Database.EnsureCreated();
@@ -60,19 +60,19 @@ namespace Test_Application.Common
 
         public HttpClient GetAnonymousClient()
         {
-            return CreateClient();
+            return this.CreateClient();
         }
 
         public async Task<HttpClient> GetAuthenticatedClientAsync()
         {
-            var username = "";
-            var password = "";
-            return await GetAuthenticatedClientAsync(username, password);
+            string username = "";
+            string password = "";
+            return await this.GetAuthenticatedClientAsync(username, password);
         }
 
         public async Task<HttpClient> GetAuthenticatedClientAsync(string userName, string password)
         {
-            var client = CreateClient();
+            HttpClient client = this.CreateClient();
 
             //var token = await GetAccessTokenAsync(client, userName, password);
 

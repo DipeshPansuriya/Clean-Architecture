@@ -25,24 +25,24 @@ namespace Application_Command.Insert_Command
 
         public Demo_Custome_Insert_Handeler(IMapper mapper, IRepositoryAsync<Demo_Customer> demoCustomer, ICacheService cache, IBackgroundJob backgroundClient, IRepositoryAsync<NotficationCls> notfication)
         {
-            _mapper = mapper;
-            _demoCustomer = demoCustomer;
-            _cache = cache;
-            _backgroundJob = backgroundClient;
-            _notfication = notfication;
+            this._mapper = mapper;
+            this._demoCustomer = demoCustomer;
+            this._cache = cache;
+            this._backgroundJob = backgroundClient;
+            this._notfication = notfication;
         }
 
         public async Task<Response> Handle(Demo_Customer_Inst_cmd request, CancellationToken cancellationToken)
         {
-            var obj = (this._mapper.Map<Demo_Customer>(request));
+            Demo_Customer obj = (this._mapper.Map<Demo_Customer>(request));
 
-            _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache("democust"));
+            this._backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache("democust"));
             //_backgroundJob.AddSchedule<ICacheService>(x => x.RemoveCache("democust"), RecuringTime.Seconds, 2);
 
-            var response = await _demoCustomer.AddAsync(obj);
+            Response response = await this._demoCustomer.AddAsync(obj);
             if (response != null && response.ResponseStatus.ToLower() == "success")
             {
-                NotficationCls notfication = new NotficationCls()
+                NotficationCls notfication = new()
                 {
                     MsgFrom = "dipeshpansuriya@ymail.com",
                     MsgTo = "pansuriya.dipesh@gmail.com",
@@ -52,7 +52,7 @@ namespace Application_Command.Insert_Command
                     MsgType = NotificationType.Mail,
                 };
                 //await _notfication.AddAsync(notfication);
-                _backgroundJob.AddEnque<IRepositoryAsync<NotficationCls>>(x => x.AddAsync(notfication));
+                this._backgroundJob.AddEnque<IRepositoryAsync<NotficationCls>>(x => x.AddAsync(notfication));
             }
 
             return response;

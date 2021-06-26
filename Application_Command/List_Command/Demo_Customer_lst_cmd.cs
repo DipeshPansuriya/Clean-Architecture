@@ -21,17 +21,17 @@ namespace Application_Command.List_Command
 
         public Demo_Customer_lst_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob, IGetQuery getQuery)
         {
-            _demoCustomer = dapper;
-            _cache = cache;
-            _backgroundJob = backgroundJob;
-            _getQuery = getQuery;
+            this._demoCustomer = dapper;
+            this._cache = cache;
+            this._backgroundJob = backgroundJob;
+            this._getQuery = getQuery;
         }
 
         public async Task<Response> Handle(Demo_Customer_lst_cmd request, CancellationToken cancellationToken)
         {
             Response response = new Response();
             bool cachexists = false;
-            var data = _cache.GetCachedObject<Demo_Customer>("democust");
+            Task<System.Collections.Generic.List<Demo_Customer>> data = this._cache.GetCachedObject<Demo_Customer>("democust");
             if (data != null)
             {
                 if (data.Result != null)
@@ -43,9 +43,9 @@ namespace Application_Command.List_Command
 
             if (cachexists == false)
             {
-                string Query = _getQuery.GetDBQuery("Demo_Cust", "1");
-                var dbdata = await this._demoCustomer.GetAll<Demo_Customer>(Query, null, System.Data.CommandType.Text);
-                _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("democust", dbdata));
+                string Query = this._getQuery.GetDBQuery("Demo_Cust", "1");
+                System.Collections.Generic.List<Demo_Customer> dbdata = await this._demoCustomer.GetAll<Demo_Customer>(Query, null, System.Data.CommandType.Text);
+                this._backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("democust", dbdata));
 
                 response.ResponseObject = dbdata;
             }

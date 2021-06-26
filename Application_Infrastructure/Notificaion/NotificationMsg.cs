@@ -15,7 +15,7 @@ namespace Application_Infrastructure.Notificaion
 
         public NotificationMsg(IRepositoryAsync<NotficationCls> repository)
         {
-            _repository = repository;
+            this._repository = repository;
         }
 
         public bool Send(NotficationCls notfication)
@@ -23,7 +23,7 @@ namespace Application_Infrastructure.Notificaion
             switch (notfication.MsgType)
             {
                 case NotificationType.Mail:
-                    return SendMail(notfication);
+                    return this.SendMail(notfication);
 
                 case NotificationType.SMS:
                     return true;
@@ -41,32 +41,36 @@ namespace Application_Infrastructure.Notificaion
             try
             {
                 // create email message
-                var email = new MimeMessage();
+                MimeMessage email = new MimeMessage();
                 email.From.Add(MailboxAddress.Parse(notfication.MsgFrom));
                 email.To.Add(MailboxAddress.Parse(notfication.MsgTo));
                 email.Subject = notfication.MsgSubject;
                 email.Body = new TextPart(TextFormat.Html) { Text = notfication.MsgBody };
 
                 // send email
-                using var smtp = new SmtpClient();
+                using SmtpClient smtp = new SmtpClient();
                 smtp.Connect(APISetting.EmailConfiguration.SMTPAddress, APISetting.EmailConfiguration.Port, SecureSocketOptions.StartTls);
                 smtp.Authenticate(APISetting.EmailConfiguration.UserId, APISetting.EmailConfiguration.Password);
                 smtp.Send(email);
                 smtp.Disconnect(true);
 
                 notfication.MsgSatus = NotificationStatus.Success;
-                _repository.UpdateAsync(notfication);
+                this._repository.UpdateAsync(notfication);
                 return true;
             }
             catch (Exception ex)
             {
                 notfication.MsgSatus = NotificationStatus.Fail;
                 if (ex.InnerException != null)
+                {
                     notfication.FailDetails = ex.Message + ex.InnerException.Message;
+                }
                 else
+                {
                     notfication.FailDetails = ex.Message;
+                }
 
-                _repository.UpdateAsync(notfication);
+                this._repository.UpdateAsync(notfication);
                 return false;
             }
         }

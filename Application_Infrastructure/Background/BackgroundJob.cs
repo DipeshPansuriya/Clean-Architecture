@@ -7,7 +7,7 @@ namespace Application_Infrastructure.Background
 {
     public class BackgroundJob : IBackgroundJob
     {
-        private IBackgroundJobClient _backgroundClient;
+        private readonly IBackgroundJobClient _backgroundClient;
 
         public BackgroundJob(IBackgroundJobClient backgroundJobClient)
         {

@@ -15,7 +15,7 @@ namespace Application_Infrastructure.Cache
 
         public CacheService(IDistributedCache cache)
         {
-            _cache = cache;
+            this._cache = cache;
         }
 
         public async Task<List<T>> GetCachedObject<T>(string cacheKeyPrefix)
@@ -26,12 +26,12 @@ namespace Application_Infrastructure.Cache
                 string cacheKey = $"{cacheKeyPrefix}";
 
                 // Get the cached item
-                string cachedObjectJson = await _cache.GetStringAsync(cacheKey);
+                string cachedObjectJson = await this._cache.GetStringAsync(cacheKey);
 
                 // If there was a cached item then deserialise this
                 if (!string.IsNullOrEmpty(cachedObjectJson))
                 {
-                    var cachedObject = JsonConvert.DeserializeObject<List<T>>(cachedObjectJson);
+                    List<T> cachedObject = JsonConvert.DeserializeObject<List<T>>(cachedObjectJson);
                     return cachedObject;
                 }
             }
@@ -45,22 +45,22 @@ namespace Application_Infrastructure.Cache
 
         public async Task<bool> SetCachedObject(string cacheKeyPrefix, dynamic objectToCache)
         {
-            string cachedObjectJson = await _cache.GetStringAsync(cacheKeyPrefix);
+            string cachedObjectJson = await this._cache.GetStringAsync(cacheKeyPrefix);
             if (!string.IsNullOrEmpty(cachedObjectJson))
             {
-                await RemoveCache(cacheKeyPrefix);
+                await this.RemoveCache(cacheKeyPrefix);
             }
             try
             {
                 string catchdata = JsonConvert.SerializeObject(objectToCache);
-                var redisCustomerList = Encoding.UTF8.GetBytes(catchdata);
+                byte[] redisCustomerList = Encoding.UTF8.GetBytes(catchdata);
 
                 string cacheKey = $"{cacheKeyPrefix}";
 
-                var options = new DistributedCacheEntryOptions()
+                DistributedCacheEntryOptions options = new DistributedCacheEntryOptions()
                     .SetAbsoluteExpiration(DateTime.Now.AddMinutes(APISetting.CacheConfiguration.AbsoluteExpirationInHours))
                     .SetSlidingExpiration(TimeSpan.FromMinutes(APISetting.CacheConfiguration.SlidingExpirationInMinutes));
-                await _cache.SetAsync(cacheKey, redisCustomerList, options);
+                await this._cache.SetAsync(cacheKey, redisCustomerList, options);
 
                 return true;
             }
