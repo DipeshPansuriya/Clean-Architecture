@@ -20,8 +20,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Application_Core\Application_Core.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Midalware\" />
-  </ItemGroup>
 </Project>
