@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Application_Database.Database_Config
+namespace Application_Database.UserConfig
 {
     public class user_config : IEntityTypeConfiguration<User_cls>
     {

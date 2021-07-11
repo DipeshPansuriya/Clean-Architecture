@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    [Migration("20210606171002_tbl_usermaster")]
-    partial class tbl_usermaster
+    [Migration("20210711144714_FreshDB")]
+    partial class FreshDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Application_Domain.Demo_Customer", b =>
@@ -159,6 +159,145 @@ namespace Application_Database.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("tbl_usermaster");
+                });
+
+            modelBuilder.Entity("Application_Domain.UserConfig.rights_cls", b =>
+                {
+                    b.Property<int>("RightId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("RightId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Add")
+                        .HasColumnType("bit")
+                        .HasColumnName("Add");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Delete")
+                        .HasColumnType("bit")
+                        .HasColumnName("Delete");
+
+                    b.Property<int>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Edit")
+                        .HasColumnType("bit")
+                        .HasColumnName("Edit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int")
+                        .HasColumnName("MenuId");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("RecordLocked")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RecordLockedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RecordLockedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int")
+                        .HasColumnName("RoleId");
+
+                    b.Property<bool>("View")
+                        .HasColumnType("bit")
+                        .HasColumnName("View");
+
+                    b.HasKey("RightId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("tbl_righmaster");
+                });
+
+            modelBuilder.Entity("Application_Domain.UserConfig.role_cls", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("RoleId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsActive");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("RecordLocked")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RecordLockedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RecordLockedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RoleNmae")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("RoleNmae");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("tbl_rolemaster");
+                });
+
+            modelBuilder.Entity("Application_Domain.UserConfig.rights_cls", b =>
+                {
+                    b.HasOne("Application_Domain.UserConfig.role_cls", "RoleDetails")
+                        .WithMany("RightDetails")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_RoleRights_RoleId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.Navigation("RoleDetails");
+                });
+
+            modelBuilder.Entity("Application_Domain.UserConfig.role_cls", b =>
+                {
+                    b.Navigation("RightDetails");
                 });
 #pragma warning restore 612, 618
         }
