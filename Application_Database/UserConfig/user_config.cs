@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application_Database.UserConfig
 {
-    public class user_config : IEntityTypeConfiguration<User_cls>
+    public class user_config : IEntityTypeConfiguration<user_cls>
     {
-        public void Configure(EntityTypeBuilder<User_cls> builder)
+        public void Configure(EntityTypeBuilder<user_cls> builder)
         {
             builder.ToTable("tbl_usermaster");
 

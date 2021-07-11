@@ -1,6 +1,6 @@
 ﻿namespace Application_Domain.UserConfig
 {
-    public class User_cls : audit_cls
+    public class user_cls : audit_cls
     {
         public int UserId { get; set; }
         public string EmailId { get; set; }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application_Domain.UserConfig
+﻿namespace Application_Domain.UserConfig
 {
     public class rights_cls : audit_cls
     {

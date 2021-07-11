@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Delete_Command\" />
-    <Folder Include="Details_Command\" />
+    <Folder Include="Details_Command\UserConfig\" />
   </ItemGroup>
 </Project>

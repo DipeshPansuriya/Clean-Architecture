@@ -1,4 +1,5 @@
 ﻿using Application_Domain;
+using Application_Domain.UserConfig;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
@@ -18,6 +19,9 @@ namespace Application_Database
         }
 
         public virtual DbSet<Demo_Customer> Demo_Customers { get; set; }
+        public virtual DbSet<user_cls> Users { get; set; }
+        public virtual DbSet<role_cls> Roles { get; set; }
+        public virtual DbSet<rights_cls> Rights { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
