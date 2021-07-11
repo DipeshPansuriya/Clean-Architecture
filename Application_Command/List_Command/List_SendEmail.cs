@@ -4,6 +4,8 @@ using Application_Core.Notification;
 using Application_Core.Repositories;
 using Application_Domain;
 using MediatR;
+using System.Collections.Generic;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,15 +20,13 @@ namespace Application_Command.List_Command
         private readonly IDapper _query;
         private readonly ICacheService _cache;
         private readonly IBackgroundJob _backgroundJob;
-        private readonly IGetQuery _getQuery;
         private readonly INotificationMsg _notification;
 
-        public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, IGetQuery getQuery, INotificationMsg notification)
+        public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
         {
             this._query = demoCustomer;
             this._cache = cache;
             this._backgroundJob = backgroundJob;
-            this._getQuery = getQuery;
             this._notification = notification;
         }
 
@@ -34,8 +34,7 @@ namespace Application_Command.List_Command
         {
             Response response = new Response();
 
-            string Query = this._getQuery.GetDBQuery("JobScheduler", "1");
-            System.Collections.Generic.List<NotficationCls> dbdata = await this._query.GetAll<NotficationCls>(Query, null, System.Data.CommandType.Text);
+            List<NotficationCls> dbdata = await this._query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
 
             Parallel.ForEach(dbdata, data =>
             {
