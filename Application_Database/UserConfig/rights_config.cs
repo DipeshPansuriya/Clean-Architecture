@@ -8,7 +8,7 @@ namespace Application_Database.UserConfig
     {
         public void Configure(EntityTypeBuilder<rights_cls> builder)
         {
-            builder.ToTable("tbl_righmaster");
+            builder.ToTable("tbl_rightmaster");
 
             builder.Property(e => e.RightId)
                 .HasColumnName("RightId")

@@ -38,7 +38,7 @@
 		WHERE ISNULL(IsDeleted,0) = 0
 	</QUERY>
 
-	<QUERY NAME="3" Desc="List tbl_righmaster">
+	<QUERY NAME="3" Desc="List tbl_rightmaster">
 		SELECT [RightId]
 		,[RoleId]
 		,[MenuId]
@@ -56,7 +56,7 @@
 		,[ModifiedOn]
 		,[DeletedBy]
 		,[DeletedOn]
-		FROM tbl_righmaster WITH(NOLOCK)
+		FROM tbl_rightmaster WITH(NOLOCK)
 		WHERE ISNULL(IsDeleted,0) = 0
 	</QUERY>
 </Queries>
