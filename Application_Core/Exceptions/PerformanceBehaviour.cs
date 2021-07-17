@@ -13,25 +13,25 @@ namespace Application_Core.Exceptions
 
         public PerformanceBehaviour(ILogger<TRequest> logger)
         {
-            this._timer = new Stopwatch();
+            _timer = new Stopwatch();
 
-            this._logger = logger;
+            _logger = logger;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            this._timer.Start();
+            _timer.Start();
 
             TResponse response = await next();
 
-            this._timer.Stop();
+            _timer.Stop();
 
-            if (this._timer.ElapsedMilliseconds > 500)
+            if (_timer.ElapsedMilliseconds > 500)
             {
                 string name = typeof(TRequest).Name;
 
-                this._logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
-                    name, this._timer.ElapsedMilliseconds, 0, request);
+                _logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
+                    name, _timer.ElapsedMilliseconds, 0, request);
 
                 //nlogcls.logperformance(name, Convert.ToString(_timer.ElapsedMilliseconds), "0", JsonConvert.SerializeObject(request));
             }

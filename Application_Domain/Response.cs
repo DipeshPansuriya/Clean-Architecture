@@ -4,7 +4,7 @@
     {
         public Response()
         {
-            this.ResponseStatus = "Unkonwn"; this.ResponseMessage = "Success"; this.OtherMessage = ""; this.ResponseId = 0;
+            ResponseStatus = "Unkonwn"; ResponseMessage = "Success"; OtherMessage = ""; ResponseId = 0;
         }
 
         public string ResponseMessage { get; set; }

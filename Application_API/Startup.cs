@@ -35,18 +35,18 @@ namespace Application_API
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            this.Configuration = configuration;
-            this.Environment = environment;
+            Configuration = configuration;
+            Environment = environment;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            this.SetAppSetting();
+            SetAppSetting();
             //services.AddMediatR(typeof(Demo_Customer_Inst_cmd).GetTypeInfo().Assembly);
 
             // Project Dependancy
-            services.AddDatabase(this.Configuration);
+            services.AddDatabase(Configuration);
             services.AddCommand();
             services.AddRepositories();
             services.AddInfrastructure();
@@ -71,7 +71,8 @@ namespace Application_API
             // Add Cookie Policy
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                // This lambda determines whether user consent for non-essential cookies is needed
+                // for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -165,8 +166,8 @@ namespace Application_API
         {
             APISetting config = new APISetting();
 
-            this.Configuration.Bind("AppSettings", config);
-            APISetting.XMLFilePath = this.Environment.WebRootPath + @"\XMLQuery\";
+            Configuration.Bind("AppSettings", config);
+            APISetting.XMLFilePath = Environment.WebRootPath + @"\XMLQuery\";
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

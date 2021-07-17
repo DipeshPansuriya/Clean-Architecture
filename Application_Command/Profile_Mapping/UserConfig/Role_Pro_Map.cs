@@ -9,11 +9,11 @@ namespace Application_Command.Profile_Mapping.UserConfig
         public Role_Pro_Map()
 
         {
-            this.CreateMap<Role_Inst_cmd, role_cls>().ReverseMap();
+            CreateMap<Role_Inst_cmd, role_cls>().ReverseMap();
 
-            this.CreateMap<Role_Upd_cmd, role_cls>().ReverseMap();
+            CreateMap<Role_Upd_cmd, role_cls>().ReverseMap();
 
-            this.CreateMap<Role_Del_cmd, role_cls>().ReverseMap();
+            CreateMap<Role_Del_cmd, role_cls>().ReverseMap();
         }
     }
 }

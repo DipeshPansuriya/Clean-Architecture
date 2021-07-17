@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 
 namespace Application_Command.List_Command.UserConfig
 {
-    public class User_Lst_cmd : IRequest<Response>
+    public class Role_Lst_cmd : IRequest<Response>
     {
     }
 
-    public class User_Lst_cmd_Handeler : IRequestHandler<User_Lst_cmd, Response>
+    public class Role_Lst_cmd_Handeler : IRequestHandler<Role_Lst_cmd, Response>
     {
         private readonly IDapper _dapper;
         private readonly ICacheService _cache;
         private readonly IBackgroundJob _backgroundJob;
 
-        public User_Lst_cmd_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob)
+        public Role_Lst_cmd_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob)
         {
             _dapper = dapper;
             _cache = cache;
             _backgroundJob = backgroundJob;
         }
 
-        public async Task<Response> Handle(User_Lst_cmd request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(Role_Lst_cmd request, CancellationToken cancellationToken)
         {
             Response response = new Response();
             bool cachexists = false;
-            Task<List<user_cls>> data = _cache.GetCachedObject<user_cls>("users");
+            Task<List<role_cls>> data = _cache.GetCachedObject<role_cls>("roles");
             if (data != null)
             {
                 if (data.Result != null)
@@ -44,8 +44,8 @@ namespace Application_Command.List_Command.UserConfig
 
             if (cachexists == false)
             {
-                List<user_cls> dbdata = await _dapper.GetDataAsync<user_cls>("users", "1", null, CommandType.Text);
-                _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("users", dbdata));
+                List<role_cls> dbdata = await _dapper.GetDataAsync<role_cls>("users", "2", null, CommandType.Text);
+                _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("roles", dbdata));
 
                 response.ResponseObject = dbdata;
             }

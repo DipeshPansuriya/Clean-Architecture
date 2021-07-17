@@ -15,7 +15,7 @@ namespace Application_API.JobScheduler
 
         public async Task<Task> SendPendingMail()
         {
-            Application_Domain.Response res = await this._mediator.Send(new List_SendEmail());
+            Application_Domain.Response res = await _mediator.Send(new List_SendEmail());
 
             return Task.CompletedTask;
         }

@@ -7,9 +7,15 @@ namespace Application_Core.Repositories
     {
         //IQueryable<T> Entities { get; }
 
-        Task<Response> AddAsync(T entity);
+        Task<Response> SaveAsync(T entity, bool IsCache, string Cahekey);
+
+        Task<Response> SaveAsync(T entity);
+
+        Task<Response> DeleteAsync(T entity, bool IsCache, string Cahekey);
 
         Task<Response> DeleteAsync(T entity);
+
+        Task<Response> UpdateAsync(T entity, bool IsCache, string Cahekey);
 
         Task<Response> UpdateAsync(T entity);
 

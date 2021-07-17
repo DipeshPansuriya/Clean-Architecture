@@ -23,8 +23,7 @@ namespace Test_Application.Common
                         .AddEntityFrameworkInMemoryDatabase()
                         .BuildServiceProvider();
 
-                    // Add a database context using an in-memory
-                    // database for testing.
+                    // Add a database context using an in-memory database for testing.
                     services.AddDbContext<APP_DbContext>(options =>
                     {
                         options.UseInMemoryDatabase("InMemoryDbForTesting");
@@ -47,7 +46,8 @@ namespace Test_Application.Common
                     try
                     {
                         // Seed the database with test data.
-                        Test_Demo_Cust_Data.CustomerInitializeData(context);
+
+                        //Test_User_Data.InitializeData(context);
                     }
                     catch (Exception ex)
                     {
@@ -60,19 +60,19 @@ namespace Test_Application.Common
 
         public HttpClient GetAnonymousClient()
         {
-            return this.CreateClient();
+            return CreateClient();
         }
 
         public async Task<HttpClient> GetAuthenticatedClientAsync()
         {
             string username = "";
             string password = "";
-            return await this.GetAuthenticatedClientAsync(username, password);
+            return await GetAuthenticatedClientAsync(username, password);
         }
 
         public async Task<HttpClient> GetAuthenticatedClientAsync(string userName, string password)
         {
-            HttpClient client = this.CreateClient();
+            HttpClient client = CreateClient();
 
             //var token = await GetAccessTokenAsync(client, userName, password);
 

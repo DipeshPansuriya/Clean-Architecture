@@ -1,5 +1,4 @@
-﻿using Application_Core.Background;
-using Application_Core.Cache;
+﻿using Application_Core.Notification;
 using Application_Core.Repositories;
 using Application_Domain;
 using Application_Domain.UserConfig;
@@ -22,38 +21,23 @@ namespace Application_Command.Insert_Command.UserConfig
     {
         private readonly IRepositoryAsync<user_cls> _user;
         private readonly IMapper _mapper;
-        private readonly ICacheService _cache;
-        private readonly IBackgroundJob _backgroundJob;
-        private readonly IRepositoryAsync<NotficationCls> _notfication;
+        private readonly INotificationMsg _notificationMsg;
 
-        public User_Inst_cmd_Handeler(IMapper mapper, IRepositoryAsync<user_cls> user, ICacheService cache, IBackgroundJob backgroundClient, IRepositoryAsync<NotficationCls> notfication)
+        public User_Inst_cmd_Handeler(IMapper mapper, IRepositoryAsync<user_cls> user, INotificationMsg notificationMsg)
         {
-            this._mapper = mapper;
-            this._user = user;
-            this._cache = cache;
-            this._backgroundJob = backgroundClient;
-            this._notfication = notfication;
+            _mapper = mapper;
+            _user = user;
+            _notificationMsg = notificationMsg;
         }
 
         public async Task<Response> Handle(User_Inst_cmd request, CancellationToken cancellationToken)
         {
-            user_cls obj = (this._mapper.Map<user_cls>(request));
-
-            this._backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache("users"));
-
-            Response response = await this._user.AddAsync(obj);
+            user_cls obj = (_mapper.Map<user_cls>(request));
+            obj.CreatedOn = System.DateTime.Now;
+            Response response = await _user.SaveAsync(obj, true, "users");
             if (response != null && response.ResponseStatus.ToLower() == "success")
             {
-                NotficationCls notfication = new()
-                {
-                    MsgFrom = "dipeshpansuriya@ymail.com",
-                    MsgTo = "pansuriya.dipesh@gmail.com",
-                    MsgSubject = "User Create Succesfully " + request.EmailId,
-                    MsgBody = "User Create Succesfully " + request.EmailId,
-                    MsgSatus = NotificationStatus.Pending,
-                    MsgType = NotificationType.Mail,
-                };
-                this._backgroundJob.AddEnque<IRepositoryAsync<NotficationCls>>(x => x.AddAsync(notfication));
+                _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Created Succesfully " + request.EmailId, "User Created Succesfully " + request.EmailId);
             }
 
             return response;

@@ -1,4 +1,6 @@
-﻿using Application_Command.Insert_Command.UserConfig;
+﻿using Application_Command.Details_Command.UserConfig;
+using Application_Command.Insert_Command.UserConfig;
+using Application_Command.List_Command.UserConfig;
 using Application_Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,37 +12,37 @@ namespace Application_API.Controllers.UserConfig
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            Response res = await this.Mediator.Send(new Role_Inst_cmd());
+            Response res = await Mediator.Send(new Role_Lst_cmd());
 
-            return this.Ok(res);
+            return Ok(res);
         }
 
         [HttpPost]
         public async Task<ActionResult<Response>> Create([FromBody] Role_Inst_cmd inst_Cmd)
         {
-            Response res = await this.Mediator.Send(inst_Cmd);
-            return this.Ok(res);
+            Response res = await Mediator.Send(inst_Cmd);
+            return Ok(res);
         }
 
         [HttpPut]
         public async Task<ActionResult<Response>> Update([FromBody] Role_Upd_cmd upd_Cmd)
         {
-            Response res = await this.Mediator.Send(upd_Cmd);
-            return this.Ok(res);
+            Response res = await Mediator.Send(upd_Cmd);
+            return Ok(res);
         }
 
         [HttpPut]
         public async Task<ActionResult<Response>> Delete(int Id)
         {
-            Response res = await this.Mediator.Send(new Role_Del_cmd { Id = Id });
-            return this.Ok(res);
+            Response res = await Mediator.Send(new Role_Del_cmd { Id = Id });
+            return Ok(res);
         }
 
-        //[HttpPut]
-        //public async Task<ActionResult<Response>> GetData(int Id)
-        //{
-        //    Response res = await this.Mediator.Send(new Demo_Customer_lst_cmd(Id));
-        //    return this.Ok(res);
-        //}
+        [HttpGet]
+        public async Task<ActionResult<Response>> GetData(int Id)
+        {
+            Response res = await Mediator.Send(new Role_Dtl_cmd { Id = Id });
+            return Ok(res);
+        }
     }
 }

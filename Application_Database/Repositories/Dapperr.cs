@@ -21,9 +21,9 @@ namespace Application_Database.Repositories
 
         public Dapperr(IConfiguration config, ILogger<Dapperr> logger, IGetQuery query)
         {
-            this._config = config;
-            this._logger = logger;
-            this._query = query;
+            _config = config;
+            _logger = logger;
+            _query = query;
         }
 
         public void Dispose()
@@ -61,7 +61,7 @@ namespace Application_Database.Repositories
 
         public async Task<int> ExecuteAsync(string foldername, string queryID, DynamicParameters param, CommandType commandType)
         {
-            string DBQuery = this._query.GetDBQuery(foldername, queryID, param);
+            string DBQuery = _query.GetDBQuery(foldername, queryID, param);
             int affectedRows = 0;
             if (!string.IsNullOrWhiteSpace(DBQuery))
             {
@@ -123,7 +123,7 @@ namespace Application_Database.Repositories
 
         public async Task<string> ExecuteScalarAsync(string foldername, string queryID, DynamicParameters param, CommandType commandType)
         {
-            string DBQuery = this._query.GetDBQuery(foldername, queryID, param);
+            string DBQuery = _query.GetDBQuery(foldername, queryID, param);
             string data = string.Empty;
             if (!string.IsNullOrWhiteSpace(DBQuery))
             {
@@ -155,7 +155,7 @@ namespace Application_Database.Repositories
 
         public async Task<List<T>> GetDataAsync<T>(string foldername, string queryID, DynamicParameters param, CommandType commandType)
         {
-            string DBQuery = this._query.GetDBQuery(foldername, queryID, param);
+            string DBQuery = _query.GetDBQuery(foldername, queryID, param);
 
             if (!string.IsNullOrWhiteSpace(DBQuery))
             {
@@ -219,7 +219,7 @@ namespace Application_Database.Repositories
 
         public async Task<DataSet> GetDataSetAsync(string foldername, string queryID, DynamicParameters param, CommandType commandType)
         {
-            string DBQuery = this._query.GetDBQuery(foldername, queryID, param);
+            string DBQuery = _query.GetDBQuery(foldername, queryID, param);
             if (!string.IsNullOrWhiteSpace(DBQuery))
             {
                 using (IDbConnection db = new SqlConnection(APISetting.DBConnection))
@@ -234,13 +234,13 @@ namespace Application_Database.Repositories
                         if (param == null)
                         {
                             IDataReader list = await db.ExecuteReaderAsync(DBQuery, commandType: commandType);
-                            DataSet dataset = this.ConvertDataReaderToDataSet(list);
+                            DataSet dataset = ConvertDataReaderToDataSet(list);
                             return dataset;
                         }
                         else
                         {
                             IDataReader list = await db.ExecuteReaderAsync(DBQuery, param, commandType: commandType);
-                            DataSet dataset = this.ConvertDataReaderToDataSet(list);
+                            DataSet dataset = ConvertDataReaderToDataSet(list);
                             return dataset;
                         }
                     }
@@ -267,13 +267,13 @@ namespace Application_Database.Repositories
                     if (param == null)
                     {
                         IDataReader list = await db.ExecuteReaderAsync(Query, commandType: commandType);
-                        DataSet dataset = this.ConvertDataReaderToDataSet(list);
+                        DataSet dataset = ConvertDataReaderToDataSet(list);
                         return dataset;
                     }
                     else
                     {
                         IDataReader list = await db.ExecuteReaderAsync(Query, param, commandType: commandType);
-                        DataSet dataset = this.ConvertDataReaderToDataSet(list);
+                        DataSet dataset = ConvertDataReaderToDataSet(list);
                         return dataset;
                     }
                 }

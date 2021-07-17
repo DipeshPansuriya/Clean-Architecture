@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Queries>
+	<QUERY NAME="1" Desc="List tbl_usermaster">
+		SELECT [UserId]
+		,[EmailId]
+		,[Password]
+		,[UserName]
+		,[IsActive]
+		,[IsDeleted]
+		,[RecordLocked]
+		,[RecordLockedBy]
+		,[RecordLockedOn]
+		,[CreatedBy]
+		,[CreatedOn]
+		,[ModifiedBy]
+		,[ModifiedOn]
+		,[DeletedBy]
+		,[DeletedOn]
+		FROM tbl_usermaster WITH(NOLOCK)
+		WHERE ISNULL(IsDeleted,0) = 0
+	</QUERY>
+
+	<QUERY NAME="2" Desc="List tbl_rolemaster">
+		SELECT [RoleId]
+		,[RoleNmae]
+		,[IsActive]
+		,[IsDeleted]
+		,[RecordLocked]
+		,[RecordLockedBy]
+		,[RecordLockedOn]
+		,[CreatedBy]
+		,[CreatedOn]
+		,[ModifiedBy]
+		,[ModifiedOn]
+		,[DeletedBy]
+		,[DeletedOn]
+		FROM tbl_rolemaster WITH(NOLOCK)
+		WHERE ISNULL(IsDeleted,0) = 0
+	</QUERY>
+
+	<QUERY NAME="3" Desc="List tbl_righmaster">
+		SELECT [RightId]
+		,[RoleId]
+		,[MenuId]
+		,[View]
+		,[Add]
+		,[Edit]
+		,[Delete]
+		,[IsDeleted]
+		,[RecordLocked]
+		,[RecordLockedBy]
+		,[RecordLockedOn]
+		,[CreatedBy]
+		,[CreatedOn]
+		,[ModifiedBy]
+		,[ModifiedOn]
+		,[DeletedBy]
+		,[DeletedOn]
+		FROM tbl_righmaster WITH(NOLOCK)
+		WHERE ISNULL(IsDeleted,0) = 0
+	</QUERY>
+</Queries>

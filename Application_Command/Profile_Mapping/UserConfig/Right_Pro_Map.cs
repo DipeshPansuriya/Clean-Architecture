@@ -9,11 +9,11 @@ namespace Application_Command.Profile_Mapping.UserConfig
         public Right_Pro_Map()
 
         {
-            this.CreateMap<Right_Inst_cmd, rights_cls>().ReverseMap();
+            CreateMap<Right_Inst_cmd, rights_cls>().ReverseMap();
 
-            this.CreateMap<Right_Upd_cmd, rights_cls>().ReverseMap();
+            CreateMap<Right_Upd_cmd, rights_cls>().ReverseMap();
 
-            this.CreateMap<Right_Del_cmd, rights_cls>().ReverseMap();
+            CreateMap<Right_Del_cmd, rights_cls>().ReverseMap();
         }
     }
 }

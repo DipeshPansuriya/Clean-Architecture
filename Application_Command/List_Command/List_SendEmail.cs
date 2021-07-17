@@ -24,21 +24,21 @@ namespace Application_Command.List_Command
 
         public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
         {
-            this._query = demoCustomer;
-            this._cache = cache;
-            this._backgroundJob = backgroundJob;
-            this._notification = notification;
+            _query = demoCustomer;
+            _cache = cache;
+            _backgroundJob = backgroundJob;
+            _notification = notification;
         }
 
         public async Task<Response> Handle(List_SendEmail request, CancellationToken cancellationToken)
         {
             Response response = new Response();
 
-            List<NotficationCls> dbdata = await this._query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
+            List<NotficationCls> dbdata = await _query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
 
             Parallel.ForEach(dbdata, data =>
             {
-                string jobid = this._backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
+                string jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
             });
 
             //foreach (NotficationCls data in dbdata)

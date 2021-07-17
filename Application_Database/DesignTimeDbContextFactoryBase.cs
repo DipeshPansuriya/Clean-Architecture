@@ -17,7 +17,7 @@ namespace Application_Database
         {
             string basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}Application_API", Path.DirectorySeparatorChar);
             Console.WriteLine($"basePath : '{basePath}'.");
-            return this.Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
+            return Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
         }
 
         protected abstract TContext CreateNewInstance(DbContextOptions<TContext> options);
@@ -41,7 +41,7 @@ namespace Application_Database
             string connectionString = APISetting.DBConnection;
             //configuration.GetConnectionString(ConnectionStringName);
 
-            return this.Create(connectionString);
+            return Create(connectionString);
         }
 
         private TContext Create(string connectionString)
@@ -57,7 +57,7 @@ namespace Application_Database
 
             optionsBuilder.UseSqlServer(connectionString);
 
-            return this.CreateNewInstance(optionsBuilder.Options);
+            return CreateNewInstance(optionsBuilder.Options);
         }
     }
 }
