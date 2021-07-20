@@ -19,12 +19,11 @@ namespace Test_Application.Common
                 .ConfigureServices(services =>
                 {
                     // Create a new service provider.
-                    var serviceProvider = new ServiceCollection()
+                    ServiceProvider serviceProvider = new ServiceCollection()
                         .AddEntityFrameworkInMemoryDatabase()
                         .BuildServiceProvider();
 
-                    // Add a database context using an in-memory
-                    // database for testing.
+                    // Add a database context using an in-memory database for testing.
                     services.AddDbContext<APP_DbContext>(options =>
                     {
                         options.UseInMemoryDatabase("InMemoryDbForTesting");
@@ -33,13 +32,13 @@ namespace Test_Application.Common
 
                     //services.AddScoped<INorthwindDbContext>(provider => provider.GetService<NorthwindDbContext>());
 
-                    var sp = services.BuildServiceProvider();
+                    ServiceProvider sp = services.BuildServiceProvider();
 
                     // Create a scope to obtain a reference to the database
-                    using var scope = sp.CreateScope();
-                    var scopedServices = scope.ServiceProvider;
-                    var context = scopedServices.GetRequiredService<APP_DbContext>();
-                    var logger = scopedServices.GetRequiredService<ILogger<ApplicationFactory<TStartup>>>();
+                    using IServiceScope scope = sp.CreateScope();
+                    IServiceProvider scopedServices = scope.ServiceProvider;
+                    APP_DbContext context = scopedServices.GetRequiredService<APP_DbContext>();
+                    ILogger<ApplicationFactory<TStartup>> logger = scopedServices.GetRequiredService<ILogger<ApplicationFactory<TStartup>>>();
 
                     // Ensure the database is created.
                     context.Database.EnsureCreated();
@@ -47,7 +46,8 @@ namespace Test_Application.Common
                     try
                     {
                         // Seed the database with test data.
-                        Test_Demo_Cust_Data.CustomerInitializeData(context);
+
+                        //Test_User_Data.InitializeData(context);
                     }
                     catch (Exception ex)
                     {
@@ -65,14 +65,14 @@ namespace Test_Application.Common
 
         public async Task<HttpClient> GetAuthenticatedClientAsync()
         {
-            var username = "";
-            var password = "";
+            string username = "";
+            string password = "";
             return await GetAuthenticatedClientAsync(username, password);
         }
 
         public async Task<HttpClient> GetAuthenticatedClientAsync(string userName, string password)
         {
-            var client = CreateClient();
+            HttpClient client = CreateClient();
 
             //var token = await GetAccessTokenAsync(client, userName, password);
 

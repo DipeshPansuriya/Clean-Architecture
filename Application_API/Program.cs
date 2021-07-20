@@ -16,11 +16,11 @@ namespace Application_API
         public static void Main(string[] args)
         {
             IWebHost host = CreateWebHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
+            using (IServiceScope scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
-                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-                var logger = loggerFactory.CreateLogger("app");
+                System.IServiceProvider services = scope.ServiceProvider;
+                ILoggerFactory loggerFactory = services.GetRequiredService<ILoggerFactory>();
+                Microsoft.Extensions.Logging.ILogger logger = loggerFactory.CreateLogger("app");
             }
             host.Run();
         }

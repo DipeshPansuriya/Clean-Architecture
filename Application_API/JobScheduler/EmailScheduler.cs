@@ -6,7 +6,7 @@ namespace Application_API.JobScheduler
 {
     public class EmailScheduler
     {
-        private IMediator _mediator;
+        private readonly IMediator _mediator;
 
         public EmailScheduler(IMediator mediator)
         {
@@ -15,7 +15,7 @@ namespace Application_API.JobScheduler
 
         public async Task<Task> SendPendingMail()
         {
-            var res = await this._mediator.Send(new List_SendEmail());
+            Application_Domain.Response res = await _mediator.Send(new List_SendEmail());
 
             return Task.CompletedTask;
         }

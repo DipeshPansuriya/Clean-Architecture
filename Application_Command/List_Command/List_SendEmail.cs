@@ -4,6 +4,8 @@ using Application_Core.Notification;
 using Application_Core.Repositories;
 using Application_Domain;
 using MediatR;
+using System.Collections.Generic;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,30 +19,32 @@ namespace Application_Command.List_Command
     {
         private readonly IDapper _query;
         private readonly ICacheService _cache;
-        private IBackgroundJob _backgroundJob;
-        private readonly IGetQuery _getQuery;
-        private INotificationMsg _notification;
+        private readonly IBackgroundJob _backgroundJob;
+        private readonly INotificationMsg _notification;
 
-        public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, IGetQuery getQuery, INotificationMsg notification)
+        public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
         {
-            this._query = demoCustomer;
-            this._cache = cache;
-            this._backgroundJob = backgroundJob;
-            this._getQuery = getQuery;
-            this._notification = notification;
+            _query = demoCustomer;
+            _cache = cache;
+            _backgroundJob = backgroundJob;
+            _notification = notification;
         }
 
         public async Task<Response> Handle(List_SendEmail request, CancellationToken cancellationToken)
         {
             Response response = new Response();
 
-            string Query = this._getQuery.GetDBQuery("JobScheduler", "1");
-            var dbdata = await this._query.GetAll<NotficationCls>(Query, null, System.Data.CommandType.Text);
+            List<NotficationCls> dbdata = await _query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
 
-            foreach (var data in dbdata)
+            Parallel.ForEach(dbdata, data =>
             {
-                var jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
-            }
+                string jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
+            });
+
+            //foreach (NotficationCls data in dbdata)
+            //{
+            //    string jobid = this._backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
+            //}
 
             //response.ResponseObject = dbdata;
 

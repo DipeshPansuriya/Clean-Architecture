@@ -16,9 +16,4 @@
     <ProjectReference Include="..\Application_Domain\Application_Domain.csproj" />
     <ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Delete_Command\" />
-    <Folder Include="Details_Command\" />
-  </ItemGroup>
 </Project>

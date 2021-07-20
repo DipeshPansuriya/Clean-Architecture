@@ -18,21 +18,37 @@ namespace Application_Infrastructure.Cache
             _cache = cache;
         }
 
+        public async Task<bool> IsConnectedAsync(string key)
+        {
+            try
+            {
+                byte[] value = await _cache.GetAsync(key);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public async Task<List<T>> GetCachedObject<T>(string cacheKeyPrefix)
         {
             try
             {
                 // Construct the key for the cache
                 string cacheKey = $"{cacheKeyPrefix}";
-
-                // Get the cached item
-                string cachedObjectJson = await _cache.GetStringAsync(cacheKey);
-
-                // If there was a cached item then deserialise this
-                if (!string.IsNullOrEmpty(cachedObjectJson))
+                if (await IsConnectedAsync(cacheKey))
                 {
-                    var cachedObject = JsonConvert.DeserializeObject<List<T>>(cachedObjectJson);
-                    return cachedObject;
+                    // Get the cached item
+                    string cachedObjectJson = await _cache.GetStringAsync(cacheKey);
+
+                    // If there was a cached item then deserialise this
+                    if (!string.IsNullOrEmpty(cachedObjectJson))
+                    {
+                        List<T> cachedObject = JsonConvert.DeserializeObject<List<T>>(cachedObjectJson);
+                        return cachedObject;
+                    }
                 }
             }
             catch (Exception ex)
@@ -45,29 +61,33 @@ namespace Application_Infrastructure.Cache
 
         public async Task<bool> SetCachedObject(string cacheKeyPrefix, dynamic objectToCache)
         {
-            string cachedObjectJson = await _cache.GetStringAsync(cacheKeyPrefix);
-            if (!string.IsNullOrEmpty(cachedObjectJson))
+            if (await IsConnectedAsync(cacheKeyPrefix))
             {
-                await RemoveCache(cacheKeyPrefix);
-            }
-            try
-            {
-                string catchdata = JsonConvert.SerializeObject(objectToCache);
-                var redisCustomerList = Encoding.UTF8.GetBytes(catchdata);
+                string cachedObjectJson = await _cache.GetStringAsync(cacheKeyPrefix);
+                if (!string.IsNullOrEmpty(cachedObjectJson))
+                {
+                    await RemoveCache(cacheKeyPrefix);
+                }
+                try
+                {
+                    string catchdata = JsonConvert.SerializeObject(objectToCache);
+                    byte[] redisCustomerList = Encoding.UTF8.GetBytes(catchdata);
 
-                string cacheKey = $"{cacheKeyPrefix}";
+                    string cacheKey = $"{cacheKeyPrefix}";
 
-                var options = new DistributedCacheEntryOptions()
-                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(APISetting.CacheConfiguration.AbsoluteExpirationInHours))
-                    .SetSlidingExpiration(TimeSpan.FromMinutes(APISetting.CacheConfiguration.SlidingExpirationInMinutes));
-                await _cache.SetAsync(cacheKey, redisCustomerList, options);
+                    DistributedCacheEntryOptions options = new DistributedCacheEntryOptions()
+                        .SetAbsoluteExpiration(DateTime.Now.AddMinutes(APISetting.CacheConfiguration.AbsoluteExpirationInHours))
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(APISetting.CacheConfiguration.SlidingExpirationInMinutes));
+                    await _cache.SetAsync(cacheKey, redisCustomerList, options);
 
-                return true;
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException($"Error in CacheService.CS :- " + ex.Message, ex.InnerException);
+                }
             }
-            catch (Exception ex)
-            {
-                throw new ArgumentException($"Error in CacheService.CS :- " + ex.Message, ex.InnerException);
-            }
+            return false;
         }
 
         //public async Task<bool> CheckExist(string cacheKeyPrefix)
@@ -83,15 +103,12 @@ namespace Application_Infrastructure.Cache
 
         public async Task<bool> RemoveCache(string cacheKeyPrefix)
         {
-            try
+            if (await IsConnectedAsync(cacheKeyPrefix))
             {
-                await this._cache.RemoveAsync($"{cacheKeyPrefix}");
+                await _cache.RemoveAsync($"{cacheKeyPrefix}");
                 return true;
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

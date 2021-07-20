@@ -12,7 +12,7 @@ namespace Application_API.Controllers
         private IMediator _mediator;
         private ILogger<T> _loggerInstance;
 
-        protected IMediator Mediator => this._mediator ?? (this._mediator = this.HttpContext.RequestServices.GetService<IMediator>());
+        protected IMediator Mediator => _mediator ?? (_mediator = HttpContext.RequestServices.GetService<IMediator>());
 
         protected ILogger<T> _logger => _loggerInstance ??= HttpContext.RequestServices.GetService<ILogger<T>>();
     }

@@ -22,13 +22,13 @@ namespace Application_Core.Exceptions
         {
             _timer.Start();
 
-            var response = await next();
+            TResponse response = await next();
 
             _timer.Stop();
 
             if (_timer.ElapsedMilliseconds > 500)
             {
-                var name = typeof(TRequest).Name;
+                string name = typeof(TRequest).Name;
 
                 _logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
                     name, _timer.ElapsedMilliseconds, 0, request);
