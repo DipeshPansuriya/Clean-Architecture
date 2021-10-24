@@ -13,45 +13,41 @@ namespace Application_Command.List_Command.UserConfig
 {
     public class Right_Lst_cmd : IRequest<Response>
     {
-    }
 
-    public class Right_Lst_cmd_Handeler : IRequestHandler<Right_Lst_cmd, Response>
-    {
-        private readonly IDapper _dapper;
-        private readonly ICacheService _cache;
-        private readonly IBackgroundJob _backgroundJob;
-
-        public Right_Lst_cmd_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob)
+        public class Right_Lst_cmd_Handeler : IRequestHandler<Right_Lst_cmd, Response>
         {
-            _dapper = dapper;
-            _cache = cache;
-            _backgroundJob = backgroundJob;
-        }
+            private readonly IDapper _dapper;
+            private readonly ICacheService _cache;
+            private readonly IBackgroundJob _backgroundJob;
 
-        public async Task<Response> Handle(Right_Lst_cmd request, CancellationToken cancellationToken)
-        {
-            Response response = new Response();
-            bool cachexists = false;
-            Task<List<rights_cls>> data = _cache.GetCachedObject<rights_cls>("rights");
-            if (data != null)
+            public Right_Lst_cmd_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob)
             {
-                if (data.Result != null)
+                _dapper = dapper;
+                _cache = cache;
+                _backgroundJob = backgroundJob;
+            }
+
+            public async Task<Response> Handle(Right_Lst_cmd request, CancellationToken cancellationToken)
+            {
+                Response response = new Response();
+                bool cachexists = false;
+                Task<List<rights_cls>> data = _cache.GetCachedObject<rights_cls>("rights");
+                cachexists = data != null ? true : data.Result != null ? true : false;
+                if (cachexists)
                 {
                     response.ResponseObject = data.Result;
-                    cachexists = true;
                 }
+                else
+                {
+                    List<rights_cls> dbdata = await _dapper.GetDataAsync<rights_cls>("users", "3", null, CommandType.Text);
+                    _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("rights", dbdata));
+
+                    response.ResponseObject = dbdata;
+                }
+                response.ResponseStatus = "success";
+
+                return response;
             }
-
-            if (cachexists == false)
-            {
-                List<rights_cls> dbdata = await _dapper.GetDataAsync<rights_cls>("users", "3", null, CommandType.Text);
-                _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("rights", dbdata));
-
-                response.ResponseObject = dbdata;
-            }
-            response.ResponseStatus = "success";
-
-            return response;
         }
     }
 }

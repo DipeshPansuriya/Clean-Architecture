@@ -10,11 +10,11 @@
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="5.0.1" />
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="5.0.1" />
-    <PackageReference Include="Hangfire" Version="1.7.24" />
-    <PackageReference Include="MailKit" Version="2.13.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.17.0" />
+    <PackageReference Include="Hangfire" Version="1.7.25" />
+    <PackageReference Include="MailKit" Version="2.15.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.18.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
-    <PackageReference Include="MimeKit" Version="2.13.0" />
+    <PackageReference Include="MimeKit" Version="2.15.1" />
   </ItemGroup>
 
   <ItemGroup>

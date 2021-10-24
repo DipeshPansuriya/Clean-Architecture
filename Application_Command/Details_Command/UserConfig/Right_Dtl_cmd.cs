@@ -10,33 +10,33 @@ namespace Application_Command.Details_Command.UserConfig
     public class Right_Dtl_cmd : IRequest<Response>
     {
         public int Id { get; set; }
-    }
 
-    public class Right_Dtl_cmd_Handeler : IRequestHandler<Right_Dtl_cmd, Response>
-    {
-        private readonly IRepositoryAsync<rights_cls> _rights;
-
-        public Right_Dtl_cmd_Handeler(IRepositoryAsync<rights_cls> rights)
+        public class Right_Dtl_cmd_Handeler : IRequestHandler<Right_Dtl_cmd, Response>
         {
-            _rights = rights;
-        }
+            private readonly IRepositoryAsync<rights_cls> _rights;
 
-        public async Task<Response> Handle(Right_Dtl_cmd request, CancellationToken cancellationToken)
-        {
-            rights_cls entity = await _rights.GetDetails(request.Id);
-
-            if (entity != null)
+            public Right_Dtl_cmd_Handeler(IRepositoryAsync<rights_cls> rights)
             {
-                Response response = new()
-                {
-                    ResponseMessage = "Success",
-                    ResponseStatus = "Success",
-                    ResponseObject = entity,
-                };
-
-                return response;
+                _rights = rights;
             }
-            return null;
+
+            public async Task<Response> Handle(Right_Dtl_cmd request, CancellationToken cancellationToken)
+            {
+                rights_cls entity = await _rights.GetDetails(request.Id);
+
+                if (entity != null)
+                {
+                    Response response = new()
+                    {
+                        ResponseMessage = "Success",
+                        ResponseStatus = "Success",
+                        ResponseObject = entity,
+                    };
+
+                    return response;
+                }
+                return null;
+            }
         }
     }
 }

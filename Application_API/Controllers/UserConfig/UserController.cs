@@ -13,7 +13,6 @@ namespace Application_API.Controllers.UserConfig
         public async Task<ActionResult> GetAll()
         {
             Response res = await Mediator.Send(new User_Lst_cmd());
-
             return Ok(res);
         }
 
