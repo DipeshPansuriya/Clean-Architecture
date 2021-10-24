@@ -10,33 +10,33 @@ namespace Application_Command.Details_Command.UserConfig
     public class Role_Dtl_cmd : IRequest<Response>
     {
         public int Id { get; set; }
-    }
 
-    public class Role_Dtl_cmd_Handeler : IRequestHandler<Role_Dtl_cmd, Response>
-    {
-        private readonly IRepositoryAsync<role_cls> _roles;
-
-        public Role_Dtl_cmd_Handeler(IRepositoryAsync<role_cls> roles)
+        public class Role_Dtl_cmd_Handeler : IRequestHandler<Role_Dtl_cmd, Response>
         {
-            _roles = roles;
-        }
+            private readonly IRepositoryAsync<role_cls> _roles;
 
-        public async Task<Response> Handle(Role_Dtl_cmd request, CancellationToken cancellationToken)
-        {
-            role_cls entity = await _roles.GetDetails(request.Id);
-
-            if (entity != null)
+            public Role_Dtl_cmd_Handeler(IRepositoryAsync<role_cls> roles)
             {
-                Response response = new()
-                {
-                    ResponseMessage = "Success",
-                    ResponseStatus = "Success",
-                    ResponseObject = entity,
-                };
-
-                return response;
+                _roles = roles;
             }
-            return null;
+
+            public async Task<Response> Handle(Role_Dtl_cmd request, CancellationToken cancellationToken)
+            {
+                role_cls entity = await _roles.GetDetails(request.Id);
+
+                if (entity != null)
+                {
+                    Response response = new()
+                    {
+                        ResponseMessage = "Success",
+                        ResponseStatus = "Success",
+                        ResponseObject = entity,
+                    };
+
+                    return response;
+                }
+                return null;
+            }
         }
     }
 }

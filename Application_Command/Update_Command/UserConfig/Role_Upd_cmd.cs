@@ -14,38 +14,38 @@ namespace Application_Command.Insert_Command.UserConfig
         public int RoleId { get; set; }
         public string RoleNmae { get; set; }
         public bool IsActive { get; set; }
-    }
 
-    public class Role_Upd_cmd_Handeler : IRequestHandler<Role_Upd_cmd, Response>
-    {
-        private readonly IRepositoryAsync<role_cls> _roles;
-        private readonly IMapper _mapper;
-        private readonly INotificationMsg _notificationMsg;
-
-        public Role_Upd_cmd_Handeler(IMapper mapper, IRepositoryAsync<role_cls> roles, INotificationMsg notificationMsg)
+        public class Role_Upd_cmd_Handeler : IRequestHandler<Role_Upd_cmd, Response>
         {
-            _mapper = mapper;
-            _roles = roles;
-            _notificationMsg = notificationMsg;
-        }
+            private readonly IRepositoryAsync<role_cls> _roles;
+            private readonly IMapper _mapper;
+            private readonly INotificationMsg _notificationMsg;
 
-        public async Task<Response> Handle(Role_Upd_cmd request, CancellationToken cancellationToken)
-        {
-            role_cls obj = (_mapper.Map<role_cls>(request));
-            role_cls entity = await _roles.GetDetails(obj.RoleId);
-
-            if (entity != null)
+            public Role_Upd_cmd_Handeler(IMapper mapper, IRepositoryAsync<role_cls> roles, INotificationMsg notificationMsg)
             {
-                obj.ModifiedOn = System.DateTime.Now;
-                Response response = await _roles.UpdateAsync(obj, true, "roles");
-                if (response != null && response.ResponseStatus.ToLower() == "success")
-                {
-                    _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Updated Succesfully " + request.RoleNmae, "Role Updated Succesfully " + request.RoleNmae);
-                }
-
-                return response;
+                _mapper = mapper;
+                _roles = roles;
+                _notificationMsg = notificationMsg;
             }
-            return null;
+
+            public async Task<Response> Handle(Role_Upd_cmd request, CancellationToken cancellationToken)
+            {
+                role_cls obj = (_mapper.Map<role_cls>(request));
+                role_cls entity = await _roles.GetDetails(obj.RoleId);
+
+                if (entity != null)
+                {
+                    obj.ModifiedOn = System.DateTime.Now;
+                    Response response = await _roles.UpdateAsync(obj, true, "roles");
+                    if (response != null && response.ResponseStatus.ToLower() == "success")
+                    {
+                        _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Updated Succesfully " + request.RoleNmae, "Role Updated Succesfully " + request.RoleNmae);
+                    }
+
+                    return response;
+                }
+                return null;
+            }
         }
     }
 }

@@ -13,42 +13,42 @@ namespace Application_Command.List_Command
 {
     public class List_SendEmail : IRequest<Response>
     {
-    }
 
-    public class List_SendEmail_Handeler : IRequestHandler<List_SendEmail, Response>
-    {
-        private readonly IDapper _query;
-        private readonly ICacheService _cache;
-        private readonly IBackgroundJob _backgroundJob;
-        private readonly INotificationMsg _notification;
-
-        public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
+        public class List_SendEmail_Handeler : IRequestHandler<List_SendEmail, Response>
         {
-            _query = demoCustomer;
-            _cache = cache;
-            _backgroundJob = backgroundJob;
-            _notification = notification;
-        }
+            private readonly IDapper _query;
+            private readonly ICacheService _cache;
+            private readonly IBackgroundJob _backgroundJob;
+            private readonly INotificationMsg _notification;
 
-        public async Task<Response> Handle(List_SendEmail request, CancellationToken cancellationToken)
-        {
-            Response response = new Response();
-
-            List<NotficationCls> dbdata = await _query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
-
-            Parallel.ForEach(dbdata, data =>
+            public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
             {
-                string jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
-            });
+                _query = demoCustomer;
+                _cache = cache;
+                _backgroundJob = backgroundJob;
+                _notification = notification;
+            }
 
-            //foreach (NotficationCls data in dbdata)
-            //{
-            //    string jobid = this._backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
-            //}
+            public async Task<Response> Handle(List_SendEmail request, CancellationToken cancellationToken)
+            {
+                Response response = new Response();
 
-            //response.ResponseObject = dbdata;
+                List<NotficationCls> dbdata = await _query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
 
-            return response;
+                Parallel.ForEach(dbdata, data =>
+                {
+                    string jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
+                });
+
+                //foreach (NotficationCls data in dbdata)
+                //{
+                //    string jobid = this._backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
+                //}
+
+                //response.ResponseObject = dbdata;
+
+                return response;
+            }
         }
     }
 }

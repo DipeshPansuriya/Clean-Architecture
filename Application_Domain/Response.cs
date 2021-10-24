@@ -1,4 +1,6 @@
-﻿namespace Application_Domain
+﻿using System.Net;
+
+namespace Application_Domain
 {
     public class Response
     {
@@ -12,5 +14,6 @@
         public object ResponseObject { get; set; }
         public string ResponseStatus { get; set; }
         public int ResponseId { get; set; }
+        public HttpStatusCode StatusCode { get; init; } = HttpStatusCode.OK;
     }
 }

@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Application_Database.Repositories
 {
@@ -43,14 +44,7 @@ namespace Application_Database.Repositories
 
                 try
                 {
-                    if (param == null)
-                    {
-                        affectedRows = await db.ExecuteAsync(Query, commandType: commandType);
-                    }
-                    else
-                    {
-                        affectedRows = await db.ExecuteAsync(Query, param, commandType: commandType);
-                    }
+                    affectedRows = param == null ? await db.ExecuteAsync(Query, commandType: commandType) : await db.ExecuteAsync(Query, param, commandType: commandType);
                 }
                 catch (Exception)
                 {
@@ -74,14 +68,7 @@ namespace Application_Database.Repositories
 
                     try
                     {
-                        if (param == null)
-                        {
-                            affectedRows = await db.ExecuteAsync(DBQuery, commandType: commandType);
-                        }
-                        else
-                        {
-                            affectedRows = await db.ExecuteAsync(DBQuery, param, commandType: commandType);
-                        }
+                        affectedRows = param == null ? await db.ExecuteAsync(DBQuery, commandType: commandType) : await db.ExecuteAsync(DBQuery, param, commandType: commandType);
                     }
                     catch (Exception)
                     {
@@ -105,14 +92,7 @@ namespace Application_Database.Repositories
 
                 try
                 {
-                    if (param == null)
-                    {
-                        data = await db.ExecuteScalarAsync<string>(Query, commandType: commandType);
-                    }
-                    else
-                    {
-                        data = await db.ExecuteScalarAsync<string>(Query, param, commandType: commandType);
-                    }
+                    data = param == null ? await db.ExecuteScalarAsync<string>(Query, commandType: commandType) : await db.ExecuteScalarAsync<string>(Query, param, commandType: commandType);
                 }
                 catch (Exception)
                 {
@@ -136,14 +116,7 @@ namespace Application_Database.Repositories
 
                     try
                     {
-                        if (param == null)
-                        {
-                            data = await db.ExecuteScalarAsync<string>(DBQuery, commandType: commandType);
-                        }
-                        else
-                        {
-                            data = await db.ExecuteScalarAsync<string>(DBQuery, param, commandType: commandType);
-                        }
+                        data = param == null ? await db.ExecuteScalarAsync<string>(DBQuery, commandType: commandType) : await db.ExecuteScalarAsync<string>(DBQuery, param, commandType: commandType);
                     }
                     catch (Exception)
                     {
@@ -168,16 +141,9 @@ namespace Application_Database.Repositories
 
                     try
                     {
-                        if (param == null)
-                        {
-                            IEnumerable<T> data = await db.QueryAsync<T>(DBQuery, commandType: commandType);
-                            return data.ToList();
-                        }
-                        else
-                        {
-                            IEnumerable<T> data = await db.QueryAsync<T>(DBQuery, param, commandType: commandType);
-                            return data.ToList();
-                        }
+                        IEnumerable<T> data = param == null ? await db.QueryAsync<T>(DBQuery, commandType: commandType) : await db.QueryAsync<T>(DBQuery, param, commandType: commandType);
+
+                        return data.ToList();
                     }
                     catch (Exception)
                     {
@@ -199,16 +165,9 @@ namespace Application_Database.Repositories
 
                 try
                 {
-                    if (param == null)
-                    {
-                        IEnumerable<T> data = await db.QueryAsync<T>(Query, commandType: commandType);
-                        return data.ToList();
-                    }
-                    else
-                    {
-                        IEnumerable<T> data = await db.QueryAsync<T>(Query, param, commandType: commandType);
-                        return data.ToList();
-                    }
+                    IEnumerable<T> data = param == null ? await db.QueryAsync<T>(Query, commandType: commandType) : await db.QueryAsync<T>(Query, param, commandType: commandType);
+
+                    return data.ToList();
                 }
                 catch (Exception)
                 {
@@ -231,18 +190,10 @@ namespace Application_Database.Repositories
 
                     try
                     {
-                        if (param == null)
-                        {
-                            IDataReader list = await db.ExecuteReaderAsync(DBQuery, commandType: commandType);
-                            DataSet dataset = ConvertDataReaderToDataSet(list);
-                            return dataset;
-                        }
-                        else
-                        {
-                            IDataReader list = await db.ExecuteReaderAsync(DBQuery, param, commandType: commandType);
-                            DataSet dataset = ConvertDataReaderToDataSet(list);
-                            return dataset;
-                        }
+                        IDataReader list = param == null ? await db.ExecuteReaderAsync(DBQuery, commandType: commandType) : await db.ExecuteReaderAsync(DBQuery, param, commandType: commandType);
+
+                        DataSet dataset = ConvertDataReaderToDataSet(list);
+                        return dataset;
                     }
                     catch (Exception)
                     {
@@ -264,18 +215,10 @@ namespace Application_Database.Repositories
 
                 try
                 {
-                    if (param == null)
-                    {
-                        IDataReader list = await db.ExecuteReaderAsync(Query, commandType: commandType);
-                        DataSet dataset = ConvertDataReaderToDataSet(list);
-                        return dataset;
-                    }
-                    else
-                    {
-                        IDataReader list = await db.ExecuteReaderAsync(Query, param, commandType: commandType);
-                        DataSet dataset = ConvertDataReaderToDataSet(list);
-                        return dataset;
-                    }
+                    IDataReader list = param == null ? await db.ExecuteReaderAsync(Query, commandType: commandType) : await db.ExecuteReaderAsync(Query, param, commandType: commandType);
+
+                    DataSet dataset = ConvertDataReaderToDataSet(list);
+                    return dataset;
                 }
                 catch (Exception)
                 {
