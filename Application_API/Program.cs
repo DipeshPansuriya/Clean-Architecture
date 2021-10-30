@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.Email;
+using System.Net;
 using System.Reflection;
 
 namespace Application_API
@@ -22,6 +25,7 @@ namespace Application_API
                 ILoggerFactory loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 Microsoft.Extensions.Logging.ILogger logger = loggerFactory.CreateLogger("app");
             }
+
             host.Run();
         }
 
@@ -30,7 +34,27 @@ namespace Application_API
             return WebHost.CreateDefaultBuilder(args)
                 .UseSerilog((hostingContext, loggerConfig) =>
                     loggerConfig.ReadFrom
-                    .Configuration(hostingContext.Configuration))
+                    .Configuration(hostingContext.Configuration)
+                        .WriteTo.Email(new EmailConnectionInfo
+                        {
+                            FromEmail = "howard0@ethereal.email",
+                            ToEmail = "dipeshpansuriya@ymail.com",
+                            MailServer = "smtp.ethereal.email",
+                            NetworkCredentials = new NetworkCredential
+                            {
+                                UserName = "howard0@ethereal.email",
+                                Password = "Ays797tvgxZSptbSHd"
+                            },
+                            EnableSsl = false,
+                            IsBodyHtml = false,
+                            Port = 587,
+                            EmailSubject = "[{Level}] <{MachineName}> Log Email",
+                        },
+                         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm} [{Level}] <{MachineName}> {Message}{NewLine}{Exception}",
+                         restrictedToMinimumLevel: LogEventLevel.Error
+                         //, batchPostingLimit: 1
+                         )
+                    )
 
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {

@@ -25,16 +25,16 @@ namespace Application_Database
         {
             if (base.Database.IsSqlServer())
             {
-                Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction transaction = base.Database.BeginTransaction();
+                //Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction transaction = base.Database.BeginTransaction();
                 try
                 {
                     int result = await base.SaveChangesAsync(cancellationToken);
-                    transaction.Commit();
+                    //transaction.Commit();
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    transaction.Rollback();
+                    //transaction.Rollback();
                     throw new ArgumentException($"Error in APP_DbContext.CS :- " + ex.Message, ex.InnerException);
                 }
             }

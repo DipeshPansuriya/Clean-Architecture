@@ -13,7 +13,6 @@ namespace Application_Command.List_Command
 {
     public class List_SendEmail : IRequest<Response>
     {
-
         public class List_SendEmail_Handeler : IRequestHandler<List_SendEmail, Response>
         {
             private readonly IDapper _query;

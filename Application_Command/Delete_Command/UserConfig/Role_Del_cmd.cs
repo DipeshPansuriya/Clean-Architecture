@@ -35,7 +35,7 @@ namespace Application_Command.Insert_Command.UserConfig
                     Response response = await _roles.UpdateAsync(entity, true, "roles");
                     if (response != null && response.ResponseStatus.ToLower() == "success")
                     {
-                        _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Delete Succesfully " + entity.RoleNmae, "Role Delete Succesfully " + entity.RoleNmae);
+                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Delete Succesfully " + entity.RoleNmae, "Role Delete Succesfully " + entity.RoleNmae));
                     }
 
                     return response;

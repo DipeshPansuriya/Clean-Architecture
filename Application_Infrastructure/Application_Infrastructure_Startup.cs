@@ -1,4 +1,5 @@
-﻿using Application_Core.Background;
+﻿using Application_Core;
+using Application_Core.Background;
 using Application_Core.Cache;
 using Application_Core.Notification;
 using Application_Infrastructure.Background;
@@ -16,6 +17,8 @@ namespace Application_Infrastructure
             services.AddScoped<CacheService>();
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBackgroundJob, BackgroundJob>();
+
+            services.AddSingleton<IResponse_Request, Response_Request>();
 
             services.AddTransient<INotificationMsg, NotificationMsg>();
             services.AddScoped<NotificationMsg>();

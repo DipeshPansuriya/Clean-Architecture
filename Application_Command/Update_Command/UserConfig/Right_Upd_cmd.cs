@@ -43,7 +43,7 @@ namespace Application_Command.Insert_Command.UserConfig
                     Response response = await _rights.UpdateAsync(obj, true, "rights");
                     if (response != null && response.ResponseStatus.ToLower() == "success")
                     {
-                        _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Right Updated Succesfully " + request.RightId, "Right Updated Succesfully " + request.RightId);
+                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Right Updated Succesfully " + request.RightId, "Right Updated Succesfully " + request.RightId));
                     }
 
                     return response;

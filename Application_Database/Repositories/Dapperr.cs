@@ -9,7 +9,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Application_Database.Repositories
 {
@@ -48,6 +47,7 @@ namespace Application_Database.Repositories
                 }
                 catch (Exception)
                 {
+
                 }
             }
             return affectedRows;

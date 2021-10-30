@@ -35,7 +35,7 @@ namespace Application_Command.Insert_Command.UserConfig
                     Response response = await _user.UpdateAsync(entity, true, "users");
                     if (response != null && response.ResponseStatus.ToLower() == "success")
                     {
-                        _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Delete Succesfully " + entity.EmailId, "User Delete Succesfully " + entity.EmailId);
+                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Delete Succesfully " + entity.EmailId, "User Delete Succesfully " + entity.EmailId));
                     }
 
                     return response;

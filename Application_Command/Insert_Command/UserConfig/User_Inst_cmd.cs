@@ -38,7 +38,7 @@ namespace Application_Command.Insert_Command.UserConfig
 
                 if (response != null && response.ResponseStatus.ToLower() == "success")
                 {
-                    _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Created Succesfully " + request.EmailId, "User Created Succesfully " + request.EmailId);
+                    Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Created Succesfully " + request.EmailId, "User Created Succesfully " + request.EmailId));
                 }
 
                 return response;

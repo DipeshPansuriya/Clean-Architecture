@@ -35,7 +35,7 @@ namespace Application_Command.Insert_Command.UserConfig
                     Response response = await _rights.UpdateAsync(entity, true, "rights");
                     if (response != null && response.ResponseStatus.ToLower() == "success")
                     {
-                        _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Right Delete Succesfully " + entity.RightId, "Right Delete Succesfully " + entity.RightId);
+                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Right Delete Succesfully " + entity.RightId, "Right Delete Succesfully " + entity.RightId));
                     }
 
                     return response;

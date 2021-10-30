@@ -40,7 +40,7 @@ namespace Application_Command.List_Command.UserConfig
                 else
                 {
                     List<user_cls> dbdata = await _dapper.GetDataAsync<user_cls>("users", "1", null, CommandType.Text);
-                    _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("users", dbdata));
+                    Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("users", dbdata)));
 
                     response.ResponseObject = dbdata;
                 }

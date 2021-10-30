@@ -3,6 +3,8 @@ using Application_Core.Cache;
 using Application_Core.Repositories;
 using Application_Domain;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Application_Database.Repositories
@@ -28,7 +30,7 @@ namespace Application_Database.Repositories
             {
                 if (!string.IsNullOrEmpty(Cahekey))
                 {
-                    _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache(Cahekey));
+                    Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache(Cahekey)));
                 }
             }
 
@@ -42,18 +44,34 @@ namespace Application_Database.Repositories
                 _dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             }
 
-            await _dbContext.Set<T>().AddAsync(entity);
-            int resulst = await _dbContext.SaveChangesAsync();
-            Response response = new Response()
+            try
             {
-                ResponseId = resulst,
-                ResponseMessage = "Success",
-                ResponseStatus = "Success",
-                ResponseObject = entity
-            };
+                await _dbContext.Set<T>().AddAsync(entity);
+                int resulst = await _dbContext.SaveChangesAsync();
+                Response response = new Response()
+                {
+                    ResponseId = resulst,
+                    ResponseMessage = "Success",
+                    ResponseStatus = "Success",
+                    ResponseObject = entity
+                };
 
-            return response;
-            //return entity;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                Response response = new Response()
+                {
+                    ResponseId = 0,
+                    ResponseMessage = ex.Message + " ~ " + ex.InnerException,
+                    ResponseStatus = "Failure",
+                    ResponseObject = entity,
+                    StatusCode = HttpStatusCode.BadRequest,
+                };
+
+
+                return response;
+            }
         }
 
         public async Task<Response> DeleteAsync(T entity, bool IsCache, string Cahekey)
@@ -62,7 +80,7 @@ namespace Application_Database.Repositories
             {
                 if (!string.IsNullOrEmpty(Cahekey))
                 {
-                    _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache(Cahekey));
+                    Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache(Cahekey)));
                 }
             }
             return await DeleteAsync(entity);
@@ -74,15 +92,30 @@ namespace Application_Database.Repositories
             {
                 _dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             }
-
-            _dbContext.Set<T>().Remove(entity);
-            Response response = new Response()
+            try
             {
-                ResponseMessage = "Success",
-                ResponseStatus = "Success",
-                ResponseObject = entity
-            };
-            return response;
+                _dbContext.Set<T>().Remove(entity);
+                Response response = new Response()
+                {
+                    ResponseMessage = "Success",
+                    ResponseStatus = "Success",
+                    ResponseObject = entity
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                Response response = new Response()
+                {
+                    ResponseId = 0,
+                    ResponseMessage = ex.Message + "~" + ex.InnerException,
+                    ResponseStatus = "Failure",
+                    ResponseObject = entity,
+                    StatusCode = HttpStatusCode.BadRequest,
+                };
+
+                return response;
+            }
         }
 
         public async Task<Response> UpdateAsync(T entity, bool IsCache, string Cahekey)
@@ -91,7 +124,7 @@ namespace Application_Database.Repositories
             {
                 if (!string.IsNullOrEmpty(Cahekey))
                 {
-                    _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache(Cahekey));
+                    Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.RemoveCache(Cahekey)));
                     //_backgroundJob.AddSchedule<ICacheService>(x => x.RemoveCache("democust"), RecuringTime.Seconds, 2);
                 }
             }
@@ -104,19 +137,34 @@ namespace Application_Database.Repositories
             {
                 _dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             }
-
-            _dbContext.Entry(entity).State = EntityState.Modified;
-
-            //_dbContext.Set<T>().Update(entity);
-            int resulst = await _dbContext.SaveChangesAsync();
-            Response response = new Response()
+            try
             {
-                ResponseId = resulst,
-                ResponseMessage = "Success",
-                ResponseStatus = "Success",
-                ResponseObject = entity
-            };
-            return response;
+                _dbContext.Entry(entity).State = EntityState.Modified;
+
+                //_dbContext.Set<T>().Update(entity);
+                int resulst = await _dbContext.SaveChangesAsync();
+                Response response = new Response()
+                {
+                    ResponseId = resulst,
+                    ResponseMessage = "Success",
+                    ResponseStatus = "Success",
+                    ResponseObject = entity
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                Response response = new Response()
+                {
+                    ResponseId = 0,
+                    ResponseMessage = ex.Message + "~" + ex.InnerException,
+                    ResponseStatus = "Failure",
+                    ResponseObject = entity,
+                    StatusCode = HttpStatusCode.BadRequest,
+                };
+
+                return response;
+            }
         }
 
         public async Task<T> GetDetails(int id)

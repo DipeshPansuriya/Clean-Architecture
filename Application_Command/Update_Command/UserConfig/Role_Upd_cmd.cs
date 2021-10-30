@@ -39,7 +39,7 @@ namespace Application_Command.Insert_Command.UserConfig
                     Response response = await _roles.UpdateAsync(obj, true, "roles");
                     if (response != null && response.ResponseStatus.ToLower() == "success")
                     {
-                        _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Updated Succesfully " + request.RoleNmae, "Role Updated Succesfully " + request.RoleNmae);
+                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Updated Succesfully " + request.RoleNmae, "Role Updated Succesfully " + request.RoleNmae));
                     }
 
                     return response;
