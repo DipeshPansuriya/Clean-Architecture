@@ -18,6 +18,7 @@ namespace Application_Database
         {
         }
 
+        public virtual DbSet<TblApiResponse> TblApiResponse { get; set; }
         public virtual DbSet<TblNotification> TblNotification { get; set; }
         public virtual DbSet<TblRightmaster> TblRightmaster { get; set; }
         public virtual DbSet<TblRolemaster> TblRolemaster { get; set; }
@@ -26,6 +27,28 @@ namespace Application_Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<TblApiResponse>(entity =>
+            {
+                entity.ToTable("tbl_API_Response");
+
+                entity.Property(e => e.Apidate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("apidate")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Apistauts).HasColumnName("apistauts");
+
+                entity.Property(e => e.Filename)
+                    .HasMaxLength(100)
+                    .HasColumnName("filename");
+
+                entity.Property(e => e.Request).HasColumnName("request");
+
+                entity.Property(e => e.Response).HasColumnName("response");
+
+                entity.Property(e => e.Userid).HasColumnName("userid");
+            });
 
             modelBuilder.Entity<TblNotification>(entity =>
             {

@@ -4,14 +4,16 @@ using Application_Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    partial class APP_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20211031080302_API_ReponseTable")]
+    partial class API_ReponseTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

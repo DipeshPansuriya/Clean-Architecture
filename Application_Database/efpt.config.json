@@ -14,6 +14,10 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[tbl_API_Response]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[tbl_Notification]",
          "ObjectType": 0
       },
