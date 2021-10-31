@@ -16,10 +16,10 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class Role_Del_cmd_Handeler : IRequestHandler<Role_Del_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblRolemaster> _roles;
+            private readonly IDapper<TblRolemaster> _roles;
             private readonly INotificationMsg _notificationMsg;
 
-            public Role_Del_cmd_Handeler(IRepositoryAsync<TblRolemaster> roles, INotificationMsg notificationMsg)
+            public Role_Del_cmd_Handeler(IDapper<TblRolemaster> roles, INotificationMsg notificationMsg)
             {
                 _roles = roles;
                 _notificationMsg = notificationMsg;

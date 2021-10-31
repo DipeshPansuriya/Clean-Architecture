@@ -3,7 +3,10 @@ using Application_Core.Cache;
 using Application_Core.Repositories;
 using Application_Database;
 using Application_Genric;
+using HealthChecks.UI.Configuration;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,15 +21,17 @@ namespace Application_Command.List_Command.UserConfig
 
         public class Role_Lst_cmd_Handeler : IRequestHandler<Role_Lst_cmd, Response>
         {
-            private readonly IDapper _dapper;
+            private readonly IDapper<TblRolemaster> _dapper;
             private readonly ICacheService _cache;
             private readonly IBackgroundJob _backgroundJob;
+            private readonly IDbConnection dbConnection;
 
-            public Role_Lst_cmd_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob)
+            public Role_Lst_cmd_Handeler(IDapper<TblRolemaster> dapper, ICacheService cache, IBackgroundJob backgroundJob, IDbConnection dbConnection)
             {
-                _dapper = dapper;
-                _cache = cache;
-                _backgroundJob = backgroundJob;
+                this._dapper = dapper;
+                this._cache = cache;
+                this._backgroundJob = backgroundJob;
+                this.dbConnection = dbConnection;
             }
 
             public async Task<Response> Handle(Role_Lst_cmd request, CancellationToken cancellationToken)
@@ -44,7 +49,7 @@ namespace Application_Command.List_Command.UserConfig
                     }
                     else
                     {
-                        List<TblRolemaster> dbdata = await _dapper.GetDataAsync<TblRolemaster>("users", "2", null, CommandType.Text);
+                        List<TblRolemaster> dbdata = (List<TblRolemaster>)await _dapper.GetDataAsync<TblRolemaster>("users", "2", null, CommandType.Text);
                         if (dbdata != null)
                         {
                             Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("roles", dbdata)));

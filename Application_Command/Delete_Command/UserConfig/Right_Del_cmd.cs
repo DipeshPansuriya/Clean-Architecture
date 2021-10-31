@@ -16,10 +16,10 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class Right_Del_cmd_Handeler : IRequestHandler<Right_Del_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblRightmaster> _rights;
+            private readonly IDapper<TblRightmaster> _rights;
             private readonly INotificationMsg _notificationMsg;
 
-            public Right_Del_cmd_Handeler(IRepositoryAsync<TblRightmaster> rights, INotificationMsg notificationMsg)
+            public Right_Del_cmd_Handeler(IDapper<TblRightmaster> rights, INotificationMsg notificationMsg)
             {
                 _rights = rights;
                 _notificationMsg = notificationMsg;

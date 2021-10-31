@@ -19,11 +19,11 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class Role_Upd_cmd_Handeler : IRequestHandler<Role_Upd_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblRolemaster> _roles;
+            private readonly IDapper<TblRolemaster> _roles;
             private readonly IMapper _mapper;
             private readonly INotificationMsg _notificationMsg;
 
-            public Role_Upd_cmd_Handeler(IMapper mapper, IRepositoryAsync<TblRolemaster> roles, INotificationMsg notificationMsg)
+            public Role_Upd_cmd_Handeler(IMapper mapper, IDapper<TblRolemaster> roles, INotificationMsg notificationMsg)
             {
                 _mapper = mapper;
                 _roles = roles;

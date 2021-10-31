@@ -17,11 +17,11 @@ namespace Application_Command.List_Command.UserConfig
     {
         public class User_Lst_cmd_Handeler : IRequestHandler<User_Lst_cmd, Response>
         {
-            private readonly IDapper _dapper;
+            private readonly IDapper<TblUsermaster> _dapper;
             private readonly ICacheService _cache;
             private readonly IBackgroundJob _backgroundJob;
 
-            public User_Lst_cmd_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob)
+            public User_Lst_cmd_Handeler(IDapper<TblUsermaster> dapper, ICacheService cache, IBackgroundJob backgroundJob)
             {
                 _dapper = dapper;
                 _cache = cache;
@@ -43,7 +43,7 @@ namespace Application_Command.List_Command.UserConfig
                     }
                     else
                     {
-                        List<TblUsermaster> dbdata = await _dapper.GetDataAsync<TblUsermaster>("users", "1", null, CommandType.Text);
+                        List<TblUsermaster> dbdata = (List<TblUsermaster>)await _dapper.GetDataAsync<TblUsermaster>("users", "1", null, CommandType.Text);
                         if (dbdata != null)
                         {
                             Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("users", dbdata)));

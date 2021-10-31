@@ -15,9 +15,9 @@ namespace Application_Command.Details_Command.UserConfig
 
         public class User_Dtl_cmd_Handeler : IRequestHandler<User_Dtl_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblUsermaster> _user;
+            private readonly IDapper<TblUsermaster> _user;
 
-            public User_Dtl_cmd_Handeler(IRepositoryAsync<TblUsermaster> user)
+            public User_Dtl_cmd_Handeler(IDapper<TblUsermaster> user)
             {
                 _user = user;
             }

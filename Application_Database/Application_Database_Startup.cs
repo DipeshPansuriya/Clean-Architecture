@@ -1,6 +1,7 @@
 ﻿using Application_Core.Repositories;
 using Application_Database.Repositories;
 using Application_Genric;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,13 +21,11 @@ namespace Application_Database
         {
             #region Repositories
 
-            services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
+            //services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
 
-            //services.AddTransient<ILogRepository, LogRepository>();
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IDapper, Dapperr>();
+            //services.AddTransient<IDapper, Dapperr>();
+            services.AddTransient(typeof(IDapper<>), typeof(Dapper<>));
             services.AddTransient<IGetQuery, GetQuery>();
-
             #endregion Repositories
         }
     }

@@ -13,10 +13,10 @@ namespace Application_Infrastructure.Notificaion
 {
     public class NotificationMsg : INotificationMsg
     {
-        private readonly IRepositoryAsync<NotficationCls> _repository;
+        private readonly IDapper<NotficationCls> _repository;
         private readonly IBackgroundJob _backgroundJob;
 
-        public NotificationMsg(IRepositoryAsync<NotficationCls> repository, IBackgroundJob backgroundJob)
+        public NotificationMsg(IDapper<NotficationCls> repository, IBackgroundJob backgroundJob)
         {
             _repository = repository;
             _backgroundJob = backgroundJob;
@@ -32,8 +32,9 @@ namespace Application_Infrastructure.Notificaion
                 MsgBody = Body,
                 MsgSatus = NotificationStatus.Pending.ToString(),
                 MsgType = NotificationType.Mail.ToString(),
+                CreatedDate = System.DateTime.Now,
             };
-            _backgroundJob.AddEnque<IRepositoryAsync<NotficationCls>>(x => x.SaveNotificationAsync(notfication));
+            _backgroundJob.AddEnque<IDapper<NotficationCls>>(x => x.SaveNotificationAsync(notfication));
         }
 
         public async Task<bool> SendAsync(NotficationCls notfication)

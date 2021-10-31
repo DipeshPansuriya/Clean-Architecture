@@ -18,11 +18,11 @@ namespace Application_Command.List_Command.UserConfig
 
         public class Right_Lst_cmd_Handeler : IRequestHandler<Right_Lst_cmd, Response>
         {
-            private readonly IDapper _dapper;
+            private readonly IDapper<TblRightmaster> _dapper;
             private readonly ICacheService _cache;
             private readonly IBackgroundJob _backgroundJob;
 
-            public Right_Lst_cmd_Handeler(IDapper dapper, ICacheService cache, IBackgroundJob backgroundJob)
+            public Right_Lst_cmd_Handeler(IDapper<TblRightmaster> dapper, ICacheService cache, IBackgroundJob backgroundJob)
             {
                 _dapper = dapper;
                 _cache = cache;
@@ -43,7 +43,7 @@ namespace Application_Command.List_Command.UserConfig
                     }
                     else
                     {
-                        List<TblRightmaster> dbdata = await _dapper.GetDataAsync<TblRightmaster>("users", "3", null, CommandType.Text);
+                        List<TblRightmaster> dbdata = (List<TblRightmaster>)await _dapper.GetDataAsync<TblRightmaster>("users", "3", null, CommandType.Text);
                         if (dbdata != null)
                         {
                             Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("rights", dbdata)));

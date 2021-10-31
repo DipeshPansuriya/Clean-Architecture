@@ -15,9 +15,9 @@ namespace Application_Command.Details_Command.UserConfig
 
         public class Role_Dtl_cmd_Handeler : IRequestHandler<Role_Dtl_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblRolemaster> _roles;
+            private readonly IDapper<TblRolemaster> _roles;
 
-            public Role_Dtl_cmd_Handeler(IRepositoryAsync<TblRolemaster> roles)
+            public Role_Dtl_cmd_Handeler(IDapper<TblRolemaster> roles)
             {
                 _roles = roles;
             }

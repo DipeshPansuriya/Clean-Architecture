@@ -23,11 +23,11 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class Right_Upd_cmd_Handeler : IRequestHandler<Right_Upd_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblRightmaster> _rights;
+            private readonly IDapper<TblRightmaster> _rights;
             private readonly IMapper _mapper;
             private readonly INotificationMsg _notificationMsg;
 
-            public Right_Upd_cmd_Handeler(IMapper mapper, IRepositoryAsync<TblRightmaster> rights, INotificationMsg notificationMsg)
+            public Right_Upd_cmd_Handeler(IMapper mapper, IDapper<TblRightmaster> rights, INotificationMsg notificationMsg)
             {
                 _mapper = mapper;
                 _rights = rights;

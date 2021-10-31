@@ -16,10 +16,10 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class User_Del_cmd_Handeler : IRequestHandler<User_Del_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblUsermaster> _user;
+            private readonly IDapper<TblUsermaster> _user;
             private readonly INotificationMsg _notificationMsg;
 
-            public User_Del_cmd_Handeler(IRepositoryAsync<TblUsermaster> user, INotificationMsg notificationMsg)
+            public User_Del_cmd_Handeler(IDapper<TblUsermaster> user, INotificationMsg notificationMsg)
             {
                 _user = user;
                 _notificationMsg = notificationMsg;

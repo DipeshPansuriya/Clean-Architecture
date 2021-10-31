@@ -21,11 +21,11 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class User_Upd_cmd_Handeler : IRequestHandler<User_Upd_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblUsermaster> _user;
+            private readonly IDapper<TblUsermaster> _user;
             private readonly IMapper _mapper;
             private readonly INotificationMsg _notificationMsg;
 
-            public User_Upd_cmd_Handeler(IMapper mapper, IRepositoryAsync<TblUsermaster> user, INotificationMsg notificationMsg)
+            public User_Upd_cmd_Handeler(IMapper mapper, IDapper<TblUsermaster> user, INotificationMsg notificationMsg)
             {
                 _mapper = mapper;
                 _user = user;

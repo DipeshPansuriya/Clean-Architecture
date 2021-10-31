@@ -1,4 +1,6 @@
-﻿namespace Application_Genric
+﻿using System;
+
+namespace Application_Genric
 {
     public class NotficationCls
     {
@@ -11,7 +13,7 @@
         public string MsgBody { get; set; }
         public string MsgSatus { get; set; }
         public string FailDetails { get; set; }
-
+        public DateTime CreatedDate { get; set; }
         // public EmailAttachment[] EmailAttachments { get; set; }
     }
 

@@ -15,9 +15,9 @@ namespace Application_Command.Details_Command.UserConfig
 
         public class Right_Dtl_cmd_Handeler : IRequestHandler<Right_Dtl_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblRightmaster> _rights;
+            private readonly IDapper<TblRightmaster> _rights;
 
-            public Right_Dtl_cmd_Handeler(IRepositoryAsync<TblRightmaster> rights)
+            public Right_Dtl_cmd_Handeler(IDapper<TblRightmaster> rights)
             {
                 _rights = rights;
             }

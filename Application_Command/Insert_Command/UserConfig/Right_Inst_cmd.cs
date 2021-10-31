@@ -22,11 +22,11 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class Right_Inst_cmd_Handeler : IRequestHandler<Right_Inst_cmd, Response>
         {
-            private readonly IRepositoryAsync<TblRightmaster> _right;
+            private readonly IDapper<TblRightmaster> _right;
             private readonly IMapper _mapper;
             private readonly INotificationMsg _notificationMsg;
 
-            public Right_Inst_cmd_Handeler(IMapper mapper, IRepositoryAsync<TblRightmaster> rights, INotificationMsg notificationMsg)
+            public Right_Inst_cmd_Handeler(IMapper mapper, IDapper<TblRightmaster> rights, INotificationMsg notificationMsg)
             {
                 _mapper = mapper;
                 _right = rights;

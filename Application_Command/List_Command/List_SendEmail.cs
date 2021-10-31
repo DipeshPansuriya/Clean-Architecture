@@ -15,12 +15,12 @@ namespace Application_Command.List_Command
     {
         public class List_SendEmail_Handeler : IRequestHandler<List_SendEmail, Response>
         {
-            private readonly IDapper _query;
+            private readonly IDapper<List_SendEmail> _query;
             private readonly ICacheService _cache;
             private readonly IBackgroundJob _backgroundJob;
             private readonly INotificationMsg _notification;
 
-            public List_SendEmail_Handeler(IDapper demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
+            public List_SendEmail_Handeler(IDapper<List_SendEmail> demoCustomer, ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
             {
                 _query = demoCustomer;
                 _cache = cache;
@@ -32,7 +32,7 @@ namespace Application_Command.List_Command
             {
                 Response response = new Response();
 
-                List<NotficationCls> dbdata = await _query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
+                List<NotficationCls> dbdata = (List<NotficationCls>)await _query.GetDataAsync<NotficationCls>("JobScheduler", "1", null, CommandType.Text);
 
                 Parallel.ForEach(dbdata, data =>
                 {
