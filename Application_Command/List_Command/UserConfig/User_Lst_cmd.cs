@@ -1,11 +1,13 @@
 ﻿using Application_Core.Background;
 using Application_Core.Cache;
 using Application_Core.Repositories;
-using Application_Domain;
-using Application_Domain.UserConfig;
+using Application_Database;
+using Application_Genric;
 using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,23 +31,33 @@ namespace Application_Command.List_Command.UserConfig
             public async Task<Response> Handle(User_Lst_cmd request, CancellationToken cancellationToken)
             {
                 Response response = new Response();
-                bool cachexists = false;
-                Task<List<user_cls>> data = _cache.GetCachedObject<user_cls>("users");
-
-                cachexists = data != null ? true : data.Result != null ? true : false;
-                if (cachexists)
+                try
                 {
-                    response.ResponseObject = data.Result;
+                    bool cachexists = false;
+                    Task<List<TblUsermaster>> data = _cache.GetCachedObject<TblUsermaster>("users");
+
+                    cachexists = data == null ? true : data.Result != null ? true : false;
+                    if (cachexists)
+                    {
+                        response.ResponseObject = data.Result;
+                    }
+                    else
+                    {
+                        List<TblUsermaster> dbdata = await _dapper.GetDataAsync<TblUsermaster>("users", "1", null, CommandType.Text);
+                        if (dbdata != null)
+                        {
+                            Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("users", dbdata)));
+
+                            response.ResponseObject = dbdata;
+                        }
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    List<user_cls> dbdata = await _dapper.GetDataAsync<user_cls>("users", "1", null, CommandType.Text);
-                    Parallel.Invoke(() => _backgroundJob.AddEnque<ICacheService>(x => x.SetCachedObject("users", dbdata)));
-
-                    response.ResponseObject = dbdata;
+                    response.ResponseStatus = false;
+                    response.ResponseObject = ex.Message +" ~ "+ ex.InnerException;
+                    response.StatusCode = HttpStatusCode.BadRequest;
                 }
-                response.ResponseStatus = "success";
-
                 return response;
             }
         }

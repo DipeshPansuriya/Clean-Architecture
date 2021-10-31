@@ -1,8 +1,9 @@
 ﻿using Application_Command.Details_Command.UserConfig;
 using Application_Command.Insert_Command.UserConfig;
 using Application_Command.List_Command.UserConfig;
-using Application_Domain;
+using Application_Genric;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace Application_API.Controllers.UserConfig
@@ -12,8 +13,13 @@ namespace Application_API.Controllers.UserConfig
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
+            int requestid = RequestResponse.RequestSave(this.ControllerContext.ToString(), null, null);
+
             Response res = await Mediator.Send(new User_Lst_cmd());
-            if (res.ResponseStatus.ToLower() != "success")
+
+            RequestResponse.RepsponseSave(JsonConvert.SerializeObject(res), requestid.ToString());
+
+            if (!res.ResponseStatus)
                 return BadRequest(res);
             else
                 return Ok(res);
@@ -22,8 +28,13 @@ namespace Application_API.Controllers.UserConfig
         [HttpPost]
         public async Task<ActionResult<Response>> Create([FromBody] User_Inst_cmd inst_Cmd)
         {
+            int requestid = RequestResponse.RequestSave(this.ControllerContext.ToString(), null, JsonConvert.SerializeObject(inst_Cmd));
+
             Response res = await Mediator.Send(inst_Cmd);
-            if (res.ResponseStatus.ToLower() != "success")
+
+            RequestResponse.RepsponseSave(JsonConvert.SerializeObject(res), requestid.ToString());
+                        
+            if (!res.ResponseStatus)
                 return BadRequest(res);
             else
                 return Ok(res);
@@ -32,8 +43,13 @@ namespace Application_API.Controllers.UserConfig
         [HttpPut]
         public async Task<ActionResult<Response>> Update([FromBody] User_Upd_cmd upd_Cmd)
         {
+            int requestid = RequestResponse.RequestSave(this.ControllerContext.ToString(), null, JsonConvert.SerializeObject(upd_Cmd));
+
             Response res = await Mediator.Send(upd_Cmd);
-            if (res.ResponseStatus.ToLower() != "success")
+
+            RequestResponse.RepsponseSave(JsonConvert.SerializeObject(res), requestid.ToString());
+
+            if (!res.ResponseStatus)
                 return BadRequest(res);
             else
                 return Ok(res);
@@ -42,8 +58,13 @@ namespace Application_API.Controllers.UserConfig
         [HttpPut]
         public async Task<ActionResult<Response>> Delete(int Id)
         {
+            int requestid = RequestResponse.RequestSave(this.ControllerContext.ToString(), null, JsonConvert.SerializeObject(Id));
+
             Response res = await Mediator.Send(new User_Del_cmd { Id = Id });
-            if (res.ResponseStatus.ToLower() != "success")
+
+            RequestResponse.RepsponseSave(JsonConvert.SerializeObject(res), requestid.ToString());
+                        
+            if (!res.ResponseStatus)
                 return BadRequest(res);
             else
                 return Ok(res);
@@ -52,8 +73,13 @@ namespace Application_API.Controllers.UserConfig
         [HttpGet]
         public async Task<ActionResult<Response>> GetData(int Id)
         {
+            int requestid = RequestResponse.RequestSave(this.ControllerContext.ToString(), null, JsonConvert.SerializeObject(Id));
+
             Response res = await Mediator.Send(new User_Dtl_cmd { Id = Id });
-            if (res.ResponseStatus.ToLower() != "success")
+
+            RequestResponse.RepsponseSave(JsonConvert.SerializeObject(res), requestid.ToString());
+
+            if (!res.ResponseStatus)
                 return BadRequest(res);
             else
                 return Ok(res);

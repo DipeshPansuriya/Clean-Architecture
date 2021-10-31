@@ -11,6 +11,6 @@
     ,[FailDetails]
     ,[MsgSatus]
     FROM tbl_Notification WITH(NOLOCK)
-    WHERE MsgSatus = 2
+    WHERE MsgSatus = 'Pending'
   </QUERY>
 </Queries>

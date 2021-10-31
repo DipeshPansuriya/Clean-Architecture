@@ -1,5 +1,5 @@
 ﻿using Application_Core.Repositories;
-using Application_Domain;
+using Application_Genric;
 using Dapper;
 using System;
 using System.IO;

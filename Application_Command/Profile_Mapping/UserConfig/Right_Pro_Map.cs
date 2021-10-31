@@ -1,5 +1,5 @@
 ﻿using Application_Command.Insert_Command.UserConfig;
-using Application_Domain.UserConfig;
+using Application_Database;
 using AutoMapper;
 
 namespace Application_Command.Profile_Mapping.UserConfig
@@ -9,11 +9,11 @@ namespace Application_Command.Profile_Mapping.UserConfig
         public Right_Pro_Map()
 
         {
-            CreateMap<Right_Inst_cmd, rights_cls>().ReverseMap();
+            CreateMap<Right_Inst_cmd, TblRightmaster>().ReverseMap();
 
-            CreateMap<Right_Upd_cmd, rights_cls>().ReverseMap();
+            CreateMap<Right_Upd_cmd, TblRightmaster>().ReverseMap();
 
-            CreateMap<Right_Del_cmd, rights_cls>().ReverseMap();
+            CreateMap<Right_Del_cmd, TblRightmaster>().ReverseMap();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Application_Domain;
+﻿using Application_Genric;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;

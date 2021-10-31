@@ -1,8 +1,10 @@
 ﻿using Application_Core.Notification;
 using Application_Core.Repositories;
-using Application_Domain;
-using Application_Domain.UserConfig;
+using Application_Database;
+using Application_Genric;
 using MediatR;
+using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,10 +16,10 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class Right_Del_cmd_Handeler : IRequestHandler<Right_Del_cmd, Response>
         {
-            private readonly IRepositoryAsync<rights_cls> _rights;
+            private readonly IRepositoryAsync<TblRightmaster> _rights;
             private readonly INotificationMsg _notificationMsg;
 
-            public Right_Del_cmd_Handeler(IRepositoryAsync<rights_cls> rights, INotificationMsg notificationMsg)
+            public Right_Del_cmd_Handeler(IRepositoryAsync<TblRightmaster> rights, INotificationMsg notificationMsg)
             {
                 _rights = rights;
                 _notificationMsg = notificationMsg;
@@ -25,22 +27,32 @@ namespace Application_Command.Insert_Command.UserConfig
 
             public async Task<Response> Handle(Right_Del_cmd request, CancellationToken cancellationToken)
             {
-                rights_cls entity = await _rights.GetDetails(request.Id);
-
-                if (entity != null)
+                Response response = new Response();
+                try
                 {
-                    entity.IsDeleted = true;
-                    entity.DeletedOn = System.DateTime.Now;
+                    TblRightmaster entity = await _rights.GetDetails(request.Id);
 
-                    Response response = await _rights.UpdateAsync(entity, true, "rights");
-                    if (response != null && response.ResponseStatus.ToLower() == "success")
+                    if (entity != null)
                     {
-                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Right Delete Succesfully " + entity.RightId, "Right Delete Succesfully " + entity.RightId));
-                    }
+                        entity.IsDeleted = true;
+                        entity.DeletedOn = System.DateTime.Now;
 
-                    return response;
+                        int result = await _rights.UpdateAsync(entity, true, "rights");
+                        if (result > 0)
+                        {
+                            Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Right Delete Succesfully " + entity.RightId, "Right Delete Succesfully " + entity.RightId));
+                        }
+
+                        response.ResponseObject = request;
+                    }
                 }
-                return null;
+                catch (Exception ex)
+                {
+                    response.ResponseStatus = false;
+                    response.ResponseObject = ex.Message + " ~ " + ex.InnerException;
+                    response.StatusCode = HttpStatusCode.BadRequest;
+                }
+                return response;
             }
         }
     }

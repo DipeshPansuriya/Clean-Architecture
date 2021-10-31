@@ -10,168 +10,75 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    [Migration("20210711144714_FreshDB")]
-    partial class FreshDB
+    [Migration("20211031075102_FressDB")]
+    partial class FressDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Application_Domain.Demo_Customer", b =>
+            modelBuilder.Entity("Application_Database.TblNotification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)")
-                        .HasColumnName("Code");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Demo_Customer");
-                });
-
-            modelBuilder.Entity("Application_Domain.NotficationCls", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FailDetails")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("FailDetails");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("MsgBody")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("MsgBody");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MsgCC")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<string>("MsgCc")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasColumnName("MsgCC");
 
                     b.Property<string>("MsgFrom")
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("MsgFrom");
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("MsgSatus")
+                    b.Property<string>("MsgSatus")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("int")
-                        .HasColumnName("MsgSatus");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("MsgSubject")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("MsgSubject");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("MsgTo")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("MsgTo");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("MsgType")
+                    b.Property<string>("MsgType")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("int")
-                        .HasColumnName("MsgType");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tbl_Notification");
                 });
 
-            modelBuilder.Entity("Application_Domain.UserConfig.User_cls", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("UserId")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DeletedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EmailId")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("EmailId");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit")
-                        .HasColumnName("IsActive");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)")
-                        .HasColumnName("Password");
-
-                    b.Property<bool>("RecordLocked")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("RecordLockedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RecordLockedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("UserName");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("tbl_usermaster");
-                });
-
-            modelBuilder.Entity("Application_Domain.UserConfig.rights_cls", b =>
+            modelBuilder.Entity("Application_Database.TblRightmaster", b =>
                 {
                     b.Property<int>("RightId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("RightId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Add")
-                        .HasColumnType("bit")
-                        .HasColumnName("Add");
+                        .HasColumnType("bit");
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
@@ -180,8 +87,7 @@ namespace Application_Database.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Delete")
-                        .HasColumnType("bit")
-                        .HasColumnName("Delete");
+                        .HasColumnType("bit");
 
                     b.Property<int>("DeletedBy")
                         .HasColumnType("int");
@@ -190,15 +96,13 @@ namespace Application_Database.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Edit")
-                        .HasColumnType("bit")
-                        .HasColumnName("Edit");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("MenuId")
-                        .HasColumnType("int")
-                        .HasColumnName("MenuId");
+                        .HasColumnType("int");
 
                     b.Property<int>("ModifiedBy")
                         .HasColumnType("int");
@@ -216,26 +120,23 @@ namespace Application_Database.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int")
-                        .HasColumnName("RoleId");
+                        .HasColumnType("int");
 
                     b.Property<bool>("View")
-                        .HasColumnType("bit")
-                        .HasColumnName("View");
+                        .HasColumnType("bit");
 
                     b.HasKey("RightId");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex(new[] { "RoleId" }, "IX_tbl_rightmaster_RoleId");
 
-                    b.ToTable("tbl_righmaster");
+                    b.ToTable("tbl_rightmaster");
                 });
 
-            modelBuilder.Entity("Application_Domain.UserConfig.role_cls", b =>
+            modelBuilder.Entity("Application_Database.TblRolemaster", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("RoleId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CreatedBy")
@@ -251,8 +152,7 @@ namespace Application_Database.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit")
-                        .HasColumnName("IsActive");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -275,29 +175,87 @@ namespace Application_Database.Migrations
                     b.Property<string>("RoleNmae")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("RoleNmae");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("RoleId");
 
                     b.ToTable("tbl_rolemaster");
                 });
 
-            modelBuilder.Entity("Application_Domain.UserConfig.rights_cls", b =>
+            modelBuilder.Entity("Application_Database.TblUsermaster", b =>
                 {
-                    b.HasOne("Application_Domain.UserConfig.role_cls", "RoleDetails")
-                        .WithMany("RightDetails")
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_RoleRights_RoleId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Navigation("RoleDetails");
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailId")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("RecordLocked")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RecordLockedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RecordLockedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("tbl_usermaster");
                 });
 
-            modelBuilder.Entity("Application_Domain.UserConfig.role_cls", b =>
+            modelBuilder.Entity("Application_Database.TblRightmaster", b =>
                 {
-                    b.Navigation("RightDetails");
+                    b.HasOne("Application_Database.TblRolemaster", "Role")
+                        .WithMany("TblRightmaster")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_RoleRights_RoleId")
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Application_Database.TblRolemaster", b =>
+                {
+                    b.Navigation("TblRightmaster");
                 });
 #pragma warning restore 612, 618
         }

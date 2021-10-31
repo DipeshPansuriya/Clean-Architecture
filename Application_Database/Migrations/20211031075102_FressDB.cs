@@ -1,40 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Application_Database.Migrations
 {
-    public partial class FreshDB : Migration
+    public partial class FressDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Demo_Customer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Demo_Customer", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "tbl_Notification",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MsgType = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    MsgType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MsgFrom = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    MsgTo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MsgCC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MsgSubject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MsgTo = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    MsgCC = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    MsgSubject = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     MsgBody = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MsgSatus = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    FailDetails = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MsgSatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FailDetails = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,7 +58,7 @@ namespace Application_Database.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmailId = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -92,7 +78,7 @@ namespace Application_Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbl_righmaster",
+                name: "tbl_rightmaster",
                 columns: table => new
                 {
                     RightId = table.Column<int>(type: "int", nullable: false)
@@ -116,30 +102,28 @@ namespace Application_Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbl_righmaster", x => x.RightId);
+                    table.PrimaryKey("PK_tbl_rightmaster", x => x.RightId);
                     table.ForeignKey(
                         name: "FK_RoleRights_RoleId",
                         column: x => x.RoleId,
                         principalTable: "tbl_rolemaster",
-                        principalColumn: "RoleId");
+                        principalColumn: "RoleId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_righmaster_RoleId",
-                table: "tbl_righmaster",
+                name: "IX_tbl_rightmaster_RoleId",
+                table: "tbl_rightmaster",
                 column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Demo_Customer");
-
-            migrationBuilder.DropTable(
                 name: "tbl_Notification");
 
             migrationBuilder.DropTable(
-                name: "tbl_righmaster");
+                name: "tbl_rightmaster");
 
             migrationBuilder.DropTable(
                 name: "tbl_usermaster");

@@ -1,9 +1,11 @@
 ﻿using Application_Core.Notification;
 using Application_Core.Repositories;
-using Application_Domain;
-using Application_Domain.UserConfig;
+using Application_Database;
+using Application_Genric;
 using AutoMapper;
 using MediatR;
+using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,11 +21,11 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class User_Upd_cmd_Handeler : IRequestHandler<User_Upd_cmd, Response>
         {
-            private readonly IRepositoryAsync<user_cls> _user;
+            private readonly IRepositoryAsync<TblUsermaster> _user;
             private readonly IMapper _mapper;
             private readonly INotificationMsg _notificationMsg;
 
-            public User_Upd_cmd_Handeler(IMapper mapper, IRepositoryAsync<user_cls> user, INotificationMsg notificationMsg)
+            public User_Upd_cmd_Handeler(IMapper mapper, IRepositoryAsync<TblUsermaster> user, INotificationMsg notificationMsg)
             {
                 _mapper = mapper;
                 _user = user;
@@ -32,22 +34,32 @@ namespace Application_Command.Insert_Command.UserConfig
 
             public async Task<Response> Handle(User_Upd_cmd request, CancellationToken cancellationToken)
             {
-                user_cls obj = (_mapper.Map<user_cls>(request));
-                user_cls entity = await _user.GetDetails(obj.UserId);
-
-                if (entity != null)
+                Response response = new Response();
+                try
                 {
-                    obj.ModifiedOn = System.DateTime.Now;
-                    Response response = await _user.UpdateAsync(obj);
+                    TblUsermaster obj = (_mapper.Map<TblUsermaster>(request));
+                    TblUsermaster entity = await _user.GetDetails(obj.UserId);
 
-                    if (response != null && response.ResponseStatus.ToLower() == "success")
+                    if (entity != null)
                     {
-                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Updated Succesfully " + request.EmailId, "User Updated Succesfully " + request.EmailId));
-                    }
+                        obj.ModifiedOn = System.DateTime.Now;
+                        int result = await _user.UpdateAsync(obj);
 
-                    return response;
+                        if (result > 0)
+                        {
+                            Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Updated Succesfully " + request.EmailId, "User Updated Succesfully " + request.EmailId));
+                        }
+
+                        response.ResponseObject = result;
+                    }
                 }
-                return null;
+                catch (Exception ex)
+                {
+                    response.ResponseStatus = false;
+                    response.ResponseObject = ex.Message + " ~ " + ex.InnerException;
+                    response.StatusCode = HttpStatusCode.BadRequest;
+                }
+                return response;
             }
         }
     }

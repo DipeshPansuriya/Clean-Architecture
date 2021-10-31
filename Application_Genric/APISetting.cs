@@ -1,4 +1,4 @@
-﻿namespace Application_Domain
+﻿namespace Application_Genric
 {
     public class APISetting
     {

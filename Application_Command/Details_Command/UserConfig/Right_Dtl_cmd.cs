@@ -1,7 +1,9 @@
 ﻿using Application_Core.Repositories;
-using Application_Domain;
-using Application_Domain.UserConfig;
+using Application_Database;
+using Application_Genric;
 using MediatR;
+using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,29 +15,32 @@ namespace Application_Command.Details_Command.UserConfig
 
         public class Right_Dtl_cmd_Handeler : IRequestHandler<Right_Dtl_cmd, Response>
         {
-            private readonly IRepositoryAsync<rights_cls> _rights;
+            private readonly IRepositoryAsync<TblRightmaster> _rights;
 
-            public Right_Dtl_cmd_Handeler(IRepositoryAsync<rights_cls> rights)
+            public Right_Dtl_cmd_Handeler(IRepositoryAsync<TblRightmaster> rights)
             {
                 _rights = rights;
             }
 
             public async Task<Response> Handle(Right_Dtl_cmd request, CancellationToken cancellationToken)
             {
-                rights_cls entity = await _rights.GetDetails(request.Id);
-
-                if (entity != null)
+                Response response = new Response();
+                try
                 {
-                    Response response = new()
-                    {
-                        ResponseMessage = "Success",
-                        ResponseStatus = "Success",
-                        ResponseObject = entity,
-                    };
+                    TblRightmaster entity = await _rights.GetDetails(request.Id);
 
-                    return response;
+                    if (entity != null)
+                    {
+                        response.ResponseObject = entity;
+                    }
                 }
-                return null;
+                catch (Exception ex)
+                {
+                    response.ResponseStatus = false;
+                    response.ResponseObject = ex.Message + " ~ " + ex.InnerException;
+                    response.StatusCode = HttpStatusCode.BadRequest;
+                }
+                return response;
             }
         }
     }

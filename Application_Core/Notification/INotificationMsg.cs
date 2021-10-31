@@ -1,4 +1,5 @@
-﻿using Application_Domain;
+﻿using Application_Genric;
+using System.Threading.Tasks;
 
 namespace Application_Core.Notification
 {
@@ -6,6 +7,6 @@ namespace Application_Core.Notification
     {
         void SaveMailNotification(string From, string To, string Subject, string Body);
 
-        bool Send(NotficationCls notfication);
+        Task<bool> SendAsync(NotficationCls notfication);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Application_Core.Cache;
-using Application_Domain;
+using Application_Genric;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using System;

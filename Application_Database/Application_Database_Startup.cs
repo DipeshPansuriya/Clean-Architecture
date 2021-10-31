@@ -1,10 +1,9 @@
 ﻿using Application_Core.Repositories;
 using Application_Database.Repositories;
-using Application_Domain;
+using Application_Genric;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Application_Database
 {
@@ -12,7 +11,7 @@ namespace Application_Database
     {
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            // services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddDbContext<APP_DbContext>(options =>
                 options.UseSqlServer(APISetting.DBConnection));
         }

@@ -1,17 +1,15 @@
-﻿namespace Application_Domain
+﻿namespace Application_Genric
 {
     public class NotficationCls
     {
         public int Id { get; set; }
-        public NotificationType MsgType { get; set; }
+        public string MsgType { get; set; }
         public string MsgFrom { get; set; }
         public string MsgTo { get; set; }
         public string MsgCC { get; set; }
         public string MsgSubject { get; set; }
         public string MsgBody { get; set; }
-
-        public NotificationStatus MsgSatus { get; set; }
-
+        public string MsgSatus { get; set; }
         public string FailDetails { get; set; }
 
         // public EmailAttachment[] EmailAttachments { get; set; }

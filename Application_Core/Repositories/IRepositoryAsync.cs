@@ -1,4 +1,4 @@
-﻿using Application_Domain;
+﻿using Application_Genric;
 using System.Threading.Tasks;
 
 namespace Application_Core.Repositories
@@ -7,17 +7,21 @@ namespace Application_Core.Repositories
     {
         //IQueryable<T> Entities { get; }
 
-        Task<Response> SaveAsync(T entity, bool IsCache, string Cahekey);
+        Task<int> SaveAsync(T entity, bool IsCache, string Cahekey);
 
-        Task<Response> SaveAsync(T entity);
+        Task<int> SaveAsync(T entity);
 
-        Task<Response> DeleteAsync(T entity, bool IsCache, string Cahekey);
+        Task<int> SaveNotificationAsync(NotficationCls entity);
 
-        Task<Response> DeleteAsync(T entity);
+        Task DeleteAsync(T entity, bool IsCache, string Cahekey);
 
-        Task<Response> UpdateAsync(T entity, bool IsCache, string Cahekey);
+        Task<bool> DeleteAsync(T entity);
 
-        Task<Response> UpdateAsync(T entity);
+        Task<int> UpdateAsync(T entity, bool IsCache, string Cahekey);
+
+        Task<int> UpdateAsync(T entity);
+
+        Task<int> UpdateNotificationAsync(NotficationCls entity);
 
         Task<T> GetDetails(int id);
     }

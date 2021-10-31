@@ -1,7 +1,9 @@
 ﻿using Application_Core.Repositories;
-using Application_Domain;
-using Application_Domain.UserConfig;
+using Application_Database;
+using Application_Genric;
 using MediatR;
+using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,29 +15,32 @@ namespace Application_Command.Details_Command.UserConfig
 
         public class User_Dtl_cmd_Handeler : IRequestHandler<User_Dtl_cmd, Response>
         {
-            private readonly IRepositoryAsync<user_cls> _user;
+            private readonly IRepositoryAsync<TblUsermaster> _user;
 
-            public User_Dtl_cmd_Handeler(IRepositoryAsync<user_cls> user)
+            public User_Dtl_cmd_Handeler(IRepositoryAsync<TblUsermaster> user)
             {
                 _user = user;
             }
 
             public async Task<Response> Handle(User_Dtl_cmd request, CancellationToken cancellationToken)
             {
-                user_cls entity = await _user.GetDetails(request.Id);
-
-                if (entity != null)
+                Response response = new Response();
+                try
                 {
-                    Response response = new()
-                    {
-                        ResponseMessage = "Success",
-                        ResponseStatus = "Success",
-                        ResponseObject = entity,
-                    };
+                    TblUsermaster entity = await _user.GetDetails(request.Id);
 
-                    return response;
+                    if (entity != null)
+                    {
+                        response.ResponseObject = entity;
+                    }
                 }
-                return null;
+                catch (Exception ex)
+                {
+                    response.ResponseStatus = false;
+                    response.ResponseObject = ex.Message + " ~ " + ex.InnerException;
+                    response.StatusCode = HttpStatusCode.BadRequest;
+                }
+                return response;
             }
         }
     }

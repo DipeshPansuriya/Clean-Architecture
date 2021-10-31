@@ -1,9 +1,11 @@
 ﻿using Application_Core.Notification;
 using Application_Core.Repositories;
-using Application_Domain;
-using Application_Domain.UserConfig;
+using Application_Database;
+using Application_Genric;
 using AutoMapper;
 using MediatR;
+using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,11 +20,11 @@ namespace Application_Command.Insert_Command.UserConfig
 
         public class User_Inst_cmd_Handeler : IRequestHandler<User_Inst_cmd, Response>
         {
-            private readonly IRepositoryAsync<user_cls> _user;
+            private readonly IRepositoryAsync<TblUsermaster> _user;
             private readonly IMapper _mapper;
             private readonly INotificationMsg _notificationMsg;
 
-            public User_Inst_cmd_Handeler(IMapper mapper, IRepositoryAsync<user_cls> user, INotificationMsg notificationMsg)
+            public User_Inst_cmd_Handeler(IMapper mapper, IRepositoryAsync<TblUsermaster> user, INotificationMsg notificationMsg)
             {
                 _mapper = mapper;
                 _user = user;
@@ -31,16 +33,26 @@ namespace Application_Command.Insert_Command.UserConfig
 
             public async Task<Response> Handle(User_Inst_cmd request, CancellationToken cancellationToken)
             {
-                user_cls obj = (_mapper.Map<user_cls>(request));
-                obj.CreatedOn = System.DateTime.Now;
-
-                Response response = await _user.SaveAsync(obj, true, "users");
-
-                if (response != null && response.ResponseStatus.ToLower() == "success")
+                Response response = new Response();
+                try
                 {
-                    Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Created Succesfully " + request.EmailId, "User Created Succesfully " + request.EmailId));
-                }
+                    TblUsermaster obj = (_mapper.Map<TblUsermaster>(request));
+                    obj.CreatedOn = System.DateTime.Now;
 
+                    int result = await _user.SaveAsync(obj, true, "users");
+
+                    if (result > 0)
+                    {
+                        Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "User Created Succesfully " + request.EmailId, "User Created Succesfully " + request.EmailId));
+                    }
+                    response.ResponseObject = result;
+                }
+                catch (Exception ex)
+                {
+                    response.ResponseStatus = false;
+                    response.ResponseObject = ex.Message + " ~ " + ex.InnerException;
+                    response.StatusCode = HttpStatusCode.BadRequest;
+                }
                 return response;
             }
         }

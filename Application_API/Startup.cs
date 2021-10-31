@@ -1,7 +1,7 @@
 using Application_API.JobScheduler;
 using Application_Command;
 using Application_Database;
-using Application_Domain;
+using Application_Genric;
 using Application_Infrastructure;
 using Hangfire;
 using HealthChecks.UI.Client;

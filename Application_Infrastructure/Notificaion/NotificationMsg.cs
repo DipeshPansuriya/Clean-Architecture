@@ -1,12 +1,13 @@
 ﻿using Application_Core.Background;
 using Application_Core.Notification;
 using Application_Core.Repositories;
-using Application_Domain;
+using Application_Genric;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 using MimeKit.Text;
 using System;
+using System.Threading.Tasks;
 
 namespace Application_Infrastructure.Notificaion
 {
@@ -29,23 +30,23 @@ namespace Application_Infrastructure.Notificaion
                 MsgTo = To,
                 MsgSubject = Subject,
                 MsgBody = Body,
-                MsgSatus = NotificationStatus.Pending,
-                MsgType = NotificationType.Mail,
+                MsgSatus = NotificationStatus.Pending.ToString(),
+                MsgType = NotificationType.Mail.ToString(),
             };
-            _backgroundJob.AddEnque<IRepositoryAsync<NotficationCls>>(x => x.SaveAsync(notfication));
+            _backgroundJob.AddEnque<IRepositoryAsync<NotficationCls>>(x => x.SaveNotificationAsync(notfication));
         }
 
-        public bool Send(NotficationCls notfication)
+        public async Task<bool> SendAsync(NotficationCls notfication)
         {
-            switch (notfication.MsgType)
+            switch (notfication.MsgType.ToString())
             {
-                case NotificationType.Mail:
-                    return SendMail(notfication);
+                case "Mail":
+                    return await SendMailAsync(notfication);
 
-                case NotificationType.SMS:
+                case "SMS":
                     return true;
 
-                case NotificationType.Whatsapp:
+                case "Whatsapp":
                     return true;
 
                 default:
@@ -53,7 +54,7 @@ namespace Application_Infrastructure.Notificaion
             }
         }
 
-        private bool SendMail(NotficationCls notfication)
+        private async Task<bool> SendMailAsync(NotficationCls notfication)
         {
             try
             {
@@ -71,13 +72,13 @@ namespace Application_Infrastructure.Notificaion
                 smtp.Send(email);
                 smtp.Disconnect(true);
 
-                notfication.MsgSatus = NotificationStatus.Success;
-                _repository.UpdateAsync(notfication);
+                notfication.MsgSatus = NotificationStatus.Success.ToString();
+                await _repository.UpdateNotificationAsync(notfication);
                 return true;
             }
             catch (Exception ex)
             {
-                notfication.MsgSatus = NotificationStatus.Fail;
+                notfication.MsgSatus = NotificationStatus.Fail.ToString();
                 if (ex.InnerException != null)
                 {
                     notfication.FailDetails = ex.Message + ex.InnerException.Message;
@@ -87,7 +88,7 @@ namespace Application_Infrastructure.Notificaion
                     notfication.FailDetails = ex.Message;
                 }
 
-                _repository.UpdateAsync(notfication);
+                await _repository.UpdateNotificationAsync(notfication);
                 return false;
             }
         }

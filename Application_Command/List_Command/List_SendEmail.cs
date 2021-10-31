@@ -2,7 +2,7 @@
 using Application_Core.Cache;
 using Application_Core.Notification;
 using Application_Core.Repositories;
-using Application_Domain;
+using Application_Genric;
 using MediatR;
 using System.Collections.Generic;
 using System.Data;
@@ -36,7 +36,7 @@ namespace Application_Command.List_Command
 
                 Parallel.ForEach(dbdata, data =>
                 {
-                    string jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.Send(data));
+                    string jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.SendAsync(data));
                 });
 
                 //foreach (NotficationCls data in dbdata)
