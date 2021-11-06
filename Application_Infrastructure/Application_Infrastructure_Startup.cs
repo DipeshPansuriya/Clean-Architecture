@@ -18,7 +18,7 @@ namespace Application_Infrastructure
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBackgroundJob, BackgroundJob>();
 
-            services.AddSingleton<IResponse_Request, Response_Request>();
+            services.AddScoped<IResponse_Request, Response_Request>();
 
             services.AddTransient<INotificationMsg, NotificationMsg>();
             services.AddScoped<NotificationMsg>();

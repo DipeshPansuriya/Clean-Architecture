@@ -18,6 +18,7 @@ namespace Application_Database
         {
         }
 
+        public virtual DbSet<TblApiRequest> TblApiRequest { get; set; }
         public virtual DbSet<TblApiResponse> TblApiResponse { get; set; }
         public virtual DbSet<TblNotification> TblNotification { get; set; }
         public virtual DbSet<TblRightmaster> TblRightmaster { get; set; }
@@ -28,26 +29,32 @@ namespace Application_Database
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
+            modelBuilder.Entity<TblApiRequest>(entity =>
+            {
+                entity.ToTable("tbl_API_Request");
+
+                entity.Property(e => e.ActionName).HasMaxLength(100);
+
+                entity.Property(e => e.ControllerName).HasMaxLength(100);
+
+                entity.Property(e => e.DisplayName).HasMaxLength(500);
+
+                entity.Property(e => e.RequestDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+            });
+
             modelBuilder.Entity<TblApiResponse>(entity =>
             {
                 entity.ToTable("tbl_API_Response");
 
-                entity.Property(e => e.Apidate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("apidate")
-                    .HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.ActionName).HasMaxLength(100);
 
-                entity.Property(e => e.Apistauts).HasColumnName("apistauts");
+                entity.Property(e => e.ControllerName).HasMaxLength(100);
 
-                entity.Property(e => e.Filename)
-                    .HasMaxLength(100)
-                    .HasColumnName("filename");
+                entity.Property(e => e.DisplayName).HasMaxLength(500);
 
-                entity.Property(e => e.Request).HasColumnName("request");
-
-                entity.Property(e => e.Response).HasColumnName("response");
-
-                entity.Property(e => e.Userid).HasColumnName("userid");
+                entity.Property(e => e.ResponseDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<TblNotification>(entity =>

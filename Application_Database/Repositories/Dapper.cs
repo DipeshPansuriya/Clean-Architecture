@@ -53,7 +53,6 @@ namespace Application_Database.Repositories
                     }
 
                     affectedRows = param == null ? await db.ExecuteAsync(Query, commandType: commandType) : await db.ExecuteAsync(Query, param, commandType: commandType);
-
                 }
                 return affectedRows;
             }

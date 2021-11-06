@@ -24,14 +24,12 @@ namespace Application_Command.List_Command.UserConfig
             private readonly IDapper<TblRolemaster> _dapper;
             private readonly ICacheService _cache;
             private readonly IBackgroundJob _backgroundJob;
-            private readonly IDbConnection dbConnection;
 
-            public Role_Lst_cmd_Handeler(IDapper<TblRolemaster> dapper, ICacheService cache, IBackgroundJob backgroundJob, IDbConnection dbConnection)
+            public Role_Lst_cmd_Handeler(IDapper<TblRolemaster> dapper, ICacheService cache, IBackgroundJob backgroundJob)
             {
                 this._dapper = dapper;
                 this._cache = cache;
                 this._backgroundJob = backgroundJob;
-                this.dbConnection = dbConnection;
             }
 
             public async Task<Response> Handle(Role_Lst_cmd request, CancellationToken cancellationToken)

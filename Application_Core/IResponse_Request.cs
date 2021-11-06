@@ -1,9 +1,11 @@
-﻿namespace Application_Core
+﻿using System.Threading.Tasks;
+
+namespace Application_Core
 {
     public interface IResponse_Request
     {
-        public int RequestSave(string filename, string userid, string request);
+        Task<int> RequestSaveAsync(string ControllerName, string ActionName, string DisplayName, string Userid, string Request);
 
-        public void RepsponseSave(string response, string requestid);
+        Task ResponseSaveAsync(string ControllerName, string ActionName, string DisplayName, string Userid, string Response, int RequestId);
     }
 }

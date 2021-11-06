@@ -6,16 +6,14 @@ using System.Collections.Generic;
 
 namespace Application_Database
 {
-    public partial class TblApiResponse
+    public partial class TblApiRequest
     {
         public int Id { get; set; }
-        public string Response { get; set; }
-        public int? RequestId { get; set; }
-        public DateTime? ResponseDate { get; set; }
-        public bool? ReponseStatus { get; set; }
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
         public string DisplayName { get; set; }
-        public int? UserId { get; set; }
+        public int? Userid { get; set; }
+        public string Request { get; set; }
+        public DateTime? RequestDate { get; set; }
     }
 }
