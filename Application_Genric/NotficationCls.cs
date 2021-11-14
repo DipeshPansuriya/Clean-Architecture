@@ -14,6 +14,7 @@ namespace Application_Genric
         public string MsgSatus { get; set; }
         public string FailDetails { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
         // public EmailAttachment[] EmailAttachments { get; set; }
     }
 

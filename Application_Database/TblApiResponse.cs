@@ -11,9 +11,6 @@ namespace Application_Database
         public int? RequestId { get; set; }
         public DateTime? ResponseDate { get; set; }
         public bool? ReponseStatus { get; set; }
-        public string ControllerName { get; set; }
-        public string ActionName { get; set; }
-        public string DisplayName { get; set; }
         public int? UserId { get; set; }
     }
 }

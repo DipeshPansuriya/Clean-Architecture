@@ -3,10 +3,7 @@ using Application_Core.Cache;
 using Application_Core.Repositories;
 using Application_Database;
 using Application_Genric;
-using HealthChecks.UI.Configuration;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,7 +15,6 @@ namespace Application_Command.List_Command.UserConfig
 {
     public class Role_Lst_cmd : IRequest<Response>
     {
-
         public class Role_Lst_cmd_Handeler : IRequestHandler<Role_Lst_cmd, Response>
         {
             private readonly IDapper<TblRolemaster> _dapper;
@@ -27,9 +23,9 @@ namespace Application_Command.List_Command.UserConfig
 
             public Role_Lst_cmd_Handeler(IDapper<TblRolemaster> dapper, ICacheService cache, IBackgroundJob backgroundJob)
             {
-                this._dapper = dapper;
-                this._cache = cache;
-                this._backgroundJob = backgroundJob;
+                _dapper = dapper;
+                _cache = cache;
+                _backgroundJob = backgroundJob;
             }
 
             public async Task<Response> Handle(Role_Lst_cmd request, CancellationToken cancellationToken)
@@ -37,7 +33,6 @@ namespace Application_Command.List_Command.UserConfig
                 Response response = new Response();
                 try
                 {
-
                     bool cachexists = false;
                     Task<List<TblRolemaster>> data = _cache.GetCachedObject<TblRolemaster>("roles");
                     cachexists = data == null ? true : data.Result != null ? true : false;

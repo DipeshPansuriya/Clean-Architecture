@@ -30,26 +30,20 @@ namespace Application_Database
             {
                 entity.ToTable("tbl_API_Request");
 
-                entity.Property(e => e.ActionName).HasMaxLength(100);
+                entity.Property(e => e.Path).HasMaxLength(100);
 
-                entity.Property(e => e.ControllerName).HasMaxLength(100);
-
-                entity.Property(e => e.DisplayName).HasMaxLength(500);
+                entity.Property(e => e.QueryString).HasMaxLength(500);
 
                 entity.Property(e => e.RequestDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Scheme).HasMaxLength(100);
             });
 
             modelBuilder.Entity<TblApiResponse>(entity =>
             {
                 entity.ToTable("tbl_API_Response");
-
-                entity.Property(e => e.ActionName).HasMaxLength(100);
-
-                entity.Property(e => e.ControllerName).HasMaxLength(100);
-
-                entity.Property(e => e.DisplayName).HasMaxLength(500);
 
                 entity.Property(e => e.ResponseDate).HasColumnType("datetime");
             });
@@ -85,6 +79,8 @@ namespace Application_Database
                 entity.Property(e => e.MsgType)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<TblRightmaster>(entity =>

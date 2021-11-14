@@ -34,6 +34,8 @@
 
     public class CacheSetting
     {
+        public string EnableCache { get; set; }
+        public string CacheURL { get; set; }
         public double AbsoluteExpirationInHours { get; set; }
         public double SlidingExpirationInMinutes { get; set; }
     }

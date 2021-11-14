@@ -1,5 +1,4 @@
-﻿using Application_Core;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -12,12 +11,12 @@ namespace Application_API.Controllers
     {
         private IMediator _mediator;
         private ILogger<T> _loggerInstance;
-        private IResponse_Request _response_request;
+        //private IResponse_Request _response_request;
 
         protected IMediator Mediator => _mediator ?? (_mediator = HttpContext.RequestServices.GetService<IMediator>());
 
         protected ILogger<T> _logger => _loggerInstance ??= HttpContext.RequestServices.GetService<ILogger<T>>();
 
-        protected IResponse_Request RequestResponse => _response_request ?? (_response_request = HttpContext.RequestServices.GetService<IResponse_Request>());
+        //protected IResponse_Request RequestResponse => _response_request ?? (_response_request = HttpContext.RequestServices.GetService<IResponse_Request>());
     }
 }

@@ -7,9 +7,9 @@ namespace Application_Database
     public partial class TblApiRequest
     {
         public int Id { get; set; }
-        public string ControllerName { get; set; }
-        public string ActionName { get; set; }
-        public string DisplayName { get; set; }
+        public string Scheme { get; set; }
+        public string Path { get; set; }
+        public string QueryString { get; set; }
         public int? Userid { get; set; }
         public string Request { get; set; }
         public DateTime? RequestDate { get; set; }

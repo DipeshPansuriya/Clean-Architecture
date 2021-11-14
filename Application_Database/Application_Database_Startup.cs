@@ -1,16 +1,14 @@
 ﻿using Application_Core.Repositories;
 using Application_Database.Repositories;
 using Application_Genric;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application_Database
 {
     public static class Application_Database_Startup
     {
-        public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
+        public static void AddDatabase(this IServiceCollection services)
         {
             // services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddDbContext<APP_DbContext>(options =>
@@ -26,6 +24,7 @@ namespace Application_Database
             //services.AddTransient<IDapper, Dapperr>();
             services.AddTransient(typeof(IDapper<>), typeof(Dapper<>));
             services.AddTransient<IGetQuery, GetQuery>();
+
             #endregion Repositories
         }
     }

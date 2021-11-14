@@ -69,7 +69,9 @@ namespace Application_Database.Repositories
             {
                 string DBQuery = _query.GetDBQuery(foldername, queryID, param);
                 if (!string.IsNullOrWhiteSpace(DBQuery))
+                {
                     return await ExecuteAsync(DBQuery, null, commandType);
+                }
             }
             catch (Exception ex)
             {
@@ -109,7 +111,9 @@ namespace Application_Database.Repositories
             {
                 string DBQuery = _query.GetDBQuery(foldername, queryID, param);
                 if (!string.IsNullOrWhiteSpace(DBQuery))
+                {
                     return await ExecuteScalarAsync(DBQuery, null, commandType);
+                }
             }
             catch (Exception ex)
             {
@@ -148,7 +152,9 @@ namespace Application_Database.Repositories
             {
                 string DBQuery = _query.GetDBQuery(foldername, queryID, param);
                 if (!string.IsNullOrWhiteSpace(DBQuery))
+                {
                     return await GetDataAsync<T>(DBQuery, null, commandType);
+                }
             }
             catch (Exception ex)
             {
@@ -187,7 +193,9 @@ namespace Application_Database.Repositories
             {
                 string DBQuery = _query.GetDBQuery(foldername, queryID, param);
                 if (!string.IsNullOrWhiteSpace(DBQuery))
+                {
                     return await GetDataFirstorDefaultAsync<T>(DBQuery, null, commandType);
+                }
             }
             catch (Exception ex)
             {
@@ -227,7 +235,9 @@ namespace Application_Database.Repositories
             {
                 string DBQuery = _query.GetDBQuery(foldername, queryID, param);
                 if (!string.IsNullOrWhiteSpace(DBQuery))
+                {
                     return await GetDataSetAsync(DBQuery, null, commandType);
+                }
             }
             catch (Exception ex)
             {
@@ -298,6 +308,7 @@ namespace Application_Database.Repositories
                 MsgBody = entity.MsgBody,
                 MsgSatus = entity.MsgSatus.ToString(),
                 MsgType = entity.MsgType.ToString(),
+                CreatedDate = entity.CreatedDate,
             };
 
             try
@@ -393,6 +404,7 @@ namespace Application_Database.Repositories
                     MsgBody = entity.MsgBody,
                     MsgSatus = entity.MsgSatus.ToString(),
                     FailDetails = entity.FailDetails,
+                    UpdatedDate = entity.UpdatedDate,
                 };
 
                 _dbContext.Entry(tblNotification).State = EntityState.Modified;

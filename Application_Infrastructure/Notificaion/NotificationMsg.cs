@@ -74,12 +74,14 @@ namespace Application_Infrastructure.Notificaion
                 smtp.Disconnect(true);
 
                 notfication.MsgSatus = NotificationStatus.Success.ToString();
+                notfication.UpdatedDate = DateTime.Now;
                 await _repository.UpdateNotificationAsync(notfication);
                 return true;
             }
             catch (Exception ex)
             {
                 notfication.MsgSatus = NotificationStatus.Fail.ToString();
+                notfication.UpdatedDate = DateTime.Now;
                 if (ex.InnerException != null)
                 {
                     notfication.FailDetails = ex.Message + ex.InnerException.Message;

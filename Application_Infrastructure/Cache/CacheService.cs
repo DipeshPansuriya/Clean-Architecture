@@ -20,16 +20,21 @@ namespace Application_Infrastructure.Cache
 
         public async Task<bool> IsConnectedAsync(string key)
         {
-            try
+            if (APISetting.CacheConfiguration.EnableCache.ToLower() == "true")
             {
-                byte[] value = await _cache.GetAsync(key);
+                try
+                {
+                    byte[] value = await _cache.GetAsync(key);
 
-                return true;
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
-            catch (Exception)
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public async Task<List<T>> GetCachedObject<T>(string cacheKeyPrefix)
