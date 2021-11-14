@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 0,
+   "CodeGenerationMode": 2,
    "ContextClassName": "APP_DbContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,

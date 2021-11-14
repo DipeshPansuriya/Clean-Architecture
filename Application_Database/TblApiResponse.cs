@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Application_Database
 {
     public partial class TblApiResponse
