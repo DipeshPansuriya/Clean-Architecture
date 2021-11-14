@@ -2,7 +2,6 @@
 using Application_Core.Repositories;
 using Application_Database;
 using Application_Genric;
-using Application_Infrastructure.Notificaion;
 using AutoMapper;
 using MediatR;
 using System;
@@ -40,8 +39,6 @@ namespace Application_Command.Insert_Command.UserConfig
                     int result = await _roles.SaveAsync(obj, true, "roles");
                     if (result > 0)
                     {
-                        _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Created Succesfully " + request.RoleNmae, "Role Created Succesfully " + request.RoleNmae);
-
                         Parallel.Invoke(() => _notificationMsg.SaveMailNotification("dipeshpansuriya@ymail.com", "pansuriya.dipesh@gmail.com", "Role Created Succesfully " + request.RoleNmae, "Role Created Succesfully " + request.RoleNmae));
                     }
 

@@ -7,66 +7,94 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    [Migration("20211031080552_API_Reponse_SP")]
-    partial class API_Reponse_SP
+    [Migration("20211114130842_FreshMigration")]
+    partial class FreshMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Application_Database.TblApiRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Path")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("QueryString")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Request")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RequestDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Scheme")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("Userid")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_API_Request", (string)null);
+                });
 
             modelBuilder.Entity("Application_Database.TblApiResponse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("Apidate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasColumnName("apidate")
-                        .HasDefaultValueSql("(getdate())");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool?>("Apistauts")
-                        .HasColumnType("bit")
-                        .HasColumnName("apistauts");
+                    b.Property<bool?>("ReponseStatus")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Filename")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("filename");
-
-                    b.Property<string>("Request")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("request");
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Response")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("response");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Userid")
-                        .HasColumnType("int")
-                        .HasColumnName("userid");
+                    b.Property<DateTime?>("ResponseDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_API_Response");
+                    b.ToTable("tbl_API_Response", (string)null);
                 });
 
             modelBuilder.Entity("Application_Database.TblNotification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedDate")
                         .ValueGeneratedOnAdd()
@@ -109,17 +137,21 @@ namespace Application_Database.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime");
+
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_Notification");
+                    b.ToTable("tbl_Notification", (string)null);
                 });
 
             modelBuilder.Entity("Application_Database.TblRightmaster", b =>
                 {
                     b.Property<int>("RightId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RightId"), 1L, 1);
 
                     b.Property<bool>("Add")
                         .HasColumnType("bit");
@@ -173,15 +205,16 @@ namespace Application_Database.Migrations
 
                     b.HasIndex(new[] { "RoleId" }, "IX_tbl_rightmaster_RoleId");
 
-                    b.ToTable("tbl_rightmaster");
+                    b.ToTable("tbl_rightmaster", (string)null);
                 });
 
             modelBuilder.Entity("Application_Database.TblRolemaster", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
@@ -223,15 +256,16 @@ namespace Application_Database.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("tbl_rolemaster");
+                    b.ToTable("tbl_rolemaster", (string)null);
                 });
 
             modelBuilder.Entity("Application_Database.TblUsermaster", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
@@ -283,7 +317,7 @@ namespace Application_Database.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("tbl_usermaster");
+                    b.ToTable("tbl_usermaster", (string)null);
                 });
 
             modelBuilder.Entity("Application_Database.TblRightmaster", b =>
@@ -291,8 +325,8 @@ namespace Application_Database.Migrations
                     b.HasOne("Application_Database.TblRolemaster", "Role")
                         .WithMany("TblRightmaster")
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_RoleRights_RoleId")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_RoleRights_RoleId");
 
                     b.Navigation("Role");
                 });
