@@ -5,6 +5,7 @@ using Application_Core.Notification;
 using Application_Infrastructure.Background;
 using Application_Infrastructure.Cache;
 using Application_Infrastructure.Notificaion;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application_Infrastructure
@@ -15,13 +16,12 @@ namespace Application_Infrastructure
         {
             services.AddTransient<ICacheService, CacheService>();
             services.AddScoped<CacheService>();
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IBackgroundJob, BackgroundJob>();
-
-            services.AddScoped<IResponse_Request, Response_Request>();
-
             services.AddTransient<INotificationMsg, NotificationMsg>();
             services.AddScoped<NotificationMsg>();
+
+            services.AddScoped<IResponse_Request, Response_Request>();
 
             return services;
         }

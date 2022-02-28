@@ -1,7 +1,6 @@
 ﻿using Application_Core.Background;
 using Application_Core.Notification;
-using Application_Core.Repositories;
-using Application_Genric;
+using Application_Services;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
@@ -13,12 +12,10 @@ namespace Application_Infrastructure.Notificaion
 {
     public class NotificationMsg : INotificationMsg
     {
-        private readonly IDapper<NotficationCls> _repository;
         private readonly IBackgroundJob _backgroundJob;
 
-        public NotificationMsg(IDapper<NotficationCls> repository, IBackgroundJob backgroundJob)
+        public NotificationMsg(IBackgroundJob backgroundJob)
         {
-            _repository = repository;
             _backgroundJob = backgroundJob;
         }
 
@@ -34,7 +31,7 @@ namespace Application_Infrastructure.Notificaion
                 MsgType = NotificationType.Mail.ToString(),
                 CreatedDate = System.DateTime.Now,
             };
-            _backgroundJob.AddEnque<IDapper<NotficationCls>>(x => x.SaveNotificationAsync(notfication));
+            //_backgroundJob.AddEnque<IDapper<NotficationCls>>(x => x.SaveNotificationAsync(notfication));
         }
 
         public async Task<bool> SendAsync(NotficationCls notfication)
@@ -75,7 +72,7 @@ namespace Application_Infrastructure.Notificaion
 
                 notfication.MsgSatus = NotificationStatus.Success.ToString();
                 notfication.UpdatedDate = DateTime.Now;
-                await _repository.UpdateNotificationAsync(notfication);
+                //await _repository.UpdateNotificationAsync(notfication);
                 return true;
             }
             catch (Exception ex)
@@ -91,7 +88,7 @@ namespace Application_Infrastructure.Notificaion
                     notfication.FailDetails = ex.Message;
                 }
 
-                await _repository.UpdateNotificationAsync(notfication);
+                //await _repository.UpdateNotificationAsync(notfication);
                 return false;
             }
         }

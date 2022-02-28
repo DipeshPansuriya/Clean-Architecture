@@ -1,4 +1,4 @@
-﻿using Application_Genric;
+﻿using Application_Services;
 using System.Threading.Tasks;
 
 namespace Application_Core.Notification

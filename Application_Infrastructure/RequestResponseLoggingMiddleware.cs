@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application_Core;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using Application_Core;
 
 namespace Application_Infrastructure
 {
