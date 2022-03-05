@@ -9,16 +9,23 @@ namespace API_Registrations.Controllers
         [HttpPost]
         public async Task<ActionResult<Response>> CreateUpdate([FromBody] Adm_Org_InstUpd cmd)
         {
-            Response res = await Mediator.Send(cmd);
-
-            if (!res.ResponseStatus)
+            Response res = new Response();
+            if (cmd != null)
             {
-                return BadRequest(res);
+                res = await Mediator.Send(cmd);
+
+                if (res.ResponseStatus)
+                {
+                    return Ok(res);
+                }
             }
             else
             {
-                return Ok(res);
+                res.StatusCode = System.Net.HttpStatusCode.NotAcceptable;
+                res.ResponseStatus = false;
+                res.ResponseObject = "Command is null";
             }
+            return BadRequest(res);
         }
     }
 }

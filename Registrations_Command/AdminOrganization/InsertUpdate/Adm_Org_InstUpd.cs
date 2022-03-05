@@ -39,7 +39,7 @@ namespace Registrations_Command.AdminOrganization.InsertUpdate
                 try
                 {
                     string XMLproduct = GenericFunction.ClassToXML<List<OrgProdcut>>(request.OrgProdcut);
-                    DynamicParameters param = new DynamicParameters();
+                    DynamicParameters param = new();
 
                     param.Add("@Id", request.Id);
                     param.Add("@OrgName", request.OrgName);
@@ -48,23 +48,8 @@ namespace Registrations_Command.AdminOrganization.InsertUpdate
                     param.Add("@IsActive", request.IsActive);
                     param.Add("@ProdctXML", XMLproduct);
 
-                    #region Call mutli query example
-
-                    //List<MapItem>? mapItems = new List<MapItem>()
-                    //{
-                    //    new MapItem(typeof(OrgProdcutResponse1), DataRetriveTypeEnum.FirstOrDefault, "Object1"),
-                    //    new MapItem(typeof(OrgProdcutResponse), DataRetriveTypeEnum.ToList, "Object2")
-                    //};
-
-                    //dynamic data = await _aPPDbContext.RunByQueryMultiple("sp_AdminOrganization_Insert", param, System.Data.CommandType.StoredProcedure, mapItems);
-
-                    //object? dat = ((IDictionary<string, object>)data).Where(x => x.Key == "Object1").FirstOrDefault().Value;
-
-                    //object? dat2 = ((IDictionary<string, object>)data).Where(x => x.Key == "Object2").FirstOrDefault().Value;
-
-                    #endregion Call mutli query example
-
-                    string? data = await _aPPDbContext.ExecuteScalarAsync("sp_AdminOrganization_InsertUpdate",
+                    string? data = await _aPPDbContext.ExecuteScalarAsync
+                        ("sp_AdminOrganization_InsertUpdate",
                         param,
                         System.Data.CommandType.StoredProcedure
                         );

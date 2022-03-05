@@ -1,9 +1,5 @@
-﻿using Application_Common;
-using Dapper;
-using System;
-using System.Collections.Generic;
+﻿using Dapper;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace Application_Core.Repositories
 {
@@ -17,10 +13,6 @@ namespace Application_Core.Repositories
 
         Task<IEnumerable<T>> GetDataListAsync<T>(string Query, DynamicParameters param, CommandType commandType);
 
-        Task<T> GetDataFirstorDefaultAsync<T>(string Query, DynamicParameters param, CommandType commandType);
-
         Task<DataSet> GetDataSetAsync(string Query, DynamicParameters param, CommandType commandType);
-
-        Task<dynamic> RunByQueryMultiple(string Query, DynamicParameters param, CommandType commandType, IEnumerable<MapItem> mapItems = null);
     }
 }

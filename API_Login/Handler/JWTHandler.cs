@@ -22,16 +22,5 @@ namespace API_Login.Handler
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-        public bool AuthenticateUser(string LoginName, string LoginPassword)
-        {
-            // Validate the User Credentials using LDAP / Database
-            if (LoginName == "admin")
-            {
-                return true;
-                //user = new UserModel { Username = "######", Password = "######" };
-            }
-            return false;
-        }
     }
 }

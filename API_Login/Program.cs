@@ -1,6 +1,7 @@
 using Application_Database;
 using Application_Infrastructure;
 using Application_Infrastructure.Startup_Proj;
+using Login_Command;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ StartupProj.AddCORS(builder);
 
 #region Project Dependancy
 
+builder.Services.AddLoginCommand();
 builder.Services.AddDatabase();
 builder.Services.AddRepositories();
 builder.Services.AddInfrastructure();

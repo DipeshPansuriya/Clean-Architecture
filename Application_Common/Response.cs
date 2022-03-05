@@ -9,9 +9,6 @@ namespace Application_Common
             ResponseStatus = true;
         }
 
-        public string MSG { get; set; }
-
-        //public string OtherMessage { get; set; }
         public object ResponseObject { get; set; }
 
         public bool ResponseStatus { get; set; }

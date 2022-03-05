@@ -4,13 +4,8 @@ using Application_Core.Cache;
 using Application_Core.Repositories;
 using Dapper;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 
 namespace Application_Infrastructure.Repositories
@@ -90,64 +85,6 @@ namespace Application_Infrastructure.Repositories
                 {
                     IEnumerable<T> data = param == null ? await db.QueryAsync<T>(Query, commandType: commandType) : await db.QueryAsync<T>(Query, param, commandType: commandType);
 
-                    return data.ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message + " ~ " + ex.InnerException);
-                throw;
-            }
-        }
-
-        public async Task<T> GetDataFirstorDefaultAsync<T>(string Query, DynamicParameters param, CommandType commandType)
-        {
-            try
-            {
-                using (IDbConnection db = dbConnection())
-                {
-                    IEnumerable<T> data = param == null ? await db.QueryAsync<T>(Query, commandType: commandType) : await db.QueryAsync<T>(Query, param, commandType: commandType);
-
-                    return data.FirstOrDefault();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message + " ~ " + ex.InnerException);
-                throw;
-            }
-        }
-
-        public async Task<dynamic> RunByQueryMultiple(string Query, DynamicParameters param, CommandType commandType, IEnumerable<MapItem> mapItems = null)
-        {
-            ExpandoObject data = new ExpandoObject();
-
-            if (mapItems == null)
-            {
-                return data;
-            }
-
-            try
-            {
-                using (IDbConnection db = dbConnection())
-                {
-                    GridReader multi = await db.QueryMultipleAsync(Query, param, commandType: commandType);
-
-                    foreach (MapItem item in mapItems)
-                    {
-                        if (item.DataRetriveType == DataRetriveTypeEnum.FirstOrDefault)
-                        {
-                            object singleItem = multi.Read(item.Type).FirstOrDefault();
-                            ((IDictionary<string, dynamic>)data).Add(item.PropertyName, singleItem);
-                        }
-
-                        if (item.DataRetriveType == DataRetriveTypeEnum.ToList)
-                        {
-                            List<object> listItem = multi.Read(item.Type).ToList();
-                            ((IDictionary<string, dynamic>)data).Add(item.PropertyName, listItem);
-                        }
-                    }
-
                     return data;
                 }
             }
@@ -183,7 +120,7 @@ namespace Application_Infrastructure.Repositories
             int i = 0;
             while (!data.IsClosed)
             {
-                ds.Tables.Add("Table");
+                ds.Tables.Add("Table" + i.ToString());
                 ds.EnforceConstraints = false;
                 ds.Tables[i].Load(data);
                 i++;

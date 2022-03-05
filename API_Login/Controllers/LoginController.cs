@@ -1,5 +1,7 @@
 ﻿using API_Login.Handler;
-using API_Login.Model;
+using Application_Common;
+using Login_Command.List;
+using Login_Command.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,20 +12,31 @@ namespace API_Login.Controllers
     {
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] UserModel login)
+        public async Task<ActionResult<Response>> Login([FromBody] LoginDetails_Lst cmd)
         {
-            IActionResult response = Unauthorized();
-            JWTHandler jWTHandler = new JWTHandler();
-
-            bool user = jWTHandler.AuthenticateUser(login.Username, login.Password);
-
-            if (user)
+            Response res = new Response();
+            if (cmd != null)
             {
-                string tokenString = jWTHandler.GenerateJSONWebToken(login.Username, login.Password);
-                response = Ok(new { token = tokenString });
-            }
+                res = await Mediator.Send(cmd);
+                if (res.ResponseStatus)
+                {
+                    JWTHandler jWTHandler = new JWTHandler();
 
-            return response;
+                    string tokenString = jWTHandler.GenerateJSONWebToken(cmd.LoginEmail, cmd.Password);
+
+                    UserInfo data = GenericFunction.ObjectToClass<UserInfo>(res.ResponseObject);
+                    data.Token = tokenString;
+                    res.ResponseObject = data;
+                    return Ok(res);
+                }
+            }
+            else
+            {
+                res.StatusCode = System.Net.HttpStatusCode.NotAcceptable;
+                res.ResponseStatus = false;
+                res.ResponseObject = "Command is null";
+            }
+            return BadRequest(res);
         }
     }
 }
