@@ -1,6 +1,6 @@
-﻿using Application_Core.Background;
+﻿using Application_Common;
+using Application_Core.Background;
 using Application_Core.Notification;
-using Application_Services;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application_Core", "Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application_Infrastructure", "Application_Infrastructure\Application_Infrastructure.csproj", "{66631894-99F7-4CBB-A5EE-926FD6E0F2AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application_Services", "Application_Services\Application_Services.csproj", "{1F2940DA-43C8-4F5B-926B-69A93A779BF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application_Common", "Application_Common\Application_Common.csproj", "{1F2940DA-43C8-4F5B-926B-69A93A779BF8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{36DE75BF-A5BB-46C7-A808-F75A4CC4A957}"
 EndProject

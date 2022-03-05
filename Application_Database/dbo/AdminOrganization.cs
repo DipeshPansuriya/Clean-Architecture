@@ -13,8 +13,8 @@ namespace Application_Database
         }
 
         public int OrgId { get; set; }
-        public string OrgName { get; set; } = default!;
-        public string OrgEmail { get; set; } = default!;
+        public string OrgName { get; set; } = null!;
+        public string OrgEmail { get; set; } = null!;
         public bool? IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }

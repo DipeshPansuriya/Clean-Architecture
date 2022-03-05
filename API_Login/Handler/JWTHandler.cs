@@ -1,4 +1,4 @@
-﻿using Application_Services;
+﻿using Application_Common;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -16,7 +16,7 @@ namespace API_Login.Handler
                 issuer: APISetting.Jwt.Issuer,
                 audience: APISetting.Jwt.Issuer,
                 claims: new List<Claim>(), // claims (are used to filter the data)
-                expires: DateTime.Now.AddMinutes(1),
+                expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: signCredentials
             );
 

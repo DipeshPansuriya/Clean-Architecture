@@ -1,4 +1,4 @@
-﻿namespace Application_Services
+﻿namespace Application_Common
 {
     public class APISetting
     {

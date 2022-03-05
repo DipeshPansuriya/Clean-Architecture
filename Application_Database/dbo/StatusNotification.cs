@@ -8,13 +8,13 @@ namespace Application_Database
     public partial class StatusNotification
     {
         public int Id { get; set; }
-        public string MsgType { get; set; } = default!;
+        public string MsgType { get; set; } = null!;
         public string? MsgFrom { get; set; }
         public string? MsgTo { get; set; }
         public string? MsgCC { get; set; }
-        public string MsgSubject { get; set; } = default!;
-        public string MsgBody { get; set; } = default!;
-        public string MsgSatus { get; set; } = default!;
+        public string MsgSubject { get; set; } = null!;
+        public string MsgBody { get; set; } = null!;
+        public string MsgSatus { get; set; } = null!;
         public string? FailDetails { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }

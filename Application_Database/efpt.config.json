@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 0,
+   "CodeGenerationMode": 2,
    "ContextClassName": "APP_DbContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
@@ -14,6 +14,14 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[AdminBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminCompany]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[AdminOrganization]",
          "ObjectType": 0
       },
@@ -23,6 +31,18 @@
       },
       {
          "Name": "[dbo].[AdminProduct]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminRole]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminUser]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminUserBranch]",
          "ObjectType": 0
       },
       {
@@ -36,14 +56,6 @@
       {
          "Name": "[dbo].[StatusNotification]",
          "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[sp_AdminOrganization_Insert]",
-         "ObjectType": 1
-      },
-      {
-         "Name": "[dbo].[sp_GenerateSPforInsertUpdateDelete]",
-         "ObjectType": 1
       }
    ],
    "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Dev_Micro",

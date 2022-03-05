@@ -24,7 +24,6 @@
 	  <Folder Include="AdminOrganization\Delete\" />
 	  <Folder Include="AdminOrganization\List\" />
 	  <Folder Include="AdminOrganization\Select\" />
-	  <Folder Include="AdminOrganization\Update\" />
 	</ItemGroup>
 
 </Project>

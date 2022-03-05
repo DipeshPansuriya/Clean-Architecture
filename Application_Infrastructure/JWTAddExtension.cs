@@ -1,4 +1,4 @@
-﻿using Application_Services;
+﻿using Application_Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

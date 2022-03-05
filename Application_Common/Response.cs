@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Application_Services
+namespace Application_Common
 {
     public class Response
     {
@@ -9,7 +9,8 @@ namespace Application_Services
             ResponseStatus = true;
         }
 
-        //public string ResponseMessage { get; set; }
+        public string MSG { get; set; }
+
         //public string OtherMessage { get; set; }
         public object ResponseObject { get; set; }
 

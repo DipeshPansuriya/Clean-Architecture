@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["API_Login/API_Login.csproj", "API_Login/"]
 COPY ["Application_Database/Application_Database.csproj", "Application_Database/"]
 COPY ["Application_Core/Application_Core.csproj", "Application_Core/"]
-COPY ["Application_Services/Application_Services.csproj", "Application_Services/"]
+COPY ["Application_Common/Application_Common.csproj", "Application_Common/"]
 COPY ["Application_Infrastructure/Application_Infrastructure.csproj", "Application_Infrastructure/"]
 RUN dotnet restore "API_Login/API_Login.csproj"
 COPY . .
