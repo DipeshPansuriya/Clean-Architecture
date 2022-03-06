@@ -20,10 +20,4 @@
 		<ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="AdminOrg\Delete\" />
-	  <Folder Include="AdminOrg\List\" />
-	  <Folder Include="AdminOrg\Select\" />
-	</ItemGroup>
-
 </Project>
