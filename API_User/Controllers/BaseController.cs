@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API_Registrations.Controllers
+namespace API_User.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api_registrations/[controller]/[action]")]
+    [Route("API_User/[controller]/[action]")]
     public abstract class BaseController<T> : ControllerBase
     {
         private IMediator _mediator;

@@ -5,7 +5,7 @@ using Dapper;
 using MediatR;
 using System.Net;
 
-namespace Registrations_Command.AdminOrganization.InsertUpdate
+namespace User_Command.AdminOrg.InsertUpdate
 {
     public class OrgProdcut
     {

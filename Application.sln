@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_Masters", "API_Masters", "{7B62CF1C-4B94-4FE7-A043-46C851DCF3B3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_Registrations", "API_Registrations", "{7D8A9912-7E72-4EBE-B74C-EE07E010024D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_User", "API_User", "{7D8A9912-7E72-4EBE-B74C-EE07E010024D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Registrations", "API_Registrations\API_Registrations.csproj", "{DC6B5280-E33D-452B-8136-717C23243939}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_User", "API_User\API_User.csproj", "{DC6B5280-E33D-452B-8136-717C23243939}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Registrations_Command", "Registrations_Command\Registrations_Command.csproj", "{40D6CFCB-E15C-41A8-995F-584A2BC8362C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "User_Command", "User_Command\User_Command.csproj", "{40D6CFCB-E15C-41A8-995F-584A2BC8362C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_Getway", "API_Getway", "{398D346C-859C-4096-9A61-46EDD310B6DD}"
 EndProject
@@ -35,9 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_Login", "API_Login", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Login", "API_Login\API_Login.csproj", "{82BCB127-6549-4FD4-8E69-48D46F863DE5}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A097360B-98CC-4F3B-A11A-02233B0F1342}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login_Command", "..\Login_Command\Login_Command.csproj", "{089C173A-B10C-4647-BED4-7F28C979D02F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login_Command", "..\Login_Command\Login_Command.csproj", "{089C173A-B10C-4647-BED4-7F28C979D02F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,14 +125,6 @@ Global
 		{82BCB127-6549-4FD4-8E69-48D46F863DE5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82BCB127-6549-4FD4-8E69-48D46F863DE5}.Release|x64.ActiveCfg = Release|Any CPU
 		{82BCB127-6549-4FD4-8E69-48D46F863DE5}.Release|x64.Build.0 = Release|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Debug|x64.Build.0 = Debug|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Release|x64.ActiveCfg = Release|Any CPU
-		{A097360B-98CC-4F3B-A11A-02233B0F1342}.Release|x64.Build.0 = Release|Any CPU
 		{089C173A-B10C-4647-BED4-7F28C979D02F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{089C173A-B10C-4647-BED4-7F28C979D02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{089C173A-B10C-4647-BED4-7F28C979D02F}.Debug|x64.ActiveCfg = Debug|Any CPU

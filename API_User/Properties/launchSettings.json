@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "API_Registrations": {
+    "API_User": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

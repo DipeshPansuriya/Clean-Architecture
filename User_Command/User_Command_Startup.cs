@@ -2,11 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Registrations_Command
+namespace User_Command
 {
-    public static class Registrations_Command_Startup
+    public static class User_Command_Startup
     {
-        public static IServiceCollection AddRegistrationsCommand(this IServiceCollection services)
+        public static IServiceCollection AddUserCommand(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());

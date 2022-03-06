@@ -21,9 +21,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="AdminOrganization\Delete\" />
-	  <Folder Include="AdminOrganization\List\" />
-	  <Folder Include="AdminOrganization\Select\" />
+	  <Folder Include="AdminOrg\Delete\" />
+	  <Folder Include="AdminOrg\List\" />
+	  <Folder Include="AdminOrg\Select\" />
 	</ItemGroup>
 
 </Project>
