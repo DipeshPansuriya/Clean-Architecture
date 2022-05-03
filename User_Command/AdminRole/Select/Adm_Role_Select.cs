@@ -1,24 +1,29 @@
 ﻿using Application_Common;
 using Application_Core.Notification;
 using Application_Core.Repositories;
+using Dapper;
 using MediatR;
 using System.Net;
+using User_Command.AdminBranch.List;
 
 namespace User_Command.AdminRole.Select
 {
     public class Adm_Role_Select : IRequest<Response>
     {
+        public int RoleId { get; set; }
+        public int OrgProdId { get; set; }
+
         public class Adm_Role_SelectHandler : IRequestHandler<Adm_Role_Select, Response>
         {
-            private readonly INotificationMsg _notificationMsg;
-            private readonly IDapper<Response> _aPPDbContext;
+            private readonly INotificationMsg notificationMsg;
+            private readonly IDapper<Response> aPPDbContext;
 
             public Adm_Role_SelectHandler(INotificationMsg notificationMsg,
                 IDapper<Response> aPPDbContext
                 )
             {
-                _notificationMsg = notificationMsg;
-                _aPPDbContext = aPPDbContext;
+                this.notificationMsg = notificationMsg;
+                this.aPPDbContext = aPPDbContext;
             }
 
             public async Task<Response> Handle(Adm_Role_Select request, CancellationToken cancellationToken)
@@ -26,7 +31,16 @@ namespace User_Command.AdminRole.Select
                 Response response = new Response();
                 try
                 {
-                    response.ResponseObject = "";
+                    DynamicParameters param = new();
+                    param.Add("@RoleId", request.RoleId);
+                    param.Add("@OrgProdId", request.OrgProdId);
+
+                    Adm_Role_Lst_DTO? data = (await aPPDbContext.GetDataListAsync<Adm_Role_Lst_DTO>("sp_AdminRole_Select", param, System.Data.CommandType.StoredProcedure)).FirstOrDefault();
+
+                    if (data != null)
+                    {
+                        response.ResponseObject = data;
+                    };
                 }
                 catch (Exception ex)
                 {

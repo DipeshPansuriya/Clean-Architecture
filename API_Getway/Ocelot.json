@@ -47,7 +47,7 @@
       ],
       "UseServiceDiscovery": true,
       //"ServiceName": "API_User",
-      "UpstreamPathTemplate": "/API_User/{everything}",
+      "UpstreamPathTemplate": "/api_user/{everything}",
       "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
       "ReRoutesCaseSensitive": false
     }
