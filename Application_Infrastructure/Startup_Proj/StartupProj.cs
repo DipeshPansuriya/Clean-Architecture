@@ -12,11 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Sinks.Email;
-using System;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Application_Infrastructure.Startup_Proj
 {
