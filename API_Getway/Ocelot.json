@@ -1,0 +1,66 @@
+﻿{
+  "Routes": [
+    //Login
+    {
+      "DownstreamPathTemplate": "/api_login/{everything}",
+      "DownstreamScheme": "https",
+      //"DownstreamPort": 52026,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7045"
+        }
+      ],
+      "UseServiceDiscovery": true,
+      //"ServiceName": "api_login",
+      "UpstreamPathTemplate": "/api_login/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
+      "ReRoutesCaseSensitive": false
+    },
+    //Generic
+    {
+      "DownstreamPathTemplate": "/api_generic/{everything}",
+      "DownstreamScheme": "https",
+      //"DownstreamPort": "52029",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7032"
+        }
+      ],
+      "UseServiceDiscovery": true,
+      //"ServiceName": "api_generic",
+      "UpstreamPathTemplate": "/api_generic/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
+      "ReRoutesCaseSensitive": false
+    },
+    //Registrations
+    {
+      "DownstreamPathTemplate": "/api_user/{everything}",
+      "DownstreamScheme": "https",
+      //"DownstreamPort": "52027",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7180"
+        }
+      ],
+      "UseServiceDiscovery": true,
+      //"ServiceName": "API_User",
+      "UpstreamPathTemplate": "/api_user/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
+      "ReRoutesCaseSensitive": false
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7061/",
+    "RequestIdKey": "OcRequestId",
+    "ServiceDiscoveryProvider": {
+      "Scheme": "https",
+      "Host": "localhost",
+      "Port": "7061",
+      "Type": "Consul"
+    }
+  },
+  //"RouteIsCaseSensitive": true
+}

@@ -17,12 +17,394 @@ namespace Application_Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Application_Database.TblApiRequest", b =>
+            modelBuilder.Entity("Application_Database.AdminBranch", b =>
+                {
+                    b.Property<int>("BranchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BranchId"), 1L, 1);
+
+                    b.Property<string>("Address1")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Address2")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Address3")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("BranchName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("CompId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<bool?>("IsHo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("OrgProdId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BranchId");
+
+                    b.HasIndex(new[] { "CompId" }, "IX_AdminBranch_CompId");
+
+                    b.HasIndex(new[] { "OrgProdId" }, "IX_AdminBranch_OrgProdId");
+
+                    b.ToTable("AdminBranch");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminCompany", b =>
+                {
+                    b.Property<int>("CompId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompId"), 1L, 1);
+
+                    b.Property<string>("Address1")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Address2")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Address3")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("CompName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("OrgProdId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TelephoneNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("CompId");
+
+                    b.HasIndex(new[] { "OrgProdId" }, "IX_AdminCompany_OrgProdId");
+
+                    b.ToTable("AdminCompany");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminOrganization", b =>
+                {
+                    b.Property<int>("OrgId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrgId"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("OrgEmail")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("OrgName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("OrgId");
+
+                    b.ToTable("AdminOrganization");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminOrgProduct", b =>
+                {
+                    b.Property<int>("OrgProdId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrgProdId"), 1L, 1);
+
+                    b.Property<bool?>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<int>("Orgid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrgProdId");
+
+                    b.HasIndex(new[] { "Orgid" }, "IX_AdminOrgProduct_Orgid");
+
+                    b.HasIndex(new[] { "ProdId" }, "IX_AdminOrgProduct_ProdId");
+
+                    b.ToTable("AdminOrgProduct");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminProduct", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+
+                    b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("ProductName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("AdminProduct");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminRole", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("OrgProdId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("RoleId");
+
+                    b.HasIndex(new[] { "OrgProdId" }, "IX_AdminRole_OrgProdId");
+
+                    b.ToTable("AdminRole");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminUser", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LoginMail")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("LoginPassword")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("OrgProdId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex(new[] { "OrgProdId" }, "IX_AdminUser_OrgProdId");
+
+                    b.ToTable("AdminUser");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminUserBranch", b =>
+                {
+                    b.Property<int>("Userbranchid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Userbranchid"), 1L, 1);
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<int>("OrgProdId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Userbranchid");
+
+                    b.HasIndex(new[] { "BranchId" }, "IX_AdminUserBranch_BranchId");
+
+                    b.HasIndex(new[] { "CompanyId" }, "IX_AdminUserBranch_CompanyId");
+
+                    b.HasIndex(new[] { "OrgProdId" }, "IX_AdminUserBranch_OrgProdId");
+
+                    b.HasIndex(new[] { "RoleId" }, "IX_AdminUserBranch_RoleId");
+
+                    b.HasIndex(new[] { "UserId" }, "IX_AdminUserBranch_UserId");
+
+                    b.ToTable("AdminUserBranch");
+                });
+
+            modelBuilder.Entity("Application_Database.APIRequest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,9 +424,7 @@ namespace Application_Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RequestDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Scheme")
                         .HasMaxLength(100)
@@ -55,10 +435,10 @@ namespace Application_Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_API_Request", (string)null);
+                    b.ToTable("APIRequest");
                 });
 
-            modelBuilder.Entity("Application_Database.TblApiResponse", b =>
+            modelBuilder.Entity("Application_Database.APIResponse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,10 +463,10 @@ namespace Application_Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_API_Response", (string)null);
+                    b.ToTable("APIResponse");
                 });
 
-            modelBuilder.Entity("Application_Database.TblNotification", b =>
+            modelBuilder.Entity("Application_Database.StatusNotification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,10 +487,9 @@ namespace Application_Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MsgCc")
+                    b.Property<string>("MsgCC")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("MsgCC");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("MsgFrom")
                         .HasMaxLength(200)
@@ -140,198 +519,165 @@ namespace Application_Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_Notification", (string)null);
+                    b.ToTable("StatusNotification");
                 });
 
-            modelBuilder.Entity("Application_Database.TblRightmaster", b =>
+            modelBuilder.Entity("Application_Database.AdminBranch", b =>
                 {
-                    b.Property<int>("RightId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("Application_Database.AdminCompany", "Comp")
+                        .WithMany("AdminBranch")
+                        .HasForeignKey("CompId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminBranch_AdminCompany");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RightId"), 1L, 1);
+                    b.HasOne("Application_Database.AdminOrgProduct", "OrgProd")
+                        .WithMany("AdminBranch")
+                        .HasForeignKey("OrgProdId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminBranch_AdminOrgProduct");
 
-                    b.Property<bool>("Add")
-                        .HasColumnType("bit");
+                    b.Navigation("Comp");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Delete")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("DeletedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Edit")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MenuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("RecordLocked")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("RecordLockedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RecordLockedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("View")
-                        .HasColumnType("bit");
-
-                    b.HasKey("RightId");
-
-                    b.HasIndex(new[] { "RoleId" }, "IX_tbl_rightmaster_RoleId");
-
-                    b.ToTable("tbl_rightmaster", (string)null);
+                    b.Navigation("OrgProd");
                 });
 
-            modelBuilder.Entity("Application_Database.TblRolemaster", b =>
+            modelBuilder.Entity("Application_Database.AdminCompany", b =>
                 {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DeletedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("RecordLocked")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("RecordLockedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RecordLockedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RoleNmae")
+                    b.HasOne("Application_Database.AdminOrgProduct", "OrgProd")
+                        .WithMany("AdminCompany")
+                        .HasForeignKey("OrgProdId")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasConstraintName("FK_AdminCompany_AdminOrgProduct");
 
-                    b.HasKey("RoleId");
-
-                    b.ToTable("tbl_rolemaster", (string)null);
+                    b.Navigation("OrgProd");
                 });
 
-            modelBuilder.Entity("Application_Database.TblUsermaster", b =>
+            modelBuilder.Entity("Application_Database.AdminOrgProduct", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DeletedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EmailId")
+                    b.HasOne("Application_Database.AdminOrganization", "Org")
+                        .WithMany("AdminOrgProduct")
+                        .HasForeignKey("Orgid")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasConstraintName("FK_AdminOrgProduct_AdminOrganization");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Password")
+                    b.HasOne("Application_Database.AdminProduct", "Prod")
+                        .WithMany("AdminOrgProduct")
+                        .HasForeignKey("ProdId")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasConstraintName("FK_AdminOrgProduct_AdminProduct");
 
-                    b.Property<bool>("RecordLocked")
-                        .HasColumnType("bit");
+                    b.Navigation("Org");
 
-                    b.Property<int>("RecordLockedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RecordLockedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("tbl_usermaster", (string)null);
+                    b.Navigation("Prod");
                 });
 
-            modelBuilder.Entity("Application_Database.TblRightmaster", b =>
+            modelBuilder.Entity("Application_Database.AdminRole", b =>
                 {
-                    b.HasOne("Application_Database.TblRolemaster", "Role")
-                        .WithMany("TblRightmaster")
+                    b.HasOne("Application_Database.AdminOrgProduct", "OrgProd")
+                        .WithMany("AdminRole")
+                        .HasForeignKey("OrgProdId")
+                        .HasConstraintName("FK_AdminRole_AdminOrgProduct");
+
+                    b.Navigation("OrgProd");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminUser", b =>
+                {
+                    b.HasOne("Application_Database.AdminOrgProduct", "OrgProd")
+                        .WithMany("AdminUser")
+                        .HasForeignKey("OrgProdId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminUser_AdminOrgProduct");
+
+                    b.Navigation("OrgProd");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminUserBranch", b =>
+                {
+                    b.HasOne("Application_Database.AdminBranch", "Branch")
+                        .WithMany("AdminUserBranch")
+                        .HasForeignKey("BranchId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminUserBranch_AdminBranch");
+
+                    b.HasOne("Application_Database.AdminCompany", "Company")
+                        .WithMany("AdminUserBranch")
+                        .HasForeignKey("CompanyId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminUserBranch_AdminCompany");
+
+                    b.HasOne("Application_Database.AdminOrgProduct", "OrgProd")
+                        .WithMany("AdminUserBranch")
+                        .HasForeignKey("OrgProdId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminUserBranch_AdminOrgProduct");
+
+                    b.HasOne("Application_Database.AdminRole", "Role")
+                        .WithMany("AdminUserBranch")
                         .HasForeignKey("RoleId")
                         .IsRequired()
-                        .HasConstraintName("FK_RoleRights_RoleId");
+                        .HasConstraintName("FK_AdminUserBranch_AdminRole");
+
+                    b.HasOne("Application_Database.AdminUser", "User")
+                        .WithMany("AdminUserBranch")
+                        .HasForeignKey("UserId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminUserBranch_AdminUser");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("OrgProd");
 
                     b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Application_Database.TblRolemaster", b =>
+            modelBuilder.Entity("Application_Database.AdminBranch", b =>
                 {
-                    b.Navigation("TblRightmaster");
+                    b.Navigation("AdminUserBranch");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminCompany", b =>
+                {
+                    b.Navigation("AdminBranch");
+
+                    b.Navigation("AdminUserBranch");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminOrganization", b =>
+                {
+                    b.Navigation("AdminOrgProduct");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminOrgProduct", b =>
+                {
+                    b.Navigation("AdminBranch");
+
+                    b.Navigation("AdminCompany");
+
+                    b.Navigation("AdminRole");
+
+                    b.Navigation("AdminUser");
+
+                    b.Navigation("AdminUserBranch");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminProduct", b =>
+                {
+                    b.Navigation("AdminOrgProduct");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminRole", b =>
+                {
+                    b.Navigation("AdminUserBranch");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminUser", b =>
+                {
+                    b.Navigation("AdminUserBranch");
                 });
 #pragma warning restore 612, 618
         }

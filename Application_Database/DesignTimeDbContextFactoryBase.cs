@@ -1,4 +1,4 @@
-﻿using Application_Genric;
+﻿using Application_Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +15,7 @@ namespace Application_Database
 
         public TContext CreateDbContext(string[] args)
         {
-            string basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}Application_API", Path.DirectorySeparatorChar);
+            string basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}API_Getway", Path.DirectorySeparatorChar);
             Console.WriteLine($"basePath : '{basePath}'.");
             return Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
         }

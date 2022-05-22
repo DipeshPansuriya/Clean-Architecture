@@ -14,44 +14,66 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[dbo].[tbl_API_Request]",
+         "Name": "[dbo].[AdminBranch]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[tbl_API_Response]",
+         "Name": "[dbo].[AdminCompany]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[tbl_Notification]",
+         "Name": "[dbo].[AdminOrganization]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[tbl_rightmaster]",
+         "Name": "[dbo].[AdminOrgProduct]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[tbl_rolemaster]",
+         "Name": "[dbo].[AdminProduct]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[tbl_usermaster]",
+         "Name": "[dbo].[AdminRole]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminUser]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminUserBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[APIRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[APIResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[StatusNotification]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Dev_Clean",
+   "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Dev_Micro",
    "UseBoolPropertiesWithoutDefaultSql": false,
-   "UseDatabaseNames": false,
-   "UseDbContextSplitting": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": true,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
+   "UseHierarchyId": true,
    "UseInflector": false,
-   "UseLegacyPluralizer": false,
+   "UseLegacyPluralizer": true,
+   "UseManyToManyEntity": true,
    "UseNoConstructor": false,
    "UseNoDefaultConstructor": false,
    "UseNoNavigations": false,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,
-   "UseNullableReferences": false,
-   "UseSchemaFolders": false,
-   "UseSpatial": false
+   "UseNullableReferences": true,
+   "UseSchemaFolders": true,
+   "UseSpatial": true
 }

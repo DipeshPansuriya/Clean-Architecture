@@ -1,5 +1,4 @@
 ﻿using Application_Core;
-using Application_Core.Repositories;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -8,13 +7,10 @@ namespace Application_Infrastructure
 {
     public class Response_Request : IResponse_Request
     {
-        private readonly IDapper<Response_Request> _dapper_request;
-
         private readonly ILogger<Response_Request> _logger;
 
-        public Response_Request(IDapper<Response_Request> dapper_request, ILogger<Response_Request> logger)
+        public Response_Request(ILogger<Response_Request> logger)
         {
-            _dapper_request = dapper_request;
             _logger = logger;
         }
 
@@ -24,7 +20,8 @@ namespace Application_Infrastructure
             {
                 string Query = "Insert Into tbl_API_Request(Scheme, Path, QueryString, Userid, Request, RequestDate) Values (N'" + Scheme + "', N'" + Path + "', N'" + QueryString + "', N'" + Userid + "', N'" + Request + "', GETDATE()); SELECT CAST(SCOPE_IDENTITY() as int)";
 
-                string id = await _dapper_request.ExecuteScalarAsync(Query, null, System.Data.CommandType.Text);
+                string id = "0";
+                //await _dapper_request.ExecuteScalarAsync(Query, null, System.Data.CommandType.Text);
                 return int.Parse(id);
             }
             catch (Exception ex)
@@ -45,8 +42,7 @@ namespace Application_Infrastructure
                 }
 
                 string Query = "Insert Into tbl_API_Response(Response, RequestId, ResponseDate, ReponseStatus,  UserId) Values (N'" + Response + "', N'" + RequestId + "', GETDATE(), N'" + res.ToString() + "', N'" + Userid + "'); SELECT CAST(SCOPE_IDENTITY() as int)";
-
-                string id = await _dapper_request.ExecuteScalarAsync(Query, null, System.Data.CommandType.Text);
+                //await _dapper_request.ExecuteScalarAsync(Query, null, System.Data.CommandType.Text);
             }
             catch (Exception ex)
             {
