@@ -22,7 +22,7 @@ namespace API_Login.Controllers
                 {
                     JWTHandler jWTHandler = new JWTHandler();
 
-                    string tokenString = jWTHandler.GenerateJSONWebToken(cmd.LoginEmail, cmd.Password);
+                    string tokenString = jWTHandler.GenerateJSONWebToken();
 
                     UserInfo data = GenericFunction.ObjectToClass<UserInfo>(res.ResponseObject);
                     data.Token = tokenString;
