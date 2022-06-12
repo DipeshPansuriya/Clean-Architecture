@@ -8,7 +8,7 @@ namespace API_Login.Handler
 {
     public class JWTHandler
     {
-        public string GenerateJSONWebToken(string LoginName, string LoginPassword)
+        public string GenerateJSONWebToken()
         {
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(APISetting.Jwt.Key));
             SigningCredentials signCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
