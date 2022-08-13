@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Application_Common
+﻿namespace Application_Common
 {
     public class NotficationCls
     {

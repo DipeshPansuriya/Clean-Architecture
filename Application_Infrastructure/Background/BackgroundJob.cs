@@ -1,6 +1,5 @@
 ﻿using Application_Core.Background;
 using Hangfire;
-using System;
 using System.Linq.Expressions;
 
 namespace Application_Infrastructure.Background

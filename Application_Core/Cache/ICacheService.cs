@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Application_Core.Cache
+﻿namespace Application_Core.Cache
 {
     public interface ICacheService
     {

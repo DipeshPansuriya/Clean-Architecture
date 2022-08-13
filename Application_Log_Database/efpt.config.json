@@ -1,43 +1,43 @@
 ﻿{
-   "CodeGenerationMode": 2,
-   "ContextClassName": "APP_Log_DbContext",
-   "ContextNamespace": null,
-   "DefaultDacpacSchema": null,
-   "FilterSchemas": false,
-   "IncludeConnectionString": false,
-   "ModelNamespace": null,
-   "OutputContextPath": null,
-   "OutputPath": null,
-   "ProjectRootNamespace": "Application_Database",
-   "Schemas": null,
-   "SelectedHandlebarsLanguage": 0,
-   "SelectedToBeGenerated": 0,
-   "Tables": [
-      {
-         "Name": "[dbo].[APIRequest]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[APIResponse]",
-         "ObjectType": 0
-      }
-   ],
-   "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Log_Micro",
-   "UseBoolPropertiesWithoutDefaultSql": false,
-   "UseDatabaseNames": true,
-   "UseDbContextSplitting": true,
-   "UseFluentApiOnly": true,
-   "UseHandleBars": false,
-   "UseHierarchyId": true,
-   "UseInflector": false,
-   "UseLegacyPluralizer": true,
-   "UseManyToManyEntity": true,
-   "UseNoConstructor": false,
-   "UseNoDefaultConstructor": false,
-   "UseNoNavigations": false,
-   "UseNoObjectFilter": false,
-   "UseNodaTime": false,
-   "UseNullableReferences": true,
-   "UseSchemaFolders": true,
-   "UseSpatial": true
+  "CodeGenerationMode": 2,
+  "ContextClassName": "APP_Log_DbContext",
+  "ContextNamespace": null,
+  "DefaultDacpacSchema": null,
+  "FilterSchemas": false,
+  "IncludeConnectionString": false,
+  "ModelNamespace": null,
+  "OutputContextPath": null,
+  "OutputPath": null,
+  "ProjectRootNamespace": "Application_Database",
+  "Schemas": null,
+  "SelectedHandlebarsLanguage": 0,
+  "SelectedToBeGenerated": 0,
+  "Tables": [
+    {
+      "Name": "[dbo].[APIRequest]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[APIResponse]",
+      "ObjectType": 0
+    }
+  ],
+  "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Log_Micro",
+  "UseBoolPropertiesWithoutDefaultSql": false,
+  "UseDatabaseNames": true,
+  "UseDbContextSplitting": true,
+  "UseFluentApiOnly": true,
+  "UseHandleBars": false,
+  "UseHierarchyId": true,
+  "UseInflector": false,
+  "UseLegacyPluralizer": true,
+  "UseManyToManyEntity": true,
+  "UseNoConstructor": false,
+  "UseNoDefaultConstructor": false,
+  "UseNoNavigations": false,
+  "UseNoObjectFilter": false,
+  "UseNodaTime": false,
+  "UseNullableReferences": true,
+  "UseSchemaFolders": true,
+  "UseSpatial": true
 }

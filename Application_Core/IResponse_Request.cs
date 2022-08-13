@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Application_Core
+﻿namespace Application_Core
 {
     public interface IResponse_Request
     {

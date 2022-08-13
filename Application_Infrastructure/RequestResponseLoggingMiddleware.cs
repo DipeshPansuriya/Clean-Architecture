@@ -1,9 +1,6 @@
 ﻿using Application_Core;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Application_Infrastructure
 {
