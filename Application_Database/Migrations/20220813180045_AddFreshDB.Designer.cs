@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    [Migration("20220813175322_AddRoleRights")]
-    partial class AddRoleRights
+    [Migration("20220813180045_AddFreshDB")]
+    partial class AddFreshDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
