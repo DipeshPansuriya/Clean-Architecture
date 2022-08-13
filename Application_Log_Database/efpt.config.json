@@ -1,6 +1,6 @@
 ﻿{
    "CodeGenerationMode": 2,
-   "ContextClassName": "APP_DbContext",
+   "ContextClassName": "APP_Log_DbContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
@@ -14,43 +14,15 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[dbo].[AdminBranch]",
+         "Name": "[dbo].[APIRequest]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[AdminCompany]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AdminOrganization]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AdminOrgProduct]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AdminProduct]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AdminRole]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AdminUser]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[AdminUserBranch]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[StatusNotification]",
+         "Name": "[dbo].[APIResponse]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Dev_Micro",
+   "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Log_Micro",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": true,

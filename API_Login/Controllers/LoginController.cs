@@ -36,6 +36,7 @@ namespace API_Login.Controllers
                 res.ResponseStatus = false;
                 res.ResponseObject = "Command is null";
             }
+            res.StatusCode = System.Net.HttpStatusCode.BadRequest;
             return BadRequest(res);
         }
     }

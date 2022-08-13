@@ -405,3 +405,7 @@ ASALocalRun/
 .localhistory/
 *.rar
 /Application_API/Logs/Error
+/API_Getway/Logs/Error
+/API_Generic/Logs/Error
+/API_Login/Logs/Error
+/API_User/Logs/Error

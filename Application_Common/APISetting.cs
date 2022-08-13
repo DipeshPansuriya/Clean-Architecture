@@ -3,6 +3,8 @@
     public class APISetting
     {
         public static string DBConnection { get; set; }
+        public static string LogDBConnection { get; set; }
+        public static string HangfireDBConnection { get; set; }
         public static string Secret { get; set; }
         public static string CORSAllowOrigin { get; set; }
         public static EmailConfiguration EmailConfiguration { get; set; }

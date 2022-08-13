@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Application_Database
 {
-    public abstract class DesignTimeDbContextFactoryBase<TContext> :
+    public abstract class DesignTimeLogDbContextFactoryBase<TContext> :
        IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
