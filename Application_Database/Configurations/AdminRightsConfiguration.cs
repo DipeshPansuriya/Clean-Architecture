@@ -16,6 +16,10 @@ namespace Application_Database.Configurations
         {
             entity.HasKey(e => e.RightId);
 
+            entity.HasIndex(e => e.MenuId, "IX_AdminRights_MenuId");
+
+            entity.HasIndex(e => e.RoleId, "IX_AdminRights_RoleId");
+
             entity.Property(e => e.AddAccess).HasDefaultValueSql("((0))");
 
             entity.Property(e => e.DeleteAccess).HasDefaultValueSql("((0))");

@@ -14,6 +14,7 @@ namespace Application_Database
 
         public int MenuId { get; set; }
         public string MenuName { get; set; } = null!;
+        public string? MenuURL { get; set; }
         public int ParentMenuId { get; set; }
         public bool IsActive { get; set; }
         public int DisplayOrder { get; set; }
