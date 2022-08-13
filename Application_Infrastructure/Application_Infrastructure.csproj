@@ -7,16 +7,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hangfire" Version="1.7.28" />
-		<PackageReference Include="MailKit" Version="3.1.1" />
-		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+		<PackageReference Include="Hangfire" Version="1.7.30" />
+		<PackageReference Include="MailKit" Version="3.3.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
-		<PackageReference Include="MimeKit" Version="3.1.1" />
-		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+		<PackageReference Include="MimeKit" Version="3.3.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
 		<PackageReference Include="Serilog.Sinks.Email" Version="2.4.0" />
-		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>

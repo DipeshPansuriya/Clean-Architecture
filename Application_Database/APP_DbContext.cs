@@ -19,8 +19,6 @@ namespace Application_Database
         {
         }
 
-        public virtual DbSet<APIRequest> APIRequest { get; set; } = null!;
-        public virtual DbSet<APIResponse> APIResponse { get; set; } = null!;
         public virtual DbSet<AdminBranch> AdminBranch { get; set; } = null!;
         public virtual DbSet<AdminCompany> AdminCompany { get; set; } = null!;
         public virtual DbSet<AdminOrgProduct> AdminOrgProduct { get; set; } = null!;
@@ -33,8 +31,6 @@ namespace Application_Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new Configurations.APIRequestConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.APIResponseConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminBranchConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminCompanyConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminOrgProductConfiguration());

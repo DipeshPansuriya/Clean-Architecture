@@ -61,7 +61,7 @@ namespace Application_Infrastructure.Startup_Proj
             builder.Host.UseSerilog((hostingContext, loggerConfig) =>
             loggerConfig
             .WriteTo.MSSqlServer(
-                connectionString: APISetting.DBConnection,
+                connectionString: APISetting.LogDBConnection,
                 tableName: "Logs",
                 schemaName: "dbo",
                 autoCreateSqlTable: true,
@@ -149,7 +149,7 @@ namespace Application_Infrastructure.Startup_Proj
             .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
             .UseSimpleAssemblyNameTypeSerializer()
             .UseRecommendedSerializerSettings()
-            .UseSqlServerStorage(APISetting.DBConnection, new SqlServerStorageOptions
+            .UseSqlServerStorage(APISetting.HangfireDBConnection, new SqlServerStorageOptions
             {
                 CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
                 SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),

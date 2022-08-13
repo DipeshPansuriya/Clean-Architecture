@@ -16,6 +16,11 @@ namespace Application_Database
         public string OrgName { get; set; } = null!;
         public string OrgEmail { get; set; } = null!;
         public bool? IsActive { get; set; }
+        public int? AlloweNoComp { get; set; }
+        public int? AlloweNoBranch { get; set; }
+        public int? AlloweNoUser { get; set; }
+        public bool? IsCompProductWise { get; set; }
+        public bool? IsMasterCompWise { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
 

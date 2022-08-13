@@ -1,3 +1,4 @@
+using Application_Common;
 using Application_Database;
 using Application_Infrastructure;
 using Application_Infrastructure.Startup_Proj;
@@ -22,8 +23,7 @@ builder.Services.AddOcelot().AddConsul().AddCacheManager(x =>
 {
     x.WithDictionaryHandle();
 });
-builder.Services.AddDatabase();
-builder.Services.AddRepositories();
+builder.Services.AddDatabase(APISetting.DBConnection);
 builder.Services.AddInfrastructure();
 
 #endregion Project Dependancy

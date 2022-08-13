@@ -1,9 +1,11 @@
 ﻿using Application_Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using User_Command.AdminOrg.InsertUpdate;
 
 namespace API_User.Controllers
 {
+    [AllowAnonymous]
     public class AdminOrgController : BaseController<AdminOrgController>
     {
         [HttpPost]

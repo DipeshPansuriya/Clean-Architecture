@@ -28,9 +28,9 @@ namespace Application_Infrastructure.Repositories
         {
         }
 
-        private IDbConnection dbConnection()
+        private IDbConnection dbConnection(string SQLConnectionstr)
         {
-            IDbConnection db = new SqlConnection(APISetting.DBConnection);
+            IDbConnection db = new SqlConnection(SQLConnectionstr);
             if (db.State == ConnectionState.Closed)
             {
                 db.Open();
@@ -39,13 +39,17 @@ namespace Application_Infrastructure.Repositories
             return db;
         }
 
-        public async Task<int> ExecuteAsync(string Query, DynamicParameters param, CommandType commandType)
+        public async Task<int> ExecuteAsync(string Query, DynamicParameters param, CommandType commandType, string SQLConnectionstr)
         {
+            if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
+            {
+                SQLConnectionstr = APISetting.DBConnection;
+            }
             try
             {
                 int affectedRows = 0;
 
-                using (IDbConnection db = dbConnection())
+                using (IDbConnection db = dbConnection(SQLConnectionstr))
                 {
                     affectedRows = param == null ? await db.ExecuteAsync(Query, commandType: commandType) : await db.ExecuteAsync(Query, param, commandType: commandType);
                 }
@@ -58,13 +62,17 @@ namespace Application_Infrastructure.Repositories
             }
         }
 
-        public async Task<string> ExecuteScalarAsync(string Query, DynamicParameters param, CommandType commandType)
+        public async Task<string> ExecuteScalarAsync(string Query, DynamicParameters param, CommandType commandType, string SQLConnectionstr)
         {
+            if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
+            {
+                SQLConnectionstr = APISetting.DBConnection;
+            }
             try
             {
                 string data = string.Empty;
 
-                using (IDbConnection db = dbConnection())
+                using (IDbConnection db = dbConnection(SQLConnectionstr))
                 {
                     data = param == null ? await db.ExecuteScalarAsync<string>(Query, commandType: commandType) : await db.ExecuteScalarAsync<string>(Query, param, commandType: commandType);
                 }
@@ -77,11 +85,16 @@ namespace Application_Infrastructure.Repositories
             }
         }
 
-        public async Task<IEnumerable<T>> GetDataListAsync<T>(string Query, DynamicParameters param, CommandType commandType)
+        public async Task<IEnumerable<T>> GetDataListAsync<T>(string Query, DynamicParameters param, CommandType commandType, string SQLConnectionstr)
         {
+            if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
+            {
+                SQLConnectionstr = APISetting.DBConnection;
+            }
+
             try
             {
-                using (IDbConnection db = dbConnection())
+                using (IDbConnection db = dbConnection(SQLConnectionstr))
                 {
                     IEnumerable<T> data = param == null ? await db.QueryAsync<T>(Query, commandType: commandType) : await db.QueryAsync<T>(Query, param, commandType: commandType);
 
@@ -95,11 +108,15 @@ namespace Application_Infrastructure.Repositories
             }
         }
 
-        public async Task<DataSet> GetDataSetAsync(string Query, DynamicParameters param, CommandType commandType)
+        public async Task<DataSet> GetDataSetAsync(string Query, DynamicParameters param, CommandType commandType, string SQLConnectionstr)
         {
+            if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
+            {
+                SQLConnectionstr = APISetting.DBConnection;
+            }
             try
             {
-                using (IDbConnection db = dbConnection())
+                using (IDbConnection db = dbConnection(SQLConnectionstr))
                 {
                     IDataReader list = param == null ? await db.ExecuteReaderAsync(Query, commandType: commandType) : await db.ExecuteReaderAsync(Query, param, commandType: commandType);
 

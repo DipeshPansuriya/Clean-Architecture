@@ -16,9 +16,19 @@ namespace Application_Database.Configurations
         {
             entity.HasKey(e => e.OrgId);
 
+            entity.Property(e => e.AlloweNoBranch).HasDefaultValueSql("((2))");
+
+            entity.Property(e => e.AlloweNoComp).HasDefaultValueSql("((2))");
+
+            entity.Property(e => e.AlloweNoUser).HasDefaultValueSql("((5))");
+
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
             entity.Property(e => e.IsActive).HasDefaultValueSql("((1))");
+
+            entity.Property(e => e.IsCompProductWise).HasDefaultValueSql("((1))");
+
+            entity.Property(e => e.IsMasterCompWise).HasDefaultValueSql("((1))");
 
             entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
