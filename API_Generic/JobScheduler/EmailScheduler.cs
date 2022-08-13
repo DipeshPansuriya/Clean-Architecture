@@ -1,5 +1,5 @@
 ﻿using Application_Common;
-using Generic_Command.List_Command;
+using Generic_Command.List;
 using MediatR;
 
 namespace API_Generic.JobScheduler

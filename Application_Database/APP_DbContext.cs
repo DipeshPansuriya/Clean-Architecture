@@ -21,9 +21,11 @@ namespace Application_Database
 
         public virtual DbSet<AdminBranch> AdminBranch { get; set; } = null!;
         public virtual DbSet<AdminCompany> AdminCompany { get; set; } = null!;
+        public virtual DbSet<AdminMenu> AdminMenu { get; set; } = null!;
         public virtual DbSet<AdminOrgProduct> AdminOrgProduct { get; set; } = null!;
         public virtual DbSet<AdminOrganization> AdminOrganization { get; set; } = null!;
         public virtual DbSet<AdminProduct> AdminProduct { get; set; } = null!;
+        public virtual DbSet<AdminRights> AdminRights { get; set; } = null!;
         public virtual DbSet<AdminRole> AdminRole { get; set; } = null!;
         public virtual DbSet<AdminUser> AdminUser { get; set; } = null!;
         public virtual DbSet<AdminUserBranch> AdminUserBranch { get; set; } = null!;
@@ -33,9 +35,11 @@ namespace Application_Database
         {
             modelBuilder.ApplyConfiguration(new Configurations.AdminBranchConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminCompanyConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.AdminMenuConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminOrgProductConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminOrganizationConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminProductConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.AdminRightsConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminRoleConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminUserConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.AdminUserBranchConfiguration());

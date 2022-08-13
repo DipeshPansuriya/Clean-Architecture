@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    [Migration("20220305123107_FreshDB")]
-    partial class FreshDB
+    [Migration("20220813180045_AddFreshDB")]
+    partial class AddFreshDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -164,6 +164,35 @@ namespace Application_Database.Migrations
                     b.ToTable("AdminCompany");
                 });
 
+            modelBuilder.Entity("Application_Database.AdminMenu", b =>
+                {
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSysAdmin")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<string>("MenuName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("ParentMenuId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MenuId");
+
+                    b.ToTable("AdminMenu");
+                });
+
             modelBuilder.Entity("Application_Database.AdminOrganization", b =>
                 {
                     b.Property<int>("OrgId")
@@ -172,10 +201,35 @@ namespace Application_Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrgId"), 1L, 1);
 
+                    b.Property<int?>("AlloweNoBranch")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("((2))");
+
+                    b.Property<int?>("AlloweNoComp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("((2))");
+
+                    b.Property<int?>("AlloweNoUser")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("((5))");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
 
                     b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("IsCompProductWise")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<bool?>("IsMasterCompWise")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValueSql("((1))");
@@ -229,23 +283,65 @@ namespace Application_Database.Migrations
             modelBuilder.Entity("Application_Database.AdminProduct", b =>
                 {
                     b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
-
                     b.Property<bool?>("IsActive")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValueSql("((1))");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ProductId");
 
                     b.ToTable("AdminProduct");
+                });
+
+            modelBuilder.Entity("Application_Database.AdminRights", b =>
+                {
+                    b.Property<int>("RightId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RightId"), 1L, 1);
+
+                    b.Property<bool?>("AddAccess")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<bool?>("DeleteAccess")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<bool?>("EditAccess")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("ViewAccess")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))");
+
+                    b.HasKey("RightId");
+
+                    b.HasIndex("MenuId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AdminRights");
                 });
 
             modelBuilder.Entity("Application_Database.AdminRole", b =>
@@ -406,68 +502,6 @@ namespace Application_Database.Migrations
                     b.ToTable("AdminUserBranch");
                 });
 
-            modelBuilder.Entity("Application_Database.APIRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Path")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("QueryString")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Request")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("RequestDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Scheme")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int?>("Userid")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("APIRequest");
-                });
-
-            modelBuilder.Entity("Application_Database.APIResponse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool?>("ReponseStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("RequestId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Response")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ResponseDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("APIResponse");
-                });
-
             modelBuilder.Entity("Application_Database.StatusNotification", b =>
                 {
                     b.Property<int>("Id")
@@ -573,6 +607,25 @@ namespace Application_Database.Migrations
                     b.Navigation("Prod");
                 });
 
+            modelBuilder.Entity("Application_Database.AdminRights", b =>
+                {
+                    b.HasOne("Application_Database.AdminMenu", "Menu")
+                        .WithMany("AdminRights")
+                        .HasForeignKey("MenuId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminRights_AdminMenu");
+
+                    b.HasOne("Application_Database.AdminRole", "Role")
+                        .WithMany("AdminRights")
+                        .HasForeignKey("RoleId")
+                        .IsRequired()
+                        .HasConstraintName("FK_AdminRights_AdminRole");
+
+                    b.Navigation("Menu");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("Application_Database.AdminRole", b =>
                 {
                     b.HasOne("Application_Database.AdminOrgProduct", "OrgProd")
@@ -649,6 +702,11 @@ namespace Application_Database.Migrations
                     b.Navigation("AdminUserBranch");
                 });
 
+            modelBuilder.Entity("Application_Database.AdminMenu", b =>
+                {
+                    b.Navigation("AdminRights");
+                });
+
             modelBuilder.Entity("Application_Database.AdminOrganization", b =>
                 {
                     b.Navigation("AdminOrgProduct");
@@ -674,6 +732,8 @@ namespace Application_Database.Migrations
 
             modelBuilder.Entity("Application_Database.AdminRole", b =>
                 {
+                    b.Navigation("AdminRights");
+
                     b.Navigation("AdminUserBranch");
                 });
 

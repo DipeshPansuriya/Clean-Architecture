@@ -22,6 +22,10 @@
       "ObjectType": 0
     },
     {
+      "Name": "[dbo].[AdminMenu]",
+      "ObjectType": 0
+    },
+    {
       "Name": "[dbo].[AdminOrganization]",
       "ObjectType": 0
     },
@@ -31,6 +35,10 @@
     },
     {
       "Name": "[dbo].[AdminProduct]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[AdminRights]",
       "ObjectType": 0
     },
     {
@@ -50,7 +58,7 @@
       "ObjectType": 0
     }
   ],
-  "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Dev_Micro",
+  "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Micro",
   "UseBoolPropertiesWithoutDefaultSql": false,
   "UseDatabaseNames": true,
   "UseDbContextSplitting": true,

@@ -16,7 +16,11 @@ namespace Application_Database.Configurations
         {
             entity.HasKey(e => e.ProductId);
 
-            entity.Property(e => e.IsActive).HasDefaultValueSql("((1))");
+            entity.Property(e => e.ProductId).ValueGeneratedNever();
+
+            entity.Property(e => e.IsActive)
+                .IsRequired()
+                .HasDefaultValueSql("((1))");
 
             entity.Property(e => e.ProductName).HasMaxLength(100);
 

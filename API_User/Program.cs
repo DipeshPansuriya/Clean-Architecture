@@ -2,7 +2,9 @@ using Application_Common;
 using Application_Database;
 using Application_Infrastructure;
 using Application_Infrastructure.Startup_Proj;
+using MediatR;
 using User_Command;
+using User_Command.AdminOrg.InsertUpdate;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -41,5 +43,16 @@ if (builder.Environment.IsDevelopment())
 
 StartupProj.AddGenricApp(app);
 StartupProj.AddMiddleware(app);
+
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    IServiceProvider services = scope.ServiceProvider;
+    IMediator mediator = services.GetRequiredService<IMediator>();
+    List<OrgProdcut> orgProdcut = new List<OrgProdcut>
+    {
+        new OrgProdcut { ProductId = 1 }
+    };
+    await mediator.Send(new Adm_Org_InstUpd { Id = 0, OrgName = "Softexim", OrgEmail = "SofteximAdmin@sfotexim.com", IsActive = true, IsFreshSetup = true, OrgProdcut = orgProdcut }, CancellationToken.None);
+}
 
 app.Run();

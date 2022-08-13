@@ -1,13 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Application_Database.Migrations
 {
-    public partial class FreshDB : Migration
+    public partial class AddFreshDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AdminMenu",
+                columns: table => new
+                {
+                    MenuId = table.Column<int>(type: "int", nullable: false),
+                    MenuName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    ParentMenuId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    IsSysAdmin = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((0))")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdminMenu", x => x.MenuId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AdminOrganization",
                 columns: table => new
@@ -17,6 +34,11 @@ namespace Application_Database.Migrations
                     OrgName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     OrgEmail = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((1))"),
+                    AlloweNoComp = table.Column<int>(type: "int", nullable: true, defaultValueSql: "((2))"),
+                    AlloweNoBranch = table.Column<int>(type: "int", nullable: true, defaultValueSql: "((2))"),
+                    AlloweNoUser = table.Column<int>(type: "int", nullable: true, defaultValueSql: "((5))"),
+                    IsCompProductWise = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((1))"),
+                    IsMasterCompWise = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((1))"),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
@@ -29,49 +51,13 @@ namespace Application_Database.Migrations
                 name: "AdminProduct",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((1))")
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValueSql: "((1))")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AdminProduct", x => x.ProductId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "APIRequest",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Scheme = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Path = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    QueryString = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Userid = table.Column<int>(type: "int", nullable: true),
-                    Request = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RequestDate = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_APIRequest", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "APIResponse",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Response = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RequestId = table.Column<int>(type: "int", nullable: true),
-                    ResponseDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    ReponseStatus = table.Column<bool>(type: "bit", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_APIResponse", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,6 +233,34 @@ namespace Application_Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AdminRights",
+                columns: table => new
+                {
+                    RightId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    MenuId = table.Column<int>(type: "int", nullable: false),
+                    ViewAccess = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((0))"),
+                    AddAccess = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((0))"),
+                    EditAccess = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((0))"),
+                    DeleteAccess = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((0))")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdminRights", x => x.RightId);
+                    table.ForeignKey(
+                        name: "FK_AdminRights_AdminMenu",
+                        column: x => x.MenuId,
+                        principalTable: "AdminMenu",
+                        principalColumn: "MenuId");
+                    table.ForeignKey(
+                        name: "FK_AdminRights_AdminRole",
+                        column: x => x.RoleId,
+                        principalTable: "AdminRole",
+                        principalColumn: "RoleId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AdminUserBranch",
                 columns: table => new
                 {
@@ -315,6 +329,16 @@ namespace Application_Database.Migrations
                 column: "ProdId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AdminRights_MenuId",
+                table: "AdminRights",
+                column: "MenuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AdminRights_RoleId",
+                table: "AdminRights",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AdminRole_OrgProdId",
                 table: "AdminRole",
                 column: "OrgProdId");
@@ -353,16 +377,16 @@ namespace Application_Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AdminRights");
+
+            migrationBuilder.DropTable(
                 name: "AdminUserBranch");
 
             migrationBuilder.DropTable(
-                name: "APIRequest");
-
-            migrationBuilder.DropTable(
-                name: "APIResponse");
-
-            migrationBuilder.DropTable(
                 name: "StatusNotification");
+
+            migrationBuilder.DropTable(
+                name: "AdminMenu");
 
             migrationBuilder.DropTable(
                 name: "AdminBranch");

@@ -4,21 +4,21 @@ using Application_Core.Cache;
 using Application_Core.Notification;
 using MediatR;
 
-namespace Generic_Command.List_Command
+namespace Generic_Command.List
 {
     public class List_SendEmail : IRequest<Response>
     {
         public class List_SendEmail_Handeler : IRequestHandler<List_SendEmail, Response>
         {
-            private readonly ICacheService _cache;
-            private readonly IBackgroundJob _backgroundJob;
-            private readonly INotificationMsg _notification;
+            private readonly ICacheService cache;
+            private readonly IBackgroundJob backgroundJob;
+            private readonly INotificationMsg notification;
 
             public List_SendEmail_Handeler(ICacheService cache, IBackgroundJob backgroundJob, INotificationMsg notification)
             {
-                _cache = cache;
-                _backgroundJob = backgroundJob;
-                _notification = notification;
+                this.cache = cache;
+                this.backgroundJob = backgroundJob;
+                this.notification = notification;
             }
 
             public async Task<Response> Handle(List_SendEmail request, CancellationToken cancellationToken)
@@ -29,7 +29,7 @@ namespace Generic_Command.List_Command
 
                 Parallel.ForEach(dbdata, data =>
                 {
-                    string jobid = _backgroundJob.AddEnque<INotificationMsg>(x => x.SendAsync(data));
+                    string jobid = backgroundJob.AddEnque<INotificationMsg>(x => x.SendAsync(data));
                 });
 
                 return response;

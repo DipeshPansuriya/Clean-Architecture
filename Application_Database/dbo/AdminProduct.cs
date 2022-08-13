@@ -13,7 +13,7 @@ namespace Application_Database
         }
 
         public int ProductId { get; set; }
-        public string? ProductName { get; set; }
+        public string ProductName { get; set; } = null!;
         public bool? IsActive { get; set; }
 
         public virtual ICollection<AdminOrgProduct> AdminOrgProduct { get; set; }

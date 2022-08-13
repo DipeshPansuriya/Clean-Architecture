@@ -19,18 +19,19 @@ namespace User_Command.AdminOrg.InsertUpdate
         public string OrgEmail { get; set; }
         public bool IsActive { get; set; } = true;
         public List<OrgProdcut> OrgProdcut { get; set; }
+        public bool IsFreshSetup { get; set; }
 
         public class Adm_Org_InstHandler : IRequestHandler<Adm_Org_InstUpd, Response>
         {
-            private readonly INotificationMsg _notificationMsg;
-            private readonly IDapper<Response> _aPPDbContext;
+            private readonly INotificationMsg notification;
+            private readonly IDapper<Response> dapper;
 
-            public Adm_Org_InstHandler(INotificationMsg notificationMsg,
-                IDapper<Response> aPPDbContext
+            public Adm_Org_InstHandler(INotificationMsg notification,
+                IDapper<Response> dapper
                 )
             {
-                _notificationMsg = notificationMsg;
-                _aPPDbContext = aPPDbContext;
+                this.notification = notification;
+                this.dapper = dapper;
             }
 
             public async Task<Response> Handle(Adm_Org_InstUpd request, CancellationToken cancellationToken)
@@ -46,9 +47,10 @@ namespace User_Command.AdminOrg.InsertUpdate
                     param.Add("@OrgEmail", request.OrgEmail);
                     param.Add("@Pwd", "123");
                     param.Add("@IsActive", request.IsActive);
-                    param.Add("@ProdctXML", XMLproduct);
+                    param.Add("@ProductXML", XMLproduct);
+                    param.Add("@IsFreshSetup", request.IsFreshSetup);
 
-                    string? data = await _aPPDbContext.ExecuteScalarAsync
+                    string? data = await dapper.ExecuteScalarAsync
                         ("sp_AdminOrganization_InsertUpdate",
                         param,
                         System.Data.CommandType.StoredProcedure
