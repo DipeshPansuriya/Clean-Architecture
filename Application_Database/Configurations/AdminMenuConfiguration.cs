@@ -22,6 +22,8 @@ namespace Application_Database.Configurations
 
             entity.Property(e => e.MenuName).HasMaxLength(250);
 
+            entity.Property(e => e.MenuURL).HasMaxLength(250);
+
             OnConfigurePartial(entity);
         }
 

@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_Login", "API_Login", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Login", "API_Login\API_Login.csproj", "{82BCB127-6549-4FD4-8E69-48D46F863DE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login_Command", "..\Login_Command\Login_Command.csproj", "{089C173A-B10C-4647-BED4-7F28C979D02F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login_Command", "Login_Command\Login_Command.csproj", "{089C173A-B10C-4647-BED4-7F28C979D02F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F4543493-272F-482F-A23A-507BBD151D9F}"
 EndProject
