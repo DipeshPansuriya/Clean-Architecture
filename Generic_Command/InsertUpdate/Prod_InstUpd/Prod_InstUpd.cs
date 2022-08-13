@@ -28,10 +28,10 @@ namespace Generic_Command.InsertUpdate.Prod_InstUpd
                 {
                     List<Prod_InstUpd> prods = new()
                     {
-                        new Prod_InstUpd { ProdId = 1,ProductName = "Core", IsActive = true},
-                        new Prod_InstUpd { ProdId = 2,ProductName = "Logistics", IsActive = true},
-                        new Prod_InstUpd { ProdId = 3,ProductName = "Warehouse", IsActive = true},
-                        new Prod_InstUpd { ProdId = 4,ProductName = "Accounts", IsActive = true},
+                        new Prod_InstUpd { ProdId = 1, ProductName = "Core", IsActive = true},
+                        new Prod_InstUpd { ProdId = 2, ProductName = "Logistics", IsActive = true},
+                        new Prod_InstUpd { ProdId = 3, ProductName = "Warehouse", IsActive = true},
+                        new Prod_InstUpd { ProdId = 4, ProductName = "Accounts", IsActive = true},
                     };
                     string XMLproduct = GenericFunction.ClassToXML<List<Prod_InstUpd>>(prods);
                     DynamicParameters param = new();

@@ -11,6 +11,7 @@ namespace API_User.Controllers
         [HttpPost]
         public async Task<ActionResult<Response>> CreateUpdate([FromBody] Adm_Org_InstUpd cmd)
         {
+            cmd.IsFreshSetup = false;
             Response res = new Response();
             if (cmd != null)
             {

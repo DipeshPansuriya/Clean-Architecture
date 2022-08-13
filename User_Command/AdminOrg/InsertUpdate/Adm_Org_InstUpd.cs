@@ -19,6 +19,7 @@ namespace User_Command.AdminOrg.InsertUpdate
         public string OrgEmail { get; set; }
         public bool IsActive { get; set; } = true;
         public List<OrgProdcut> OrgProdcut { get; set; }
+        public bool IsFreshSetup { get; set; }
 
         public class Adm_Org_InstHandler : IRequestHandler<Adm_Org_InstUpd, Response>
         {
@@ -47,6 +48,7 @@ namespace User_Command.AdminOrg.InsertUpdate
                     param.Add("@Pwd", "123");
                     param.Add("@IsActive", request.IsActive);
                     param.Add("@ProductXML", XMLproduct);
+                    param.Add("@IsFreshSetup", request.IsFreshSetup);
 
                     string? data = await dapper.ExecuteScalarAsync
                         ("sp_AdminOrganization_InsertUpdate",
