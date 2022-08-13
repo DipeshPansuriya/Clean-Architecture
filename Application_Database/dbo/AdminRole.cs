@@ -9,6 +9,7 @@ namespace Application_Database
     {
         public AdminRole()
         {
+            AdminRights = new HashSet<AdminRights>();
             AdminUserBranch = new HashSet<AdminUserBranch>();
         }
 
@@ -25,6 +26,7 @@ namespace Application_Database
         public DateTime? DeletedDate { get; set; }
 
         public virtual AdminOrgProduct? OrgProd { get; set; }
+        public virtual ICollection<AdminRights> AdminRights { get; set; }
         public virtual ICollection<AdminUserBranch> AdminUserBranch { get; set; }
     }
 }

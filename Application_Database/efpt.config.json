@@ -38,6 +38,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AdminRights]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[AdminRole]",
          "ObjectType": 0
       },

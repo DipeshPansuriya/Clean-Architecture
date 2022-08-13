@@ -7,11 +7,18 @@ namespace Application_Database
 {
     public partial class AdminMenu
     {
+        public AdminMenu()
+        {
+            AdminRights = new HashSet<AdminRights>();
+        }
+
         public int MenuId { get; set; }
         public string MenuName { get; set; } = null!;
         public int ParentMenuId { get; set; }
         public bool IsActive { get; set; }
         public int DisplayOrder { get; set; }
         public bool? IsSysAdmin { get; set; }
+
+        public virtual ICollection<AdminRights> AdminRights { get; set; }
     }
 }
