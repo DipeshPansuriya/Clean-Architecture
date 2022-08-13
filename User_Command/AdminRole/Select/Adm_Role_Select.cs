@@ -15,15 +15,15 @@ namespace User_Command.AdminRole.Select
 
         public class Adm_Role_SelectHandler : IRequestHandler<Adm_Role_Select, Response>
         {
-            private readonly INotificationMsg notificationMsg;
-            private readonly IDapper<Response> aPPDbContext;
+            private readonly INotificationMsg notification;
+            private readonly IDapper<Response> dapper;
 
-            public Adm_Role_SelectHandler(INotificationMsg notificationMsg,
-                IDapper<Response> aPPDbContext
+            public Adm_Role_SelectHandler(INotificationMsg notification,
+                IDapper<Response> dapper
                 )
             {
-                this.notificationMsg = notificationMsg;
-                this.aPPDbContext = aPPDbContext;
+                this.notification = notification;
+                this.dapper = dapper;
             }
 
             public async Task<Response> Handle(Adm_Role_Select request, CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ namespace User_Command.AdminRole.Select
                     param.Add("@RoleId", request.RoleId);
                     param.Add("@OrgProdId", request.OrgProdId);
 
-                    Adm_Role_Lst_DTO? data = (await aPPDbContext.GetDataListAsync<Adm_Role_Lst_DTO>("sp_AdminRole_Select", param, System.Data.CommandType.StoredProcedure)).FirstOrDefault();
+                    Adm_Role_Lst_DTO? data = (await dapper.GetDataListAsync<Adm_Role_Lst_DTO>("sp_AdminRole_Select", param, System.Data.CommandType.StoredProcedure)).FirstOrDefault();
 
                     if (data != null)
                     {

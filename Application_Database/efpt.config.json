@@ -1,71 +1,75 @@
 ﻿{
-  "CodeGenerationMode": 2,
-  "ContextClassName": "APP_DbContext",
-  "ContextNamespace": null,
-  "DefaultDacpacSchema": null,
-  "FilterSchemas": false,
-  "IncludeConnectionString": false,
-  "ModelNamespace": null,
-  "OutputContextPath": null,
-  "OutputPath": null,
-  "ProjectRootNamespace": "Application_Database",
-  "Schemas": null,
-  "SelectedHandlebarsLanguage": 0,
-  "SelectedToBeGenerated": 0,
-  "Tables": [
-    {
-      "Name": "[dbo].[AdminBranch]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[AdminCompany]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[AdminOrganization]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[AdminOrgProduct]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[AdminProduct]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[AdminRole]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[AdminUser]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[AdminUserBranch]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[dbo].[StatusNotification]",
-      "ObjectType": 0
-    }
-  ],
-  "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Dev_Micro",
-  "UseBoolPropertiesWithoutDefaultSql": false,
-  "UseDatabaseNames": true,
-  "UseDbContextSplitting": true,
-  "UseFluentApiOnly": true,
-  "UseHandleBars": false,
-  "UseHierarchyId": true,
-  "UseInflector": false,
-  "UseLegacyPluralizer": true,
-  "UseManyToManyEntity": true,
-  "UseNoConstructor": false,
-  "UseNoDefaultConstructor": false,
-  "UseNoNavigations": false,
-  "UseNoObjectFilter": false,
-  "UseNodaTime": false,
-  "UseNullableReferences": true,
-  "UseSchemaFolders": true,
-  "UseSpatial": true
+   "CodeGenerationMode": 2,
+   "ContextClassName": "APP_DbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "ProjectRootNamespace": "Application_Database",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[AdminBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminCompany]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminMenu]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminOrganization]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminOrgProduct]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminProduct]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminRole]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminUser]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AdminUserBranch]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[StatusNotification]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Dev_Micro",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": true,
+   "UseInflector": false,
+   "UseLegacyPluralizer": true,
+   "UseManyToManyEntity": true,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UseSchemaFolders": true,
+   "UseSpatial": true
 }

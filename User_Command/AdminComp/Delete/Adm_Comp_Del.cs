@@ -14,15 +14,15 @@ namespace User_Command.AdminComp.Delete
 
         public class Adm_Comp_DelHandler : IRequestHandler<Adm_Comp_Del, Response>
         {
-            private readonly INotificationMsg notificationMsg;
-            private readonly IDapper<Response> aPPDbContext;
+            private readonly INotificationMsg notification;
+            private readonly IDapper<Response> dapper;
 
-            public Adm_Comp_DelHandler(INotificationMsg notificationMsg,
-                IDapper<Response> aPPDbContext
+            public Adm_Comp_DelHandler(INotificationMsg notification,
+                IDapper<Response> dapper
                 )
             {
-                this.notificationMsg = notificationMsg;
-                this.aPPDbContext = aPPDbContext;
+                this.notification = notification;
+                this.dapper = dapper;
             }
 
             public async Task<Response> Handle(Adm_Comp_Del request, CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ namespace User_Command.AdminComp.Delete
                     param.Add("@CompId", request.CompId);
                     param.Add("@OrgProdId", request.OrgProdId);
 
-                    response.ResponseObject = await aPPDbContext.ExecuteScalarAsync("sp_AdminCompany_Delete", param, System.Data.CommandType.StoredProcedure);
+                    response.ResponseObject = await dapper.ExecuteScalarAsync("sp_AdminCompany_Delete", param, System.Data.CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
                 {

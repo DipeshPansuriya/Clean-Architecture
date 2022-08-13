@@ -4,6 +4,7 @@ using Application_Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application_Database.Migrations
 {
     [DbContext(typeof(APP_DbContext))]
-    partial class APP_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20220813141925_AddMenuTable")]
+    partial class AddMenuTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,11 +174,6 @@ namespace Application_Database.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-
-                    b.Property<bool?>("IsSysAdmin")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((0))");
 
                     b.Property<string>("MenuName")
                         .IsRequired()

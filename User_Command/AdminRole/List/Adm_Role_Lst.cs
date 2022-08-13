@@ -14,15 +14,15 @@ namespace User_Command.AdminRole.List
 
         public class Adm_Role_LstHandler : IRequestHandler<Adm_Role_Lst, Response>
         {
-            private readonly INotificationMsg notificationMsg;
-            private readonly IDapper<Response> aPPDbContext;
+            private readonly INotificationMsg notification;
+            private readonly IDapper<Response> dapper;
 
-            public Adm_Role_LstHandler(INotificationMsg notificationMsg,
-                IDapper<Response> aPPDbContext
+            public Adm_Role_LstHandler(INotificationMsg notification,
+                IDapper<Response> dapper
                 )
             {
-                this.notificationMsg = notificationMsg;
-                this.aPPDbContext = aPPDbContext;
+                this.notification = notification;
+                this.dapper = dapper;
             }
 
             public async Task<Response> Handle(Adm_Role_Lst request, CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ namespace User_Command.AdminRole.List
 
                     param.Add("@OrgProdId", request.OrgProdId);
 
-                    response.ResponseObject = (await aPPDbContext.GetDataListAsync<Adm_Role_Lst_DTO>("sp_AdminRole_List", param, System.Data.CommandType.StoredProcedure)).ToList();
+                    response.ResponseObject = (await dapper.GetDataListAsync<Adm_Role_Lst_DTO>("sp_AdminRole_List", param, System.Data.CommandType.StoredProcedure)).ToList();
                 }
                 catch (Exception ex)
                 {

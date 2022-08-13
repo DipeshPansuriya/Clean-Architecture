@@ -15,15 +15,15 @@ namespace User_Command.AdminUser.Select
 
         public class Adm_User_SelectHandler : IRequestHandler<Adm_User_Select, Response>
         {
-            private readonly INotificationMsg notificationMsg;
-            private readonly IDapper<Response> aPPDbContext;
+            private readonly INotificationMsg notification;
+            private readonly IDapper<Response> dapper;
 
-            public Adm_User_SelectHandler(INotificationMsg notificationMsg,
-                IDapper<Response> aPPDbContext
+            public Adm_User_SelectHandler(INotificationMsg notification,
+                IDapper<Response> dapper
                 )
             {
-                this.notificationMsg = notificationMsg;
-                this.aPPDbContext = aPPDbContext;
+                this.notification = notification;
+                this.dapper = dapper;
             }
 
             public async Task<Response> Handle(Adm_User_Select request, CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ namespace User_Command.AdminUser.Select
                     param.Add("@UserId", request.UserId);
                     param.Add("@OrgProdId", request.OrgProdId);
 
-                    Adm_User_Lst_DTO? data = (await aPPDbContext.GetDataListAsync<Adm_User_Lst_DTO>("sp_AdminUser_Select", param, System.Data.CommandType.StoredProcedure)).FirstOrDefault();
+                    Adm_User_Lst_DTO? data = (await dapper.GetDataListAsync<Adm_User_Lst_DTO>("sp_AdminUser_Select", param, System.Data.CommandType.StoredProcedure)).FirstOrDefault();
 
                     if (data != null)
                     {

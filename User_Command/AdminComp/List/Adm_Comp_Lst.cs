@@ -14,15 +14,15 @@ namespace User_Command.AdminComp.List
 
         public class Adm_Comp_LstHandler : IRequestHandler<Adm_Comp_Lst, Response>
         {
-            private readonly INotificationMsg notificationMsg;
-            private readonly IDapper<Response> aPPDbContext;
+            private readonly INotificationMsg notification;
+            private readonly IDapper<Response> dapper;
 
-            public Adm_Comp_LstHandler(INotificationMsg notificationMsg,
-                IDapper<Response> aPPDbContext
+            public Adm_Comp_LstHandler(INotificationMsg notification,
+                IDapper<Response> dapper
                 )
             {
-                this.notificationMsg = notificationMsg;
-                this.aPPDbContext = aPPDbContext;
+                this.notification = notification;
+                this.dapper = dapper;
             }
 
             public async Task<Response> Handle(Adm_Comp_Lst request, CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ namespace User_Command.AdminComp.List
 
                     param.Add("@OrgProdId", request.OrgProdId);
 
-                    response.ResponseObject = (await aPPDbContext.GetDataListAsync<Adm_Comp_Lst_DTO>("sp_AdminCompany_List", param, System.Data.CommandType.StoredProcedure)).ToList();
+                    response.ResponseObject = (await dapper.GetDataListAsync<Adm_Comp_Lst_DTO>("sp_AdminCompany_List", param, System.Data.CommandType.StoredProcedure)).ToList();
                 }
                 catch (Exception ex)
                 {

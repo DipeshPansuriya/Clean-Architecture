@@ -17,15 +17,15 @@ namespace User_Command.AdminRole.InsertUpdate
 
         public class Adm_Role_InstUpdHandler : IRequestHandler<Adm_Role_InstUpd, Response>
         {
-            private readonly INotificationMsg notificationMsg;
-            private readonly IDapper<Response> aPPDbContext;
+            private readonly INotificationMsg notification;
+            private readonly IDapper<Response> dapper;
 
-            public Adm_Role_InstUpdHandler(INotificationMsg notificationMsg,
-                IDapper<Response> aPPDbContext
+            public Adm_Role_InstUpdHandler(INotificationMsg notification,
+                IDapper<Response> dapper
                 )
             {
-                this.notificationMsg = notificationMsg;
-                this.aPPDbContext = aPPDbContext;
+                this.notification = notification;
+                this.dapper = dapper;
             }
 
             public async Task<Response> Handle(Adm_Role_InstUpd request, CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ namespace User_Command.AdminRole.InsertUpdate
                     param.Add("@IsActive", request.IsActive);
                     param.Add("@UserId", request.UserId);
 
-                    response.ResponseObject = await aPPDbContext.ExecuteScalarAsync("sp_AdminRole_InsertUpdate", param, System.Data.CommandType.StoredProcedure);
+                    response.ResponseObject = await dapper.ExecuteScalarAsync("sp_AdminRole_InsertUpdate", param, System.Data.CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
                 {
