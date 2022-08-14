@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Users_Database", "Application_Database\Users_Database.csproj", "{189E1B56-6254-48E9-99E7-81F477A89D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Users_Database", "Users_Database\Users_Database.csproj", "{189E1B56-6254-48E9-99E7-81F477A89D19}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application_Core", "Application_Core\Application_Core.csproj", "{413DDA25-C246-4BFB-856A-FE5D5B7F5494}"
 EndProject
@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login_Command", "Login_Comm
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F4543493-272F-482F-A23A-507BBD151D9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Log_Database", "Application_Log_Database\Log_Database.csproj", "{92BB1520-1776-4D7B-BAAD-B20EC39378A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Log_Database", "Log_Database\Log_Database.csproj", "{92BB1520-1776-4D7B-BAAD-B20EC39378A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API_Masters", "API_Masters", "{2E798A42-17B9-4F73-AB6F-708C05652B6C}"
 EndProject
