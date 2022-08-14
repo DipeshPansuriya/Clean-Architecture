@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<!--<Nullable>enable</Nullable>-->
 		<ImplicitUsings>enable</ImplicitUsings>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-		<UserSecretsId>fd83a5fd-5364-4a07-aa5a-c1f8eabefbdd</UserSecretsId>
+		<UserSecretsId>3c3f0583-f2f8-449c-a82c-3758fa64471c</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 
@@ -26,10 +25,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Application_Core\Application_Core.csproj" />
-		<ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
-		<ProjectReference Include="..\Masters_Command\Masters_Command.csproj" />
-		<ProjectReference Include="..\Masters_Database\Masters_Database.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\Application_Core\Application_Core.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\Application_Infrastructure\Application_Infrastructure.csproj" />
+		<ProjectReference Include="..\..\Users\Users_Database\Users_Database.csproj" />
+		<ProjectReference Include="..\Login_Command\Login_Command.csproj" />
 	</ItemGroup>
+
 
 </Project>

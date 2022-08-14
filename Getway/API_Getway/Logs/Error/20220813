@@ -1,0 +1,7 @@
+
+2022-08-13T14:50:16.7084224+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Invalid object name 'tbl_API_Request'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
