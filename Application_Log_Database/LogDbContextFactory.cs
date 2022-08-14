@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Application_Database
+namespace Users_Database
 {
     public class LogDbContextFactory : DesignTimeLogDbContextFactoryBase<APP_Log_DbContext>
     {

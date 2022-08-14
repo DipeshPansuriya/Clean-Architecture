@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Application_Core\Application_Core.csproj" />
-		<ProjectReference Include="..\Application_Database\Application_Database.csproj" />
+		<ProjectReference Include="..\Application_Database\Users_Database.csproj" />
 		<ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
 	</ItemGroup>
 </Project>

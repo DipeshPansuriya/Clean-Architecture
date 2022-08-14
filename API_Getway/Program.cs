@@ -1,5 +1,3 @@
-using Application_Common;
-using Application_Database;
 using Application_Infrastructure;
 using Application_Infrastructure.Startup_Proj;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -23,7 +21,7 @@ builder.Services.AddOcelot().AddConsul().AddCacheManager(x =>
 {
     x.WithDictionaryHandle();
 });
-builder.Services.AddDatabase(APISetting.DBConnection);
+//builder.Services.AddDatabase(APISetting.UserDBConnection);
 builder.Services.AddInfrastructure();
 
 #endregion Project Dependancy

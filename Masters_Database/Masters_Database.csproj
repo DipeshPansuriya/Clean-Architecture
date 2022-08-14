@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -36,9 +36,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Application_Core\Application_Core.csproj" />
 		<ProjectReference Include="..\Application_Common\Application_Common.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Migrations\" />
 	</ItemGroup>
 </Project>

@@ -2,7 +2,8 @@
 {
     public class APISetting
     {
-        public static string DBConnection { get; set; }
+        public static string UserDBConnection { get; set; }
+        public static string MasterDBConnection { get; set; }
         public static string LogDBConnection { get; set; }
         public static string HangfireDBConnection { get; set; }
         public static string Secret { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Application_Database
+namespace Users_Database
 {
     public abstract class DesignTimeLogDbContextFactoryBase<TContext> :
        IDesignTimeDbContextFactory<TContext> where TContext : DbContext
@@ -29,13 +29,13 @@ namespace Application_Database
                 .AddEnvironmentVariables()
                 .Build();
 
-            if (string.IsNullOrEmpty(APISetting.DBConnection))
+            if (string.IsNullOrEmpty(APISetting.UserDBConnection))
             {
                 APISetting config = new APISetting();
                 configuration.Bind("AppSettings", config);
             }
 
-            string connectionString = APISetting.DBConnection;
+            string connectionString = APISetting.UserDBConnection;
             Console.WriteLine($"connectionString : '{connectionString}'.");
             return Create(connectionString);
         }

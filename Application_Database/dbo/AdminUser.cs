@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Application_Database
+namespace Users_Database
 {
     public partial class AdminUser
     {

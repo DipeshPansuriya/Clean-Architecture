@@ -17,23 +17,6 @@
       "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
       "ReRoutesCaseSensitive": false
     },
-    //Generic
-    {
-      "DownstreamPathTemplate": "/api_generics/{everything}",
-      "DownstreamScheme": "https",
-      //"DownstreamPort": "52029",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "7032"
-        }
-      ],
-      "UseServiceDiscovery": true,
-      //"ServiceName": "api_generic",
-      "UpstreamPathTemplate": "/api_generics/{everything}",
-      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
-      "ReRoutesCaseSensitive": false
-    },
     //Users
     {
       "DownstreamPathTemplate": "/api_users/{everything}",

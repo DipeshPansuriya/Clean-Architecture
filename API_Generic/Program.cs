@@ -1,5 +1,3 @@
-using Application_Common;
-using Application_Database;
 using Application_Infrastructure;
 using Application_Infrastructure.Startup_Proj;
 using Generic_Command;
@@ -16,7 +14,7 @@ StartupProj.AddCORS(builder);
 #region Project Dependancy
 
 builder.Services.AddGenericCommand();
-builder.Services.AddDatabase(APISetting.DBConnection);
+//builder.Services.AddDatabase(APISetting.DBConnection);
 builder.Services.AddInfrastructure();
 
 #endregion Project Dependancy
