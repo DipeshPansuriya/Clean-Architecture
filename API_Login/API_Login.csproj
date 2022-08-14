@@ -26,9 +26,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Application_Core\Application_Core.csproj" />
-		<ProjectReference Include="..\Application_Database\Users_Database.csproj" />
 		<ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
 		<ProjectReference Include="..\Login_Command\Login_Command.csproj" />
+		<ProjectReference Include="..\Users_Database\Users_Database.csproj" />
 	</ItemGroup>
 
 
