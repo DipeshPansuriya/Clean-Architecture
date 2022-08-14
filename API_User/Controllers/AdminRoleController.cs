@@ -5,7 +5,7 @@ using User_Command.AdminRole.InsertUpdate;
 using User_Command.AdminRole.List;
 using User_Command.AdminRole.Select;
 
-namespace API_User.Controllers
+namespace API_Users.Controllers
 {
     public class AdminRoleController : BaseController<AdminRoleController>
     {

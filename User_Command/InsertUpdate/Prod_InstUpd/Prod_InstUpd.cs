@@ -4,7 +4,7 @@ using Dapper;
 using MediatR;
 using System.Net;
 
-namespace Generic_Command.InsertUpdate.Prod_InstUpd
+namespace User_Command.InsertUpdate.Prod_InstUpd
 {
     public class Prod_InstUpd : IRequest<Response>
     {

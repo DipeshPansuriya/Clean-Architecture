@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using User_Command.AdminOrg.InsertUpdate;
 
-namespace API_User.Controllers
+namespace API_Users.Controllers
 {
     [AllowAnonymous]
     public class AdminOrgController : BaseController<AdminOrgController>

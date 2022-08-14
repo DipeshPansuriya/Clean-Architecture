@@ -5,7 +5,7 @@ using User_Command.AdminUser.InsertUpdate;
 using User_Command.AdminUser.List;
 using User_Command.AdminUser.Select;
 
-namespace API_User.Controllers
+namespace API_Users.Controllers
 {
     public class AdminUserController : BaseController<AdminUserController>
     {
