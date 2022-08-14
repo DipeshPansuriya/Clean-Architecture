@@ -1,0 +1,192 @@
+
+2022-08-14T00:56:18.1316355+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'10', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T00:56:18.2510898+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'10', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T01:23:09.1383994+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'11', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T01:23:09.2750898+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'11', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T01:25:02.2194512+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'12', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T01:25:02.2947010+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'12', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T01:26:33.5676431+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'14', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T01:26:33.6877868+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'14', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:28:53.9117800+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'15', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:28:54.1256791+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'15', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:29:43.0321895+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'16', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:29:43.2873764+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'16', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:30:12.8292523+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'17', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:30:12.9078991+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'17', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:30:39.4559794+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'18', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:30:39.6281290+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'18', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:30:56.9880440+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'19', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:30:57.1606257+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'19', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:32:05.9486006+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'20', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:32:06.0319339+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'20', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:36:04.2605556+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'21', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:36:04.6620633+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'21', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:39:14.3434450+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Repositories.Dapper) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'22', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'. ~ 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+2022-08-14T09:39:14.5295760+05:30 
+--------------------SourceContext [Error]--------------------
+(Application_Infrastructure.Response_Request) 
+--------------------Message--------------------
+Incorrect syntax near 's'.
+Unclosed quotation mark after the character string ':200}', N'22', GETDATE(), N'True', N''); SELECT CAST(SCOPE_IDENTITY() as int)'.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

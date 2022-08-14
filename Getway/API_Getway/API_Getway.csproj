@@ -30,11 +30,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
+	  <Folder Include="Controllers\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controllers\" />
+	  <ProjectReference Include="..\..\Infrastructure\Application_Infrastructure\Application_Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

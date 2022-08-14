@@ -15,8 +15,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Application_Core\Application_Core.csproj" />
-		<ProjectReference Include="..\Application_Database\Users_Database.csproj" />
-		<ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\Application_Core\Application_Core.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\Application_Infrastructure\Application_Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Users\Users_Database\Users_Database.csproj" />
 	</ItemGroup>
 </Project>
