@@ -1,0 +1,59 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "Master_DbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "ProjectRootNamespace": "Masters_Database",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[MasterCity]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MasterCountry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MasterCurrency]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MastersContinent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MasterState]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MasterTimeZone]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DIPESH-PANSURIY\\SQL2016.App_Masters_Micor",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": true,
+   "UseInflector": false,
+   "UseLegacyPluralizer": true,
+   "UseManyToManyEntity": true,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UseSchemaFolders": true,
+   "UseSpatial": true
+}

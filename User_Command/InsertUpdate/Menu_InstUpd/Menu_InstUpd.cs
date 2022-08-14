@@ -4,7 +4,7 @@ using Dapper;
 using MediatR;
 using System.Net;
 
-namespace Generic_Command.InsertUpdate.Menu_InstUpd
+namespace User_Command.InsertUpdate.Menu_InstUpd
 {
     public class Menu_InstUpd : IRequest<Response>
     {

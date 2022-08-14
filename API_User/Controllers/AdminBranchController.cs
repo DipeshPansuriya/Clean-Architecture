@@ -5,7 +5,7 @@ using User_Command.AdminBranch.InsertUpdate;
 using User_Command.AdminBranch.List;
 using User_Command.AdminBranch.Select;
 
-namespace API_User.Controllers
+namespace API_Users.Controllers
 {
     public class AdminBranchController : BaseController<AdminBranchController>
     {

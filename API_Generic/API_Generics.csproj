@@ -27,7 +27,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Application_Core\Application_Core.csproj" />
-		<ProjectReference Include="..\Application_Database\Application_Database.csproj" />
 		<ProjectReference Include="..\Application_Infrastructure\Application_Infrastructure.csproj" />
 		<ProjectReference Include="..\Generic_Command\Generic_Command.csproj" />
 	</ItemGroup>

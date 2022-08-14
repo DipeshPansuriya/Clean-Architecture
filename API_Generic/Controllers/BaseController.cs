@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API_Generic.Controllers
+namespace API_Generics.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api_generic/[controller]/[action]")]
+    [Route("api_generics/[controller]/[action]")]
     public abstract class BaseController<T> : ControllerBase
     {
         private IMediator _mediator;

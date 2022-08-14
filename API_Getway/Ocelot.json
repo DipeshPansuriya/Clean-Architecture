@@ -17,26 +17,9 @@
       "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
       "ReRoutesCaseSensitive": false
     },
-    //Generic
+    //Users
     {
-      "DownstreamPathTemplate": "/api_generic/{everything}",
-      "DownstreamScheme": "https",
-      //"DownstreamPort": "52029",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "7032"
-        }
-      ],
-      "UseServiceDiscovery": true,
-      //"ServiceName": "api_generic",
-      "UpstreamPathTemplate": "/api_generic/{everything}",
-      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
-      "ReRoutesCaseSensitive": false
-    },
-    //Registrations
-    {
-      "DownstreamPathTemplate": "/api_user/{everything}",
+      "DownstreamPathTemplate": "/api_users/{everything}",
       "DownstreamScheme": "https",
       //"DownstreamPort": "52027",
       "DownstreamHostAndPorts": [
@@ -47,7 +30,24 @@
       ],
       "UseServiceDiscovery": true,
       //"ServiceName": "API_User",
-      "UpstreamPathTemplate": "/api_user/{everything}",
+      "UpstreamPathTemplate": "/api_users/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
+      "ReRoutesCaseSensitive": false
+    },
+    //Masters
+    {
+      "DownstreamPathTemplate": "/api_masters/{everything}",
+      "DownstreamScheme": "https",
+      //"DownstreamPort": "52027",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7034"
+        }
+      ],
+      "UseServiceDiscovery": true,
+      //"ServiceName": "API_User",
+      "UpstreamPathTemplate": "/api_masters/{everything}",
       "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
       "ReRoutesCaseSensitive": false
     }

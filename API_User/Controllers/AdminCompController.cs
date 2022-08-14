@@ -5,7 +5,7 @@ using User_Command.AdminComp.InsertUpdate;
 using User_Command.AdminComp.List;
 using User_Command.AdminComp.Select;
 
-namespace API_User.Controllers
+namespace API_Users.Controllers
 {
     public class AdminCompController : BaseController<AdminCompController>
     {

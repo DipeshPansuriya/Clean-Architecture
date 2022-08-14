@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Application_Database.Migrations
+namespace Users_Database.Migrations
 {
     public partial class AddFreshDB : Migration
     {

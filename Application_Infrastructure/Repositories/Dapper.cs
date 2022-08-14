@@ -28,7 +28,7 @@ namespace Application_Infrastructure.Repositories
         {
         }
 
-        private IDbConnection dbConnection(string SQLConnectionstr)
+        private IDbConnection UserDBConnection(string SQLConnectionstr)
         {
             IDbConnection db = new SqlConnection(SQLConnectionstr);
             if (db.State == ConnectionState.Closed)
@@ -43,13 +43,13 @@ namespace Application_Infrastructure.Repositories
         {
             if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
             {
-                SQLConnectionstr = APISetting.DBConnection;
+                SQLConnectionstr = APISetting.UserDBConnection;
             }
             try
             {
                 int affectedRows = 0;
 
-                using (IDbConnection db = dbConnection(SQLConnectionstr))
+                using (IDbConnection db = UserDBConnection(SQLConnectionstr))
                 {
                     affectedRows = param == null ? await db.ExecuteAsync(Query, commandType: commandType) : await db.ExecuteAsync(Query, param, commandType: commandType);
                 }
@@ -66,13 +66,13 @@ namespace Application_Infrastructure.Repositories
         {
             if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
             {
-                SQLConnectionstr = APISetting.DBConnection;
+                SQLConnectionstr = APISetting.UserDBConnection;
             }
             try
             {
                 string data = string.Empty;
 
-                using (IDbConnection db = dbConnection(SQLConnectionstr))
+                using (IDbConnection db = UserDBConnection(SQLConnectionstr))
                 {
                     data = param == null ? await db.ExecuteScalarAsync<string>(Query, commandType: commandType) : await db.ExecuteScalarAsync<string>(Query, param, commandType: commandType);
                 }
@@ -89,12 +89,12 @@ namespace Application_Infrastructure.Repositories
         {
             if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
             {
-                SQLConnectionstr = APISetting.DBConnection;
+                SQLConnectionstr = APISetting.UserDBConnection;
             }
 
             try
             {
-                using (IDbConnection db = dbConnection(SQLConnectionstr))
+                using (IDbConnection db = UserDBConnection(SQLConnectionstr))
                 {
                     IEnumerable<T> data = param == null ? await db.QueryAsync<T>(Query, commandType: commandType) : await db.QueryAsync<T>(Query, param, commandType: commandType);
 
@@ -112,11 +112,11 @@ namespace Application_Infrastructure.Repositories
         {
             if (string.IsNullOrEmpty(SQLConnectionstr) || string.IsNullOrWhiteSpace(SQLConnectionstr))
             {
-                SQLConnectionstr = APISetting.DBConnection;
+                SQLConnectionstr = APISetting.UserDBConnection;
             }
             try
             {
-                using (IDbConnection db = dbConnection(SQLConnectionstr))
+                using (IDbConnection db = UserDBConnection(SQLConnectionstr))
                 {
                     IDataReader list = param == null ? await db.ExecuteReaderAsync(Query, commandType: commandType) : await db.ExecuteReaderAsync(Query, param, commandType: commandType);
 

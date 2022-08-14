@@ -1,10 +1,12 @@
 using Application_Common;
-using Application_Database;
 using Application_Infrastructure;
 using Application_Infrastructure.Startup_Proj;
 using MediatR;
 using User_Command;
 using User_Command.AdminOrg.InsertUpdate;
+using User_Command.InsertUpdate.Menu_InstUpd;
+using User_Command.InsertUpdate.Prod_InstUpd;
+using Users_Database;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,7 @@ StartupProj.AddCORS(builder);
 #region Project Dependancy
 
 builder.Services.AddUserCommand();
-builder.Services.AddDatabase(APISetting.DBConnection);
+builder.Services.AddDatabase(APISetting.UserDBConnection);
 builder.Services.AddInfrastructure();
 
 #endregion Project Dependancy
@@ -52,6 +54,11 @@ using (IServiceScope scope = app.Services.CreateScope())
     {
         new OrgProdcut { ProductId = 1 }
     };
+
+    await mediator.Send(new Menu_InstUpd { }, CancellationToken.None);
+
+    await mediator.Send(new Prod_InstUpd { }, CancellationToken.None);
+
     await mediator.Send(new Adm_Org_InstUpd { Id = 0, OrgName = "Softexim", OrgEmail = "SofteximAdmin@sfotexim.com", IsActive = true, IsFreshSetup = true, OrgProdcut = orgProdcut }, CancellationToken.None);
 }
 

@@ -20,7 +20,7 @@ namespace Application_Infrastructure
         {
             try
             {
-                string Query = "Insert Into APIRequest(Scheme, Path, QueryString, Userid, Request, RequestDate) Values (N'" + Scheme + "', N'" + Path + "', N'" + QueryString + "', N'" + Userid + "', N'" + Request + "', GETDATE()); SELECT CAST(SCOPE_IDENTITY() as int)";
+                string Query = "Insert Into APIRequest(Scheme, Path, QueryString, Userid, Request, RequestDate) Values (N'" + Scheme + "', N'" + Path + "', N'" + QueryString + "', N'" + Userid + "', N'" + Request.Replace("'", "''") + "', GETDATE()); SELECT CAST(SCOPE_IDENTITY() as int)";
 
                 string id = "0";
                 id = await dapper.ExecuteScalarAsync(Query, null, System.Data.CommandType.Text, APISetting.LogDBConnection);
@@ -43,7 +43,7 @@ namespace Application_Infrastructure
                     res = Response.Contains("ResponseStatus\":true,") == true ? true : false;
                 }
 
-                string Query = "Insert Into APIResponse(Response, RequestId, ResponseDate, ReponseStatus,  UserId) Values (N'" + Response + "', N'" + RequestId + "', GETDATE(), N'" + res.ToString() + "', N'" + Userid + "'); SELECT CAST(SCOPE_IDENTITY() as int)";
+                string Query = "Insert Into APIResponse(Response, RequestId, ResponseDate, ReponseStatus,  UserId) Values (N'" + Response.Replace("'", "''") + "', N'" + RequestId + "', GETDATE(), N'" + res.ToString() + "', N'" + Userid + "'); SELECT CAST(SCOPE_IDENTITY() as int)";
                 await dapper.ExecuteScalarAsync(Query, null, System.Data.CommandType.Text, APISetting.LogDBConnection);
             }
             catch (Exception ex)
