@@ -12,7 +12,7 @@
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
-		<PackageReference Include="MimeKit" Version="3.3.0" />
+		<PackageReference Include="MimeKit" Version="4.7.1" />
 		<PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
 		<PackageReference Include="Serilog.Sinks.Email" Version="2.4.0" />
 		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.1" />
@@ -20,6 +20,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+
+	  <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 		<ProjectReference Include="..\Application_Core\Application_Core.csproj" />
 	</ItemGroup>
 </Project>
