@@ -29,3 +29,20 @@ An Implementation of Clean Architecture with ASP.NET 5 WebApi.
 - [X] HangFire (Task, Equee)
 - [X] Mail Log table Send mail through Task Hangfire
 - [X] SMTP & Mailkit Send Email
+
+## Configuration
+
+Secrets are not stored in `appsettings.json`. Each API (Gateway, Login, Masters, Users) reads them from
+environment variables (ASP.NET Core maps `__` to `:`) and refuses to start if any is missing:
+
+| Variable | What |
+|---|---|
+| `AppSettings__UserDBConnection` | SQL Server connection string, user DB |
+| `AppSettings__MasterDBConnection` | SQL Server connection string, masters DB |
+| `AppSettings__LogDBConnection` | SQL Server connection string, log DB (Serilog sink) |
+| `AppSettings__HangfireDBConnection` | SQL Server connection string, Hangfire DB |
+| `AppSettings__EmailConfiguration__Password` | SMTP account password |
+| `AppSettings__Jwt__Key` | JWT signing key (long random value) |
+
+For local development you may instead put them in `appsettings.Local.json` (git-ignored); environment
+variables still take precedence.

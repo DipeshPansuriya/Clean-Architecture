@@ -409,3 +409,6 @@ ASALocalRun/
 /API_Generic/Logs/Error
 /API_Login/Logs/Error
 /API_User/Logs/Error
+
+# Local secrets override (row 180) - never committed
+appsettings.Local.json

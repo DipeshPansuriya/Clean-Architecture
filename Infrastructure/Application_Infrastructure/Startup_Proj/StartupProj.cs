@@ -26,13 +26,15 @@ namespace Application_Infrastructure.Startup_Proj
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.Local.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("ocelot.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("ocelot.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();   // last: env (AppSettings__*) must win over the blank secrets in appsettings.json
             //.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
             #region SetAPPSetting
 
             APISetting config = new APISetting();
             builder.Configuration.Bind("AppSettings", config);
+            RequireSecrets(builder.Configuration);
 
             APISetting.XMLFilePath = builder.Environment.WebRootPath + @"\XMLQuery\";
 
@@ -44,16 +46,39 @@ namespace Application_Infrastructure.Startup_Proj
             builder.Configuration
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.Local.json", optional: true, reloadOnChange: true);
+                .AddJsonFile($"appsettings.Local.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();   // last: env (AppSettings__*) must win over the blank secrets in appsettings.json
 
             #region SetAPPSetting
 
             APISetting config = new APISetting();
             builder.Configuration.Bind("AppSettings", config);
+            RequireSecrets(builder.Configuration);
 
             APISetting.XMLFilePath = builder.Environment.WebRootPath + @"\XMLQuery\";
 
             #endregion SetAPPSetting
+        }
+
+        // Secrets live in the environment, never in appsettings.json (row 180).
+        private static readonly string[] RequiredSecrets =
+        {
+            "UserDBConnection", "MasterDBConnection", "LogDBConnection", "HangfireDBConnection",
+            "EmailConfiguration:Password", "Jwt:Key"
+        };
+
+        /// <summary>Fails startup naming every missing AppSettings__* variable. Never prints a value.</summary>
+        public static void RequireSecrets(IConfiguration configuration)
+        {
+            List<string> missing = RequiredSecrets
+                .Where(k => string.IsNullOrWhiteSpace(configuration["AppSettings:" + k]))
+                .Select(k => "AppSettings__" + k.Replace(":", "__"))
+                .ToList();
+            if (missing.Count > 0)
+            {
+                throw new InvalidOperationException(
+                    "Missing configuration - set these environment variables: " + string.Join(", ", missing));
+            }
         }
 
         public static void AddSerilog(WebApplicationBuilder builder)

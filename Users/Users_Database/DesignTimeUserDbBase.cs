@@ -36,7 +36,7 @@ namespace Users_Database
             }
 
             string connectionString = APISetting.UserDBConnection;
-            Console.WriteLine($"connectionString : '{connectionString}'.");
+            Console.WriteLine("connectionString : resolved (value not printed).");
             return Create(connectionString);
         }
 
@@ -47,7 +47,7 @@ namespace Users_Database
                 throw new ArgumentException($"Connection string '{connectionString}' is null or empty.", nameof(connectionString));
             }
 
-            Console.WriteLine($"DesignTimeDbContextFactoryBase.Create(string): Connection string: '{connectionString}'.");
+            Console.WriteLine("DesignTimeDbContextFactoryBase.Create(string): connection string set (value not printed).");
 
             DbContextOptionsBuilder<TContext> optionsBuilder = new DbContextOptionsBuilder<TContext>();
 
